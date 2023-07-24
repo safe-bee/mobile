@@ -2,19 +2,39 @@
   "dependencies": {
     "@apollo/client": "^3.4.16",
     "@apollo/link-context": "^2.0.0-beta.3",
+    "@react-native-async-storage/async-storage": "^1.19.1",
     "@react-native-picker/picker": "2.4.8",
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/stack": "^6.3.17",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-import-graphql": "^2.8.1",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "eslint": "^8.45.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-babel-module": "^5.3.2",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-native": "^4.0.0",
+    "eslint-plugin-testing-library": "^5.11.0",
     "expo": "^48.0.7",
     "graphql": "^15.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.8",
-    "react-native-web": "~0.18.7"
+    "react-native-paper": "^5.9.1",
+    "react-native-remix-icon": "^0.4.0",
+    "react-native-web": "~0.18.7",
+    "styled-components": "^6.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3"
   },
   "scripts": {
     "start": "expo start",
+    "lint": "./node_modules/.bin/eslint src --ext .js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
