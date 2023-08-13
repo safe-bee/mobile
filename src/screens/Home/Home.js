@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import styled from 'styled-components/native';
 import COLORS from '../../theme/colors';
@@ -6,7 +6,7 @@ import { GET_APIARIOS } from '../../graphql/queries/index';
 import Menu from '../../components/Menu/index';
 import { useQuery } from "@apollo/client";
 import FabMenu from '../../components/Menu/FabMenu';
-
+import TextInput from '../../elements/TextInput';
 
 export const MenuContainer = styled.View`
   flex: 0.1;
@@ -27,6 +27,7 @@ export const Container = styled.View`
 
 const Home = () => {
   const { data, error, loading } = useQuery(GET_APIARIOS);
+  const [domainVars, setDomainVars] = useState('');
 
   if (error) {
     console.log("Error fetching apiarios", error);
@@ -45,6 +46,21 @@ const Home = () => {
                 <Text style={styles.starshipModel}>{apiario.name}</Text>
               </View>
             ))}
+
+          <View style={{ flex: 1, marginLeft: 10 }}>
+            <TextInput
+              autoCapitalize="none"
+              autoCorrect={false}
+              label='Hive name'
+              placeholder='Name your hive'
+              onBlur={() => {}}
+              icon="ri-pencil-fill"
+              outlined={true}
+              onChangeText={(text) => setDomainVars(text)}
+              value={domainVars}
+            />
+            </View>
+
           </View>
         )}
       </ContentContainer>
