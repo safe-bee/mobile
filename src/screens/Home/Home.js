@@ -7,6 +7,7 @@ import Menu from '../../components/Menu/index';
 import { useQuery } from "@apollo/client";
 import FabMenu from '../../components/Menu/FabMenu';
 import TextInput from '../../elements/TextInput';
+import { TextButton, ContainedButton} from '../../elements/Button';
 
 export const MenuContainer = styled.View`
   flex: 0.1;
@@ -47,21 +48,39 @@ const Home = () => {
               </View>
             ))}
 
-          <View style={{ flex: 1, marginLeft: 10 }}>
-            <TextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              label='Hive name'
-              placeholder='Name your hive'
-              onBlur={() => {}}
-              icon="ri-pencil-fill"
-              outlined={true}
-              onChangeText={(text) => setDomainVars(text)}
-              value={domainVars}
-            />
-            </View>
+            <View style={{ flex: 1, marginLeft: 10 }}>
+              <View style={{ flex: 1 }}>
+                <TextInput
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  label='Hive name'
+                  placeholder='Name your hive'
+                  onBlur={() => {}}
+                  icon="ri-pencil-fill"
+                  outlined={true}
+                  onChangeText={(text) => setDomainVars(text)}
+                  value={domainVars}
+                />
+              </View>
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
+                <TextButton 
+                  disabled={false}
+                  onPress={() => {}}
+                  label="Next"
+                />
+              </View>
 
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
+                <ContainedButton 
+                  disabled={false}
+                  onPress={() => {}}
+                  label="Next"
+                />
+              </View>
+            </View>
           </View>
+
+
         )}
       </ContentContainer>
       
