@@ -62,26 +62,28 @@ const TextInput = ({
             </IconContainer>
           ) : null
         } 
-        <StyledTextInput
-          autoCorrect={false}
-          backgroundColor={COLORS.BLUE_1}
-          placeholder={placeholder}
-          editable={editable}
-          defaultValue={value}
-          icon={icon}
-          outlined={outlined}
-          rounded={rounded}
-          borderColor={COLORS.BLUE_1}
-          color={COLORS.GREY_90}
-          placeholderTextColor={COLORS.GREY_40}
-          testID={testID}
-          accessibilityLabel={accessibilityLabel}
-          accessible={accessible}
-          multiline={textArea}
-          blurOnSubmit={textArea}
-          textArea={textArea}
-          {...props}
-          />
+        <View pointerEvents='none'>
+          <StyledTextInput
+            autoCorrect={false}
+            backgroundColor={COLORS.BLUE_1}
+            placeholder={placeholder}
+            editable={editable}
+            defaultValue={value}
+            icon={icon}
+            outlined={outlined}
+            rounded={rounded}
+            borderColor={COLORS.BLUE_1}
+            color={COLORS.GREY_90}
+            placeholderTextColor={COLORS.GREY_40}
+            testID={testID}
+            accessibilityLabel={accessibilityLabel}
+            accessible={accessible}
+            multiline={textArea}
+            blurOnSubmit={textArea}
+            textArea={textArea}
+            {...props}
+            />
+        </View>
       </InnerContainer>
     </Container>
       {
