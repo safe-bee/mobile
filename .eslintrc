@@ -1,18 +1,69 @@
 {
+  "extends": [
+    "airbnb",
+    "prettier"
+  ],
+  "plugins": [
+    "react",
+    "react-native",
+    "react-hooks",
+    "testing-library"
+  ],
+  "parser": "babel-eslint",
   "env": {
-    "browser": true,
-    "es2021": true
+    "jest": true,
+    "node": true,
+    "react-native/react-native": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 12,
-    "sourceType": "module"
-  },
-  "plugins": ["react"],
   "rules": {
-    "react/prop-types": "off"
+    "jsx-a11y/media-has-caption": 0,
+    "jsx-a11y/no-autofocus": 0,
+    "react/jsx-filename-extension": 0,
+    "react/no-array-index-key": 0,
+    "react/forbid-prop-types": 0,
+    "react/destructuring-assignment": 0,
+    "react/state-in-constructor": 0,
+    "import/no-cycle": 0,
+    "prefer-destructuring": 0,
+    "import/prefer-default-export": 0,
+    "react/no-unused-prop-types": 0,
+    "camelcase": 0,
+    "prefer-template": 0,
+    "no-path-concat": 0,
+    "no-confusing-arrow": 0,
+    "no-underscore-dangle": 0,
+    "no-nested-ternary": 0,
+    "semi": 2,
+    "max-len": 0,
+    "no-throw-literal": 0,
+    "no-shadow": 0,
+    "no-use-before-define": 0,
+    "indent": 0,
+    "import/no-unresolved": 0,
+    "import/no-extraneous-dependencies": 0,
+    "no-unused-expressions": 0,
+    "react/jsx-boolean-value": 0,
+    "arrow-parens": 0,
+    "func-names": 0,
+    "lines-between-class-members": 0,
+    "operator-linebreak": 0,
+    "react/jsx-curly-newline": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/require-default-props": 0,
+    "react-native/no-unused-styles": 2,
+    "react-native/no-inline-styles": 2,
+    "react-native/no-color-literals": 2,
+    "react-native/no-single-element-style-arrays": 2,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": 0,
+    "no-console": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
+  "globals": {
+    "fetch": true
   }
 }

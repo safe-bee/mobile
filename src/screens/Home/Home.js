@@ -7,6 +7,7 @@ import Menu from '../../components/Menu/index';
 import { useQuery } from "@apollo/client";
 import FabMenu from '../../components/Menu/FabMenu';
 import TextInput from '../../elements/TextInput';
+import Calendar from '../../elements/Calendar';
 import { TextButton, ContainedButton} from '../../elements/Button';
 
 export const MenuContainer = styled.View`
@@ -29,6 +30,7 @@ export const Container = styled.View`
 const Home = () => {
   const { data, error, loading } = useQuery(GET_APIARIOS);
   const [domainVars, setDomainVars] = useState('');
+  
 
   if (error) {
     console.log("Error fetching apiarios", error);
@@ -63,10 +65,10 @@ const Home = () => {
                 />
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
-                <TextButton 
-                  disabled={false}
-                  onPress={() => {}}
-                  label="Next"
+                <Calendar 
+                  onConfirm={(val) => console.log(val)}
+                  label='Date of task'
+                  
                 />
               </View>
 
