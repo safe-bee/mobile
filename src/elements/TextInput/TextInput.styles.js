@@ -38,9 +38,9 @@ export const StyledTextInput = styled.TextInput`
   border-color: ${(props) => props.borderColor};
   border-radius: ${(props) => props.rounded ? SIZES.LG : 8}px;
   text-align-vertical: ${(props) => props.multiline ? 'top' : 'center'};
-  elevation: 2; /* Ajusta el valor según tus preferencias */
+  elevation: 2;
   ::placeholder {
-    color: ${COLORS.GREY_3}; /* Cambia esto al color que desees */
+    color: ${COLORS.GREY_3};
   }
   ${({ textArea }) => textArea && `height: 124;`}
 `;

@@ -39,6 +39,7 @@ const MyCalendar = ({
                 onBlur={() => {}}
                 outlined={true}
                 value={inputVal}
+                isCalendar={true}
                 icon="ri-calendar-2-fill"
               />
             </TouchableOpacity>

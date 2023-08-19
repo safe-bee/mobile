@@ -8,6 +8,7 @@ import { useQuery } from "@apollo/client";
 import FabMenu from '../../components/Menu/FabMenu';
 import TextInput from '../../elements/TextInput';
 import Calendar from '../../elements/Calendar';
+import CustomPicker from '../../elements/CustomPicker';
 import { TextButton, ContainedButton} from '../../elements/Button';
 
 export const MenuContainer = styled.View`
@@ -36,6 +37,8 @@ const Home = () => {
     console.log("Error fetching apiarios", error);
   }
 
+  const options =  [{value: "test", label: "test"}, {value: "test1", label: "test1"}, {value: "test2", label: "test2"}];
+  
   return (
     <Container>
       <ContentContainer>
@@ -51,6 +54,56 @@ const Home = () => {
             ))}
 
             <View style={{ flex: 1, marginLeft: 10 }}>
+
+
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
+                <Calendar 
+                  onConfirm={(val) => console.log(val)}
+                  label='Date of task'
+                />
+              </View>
+
+
+              <View style={{ flex: 1, zIndex: 9999 }}>
+                  <CustomPicker
+                    options={options}
+                    value={{ value: "test", label: "test" }}
+                    onChange={() =>{}}
+                    label='Choose an option'
+                  />
+                </View>
+
+              <View style={{ flex: 1 }}>
+                <TextInput
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  label='Hive name'
+                  placeholder='Name your hive'
+                  onBlur={() => {}}
+                  icon="ri-pencil-fill"
+                  outlined={true}
+                  onChangeText={(text) => setDomainVars(text)}
+                  value={domainVars}
+                />
+                </View>
+
+
+              {
+                /*
+              <View style={{ flex: 1 }}>
+                <TextInput
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  label='Hive name'
+                  placeholder='Name your hive'
+                  onBlur={() => {}}
+                  icon="ri-pencil-fill"
+                  outlined={true}
+                  onChangeText={(text) => setDomainVars(text)}
+                  value={domainVars}
+                />
+                </View>
+
               <View style={{ flex: 1 }}>
                 <TextInput
                   autoCapitalize="none"
@@ -79,6 +132,11 @@ const Home = () => {
                   label="Next"
                 />
               </View>
+                */
+              }
+              
+   
+             
             </View>
           </View>
 

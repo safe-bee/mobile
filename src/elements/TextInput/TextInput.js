@@ -22,7 +22,7 @@ const TextInput = ({
   placeholder = '',
   error = '',
   value = '',
-  outlined = false,
+  outlined = true,
   rightLabel = null,
   rounded,
   icon,
@@ -31,8 +31,10 @@ const TextInput = ({
   accessibilityLabel = '',
   accessible = true,
   textArea = false,
+  isCalendar = false,
   ...props
 }) => {
+  
   return (
     <>
     <Container>
@@ -62,7 +64,9 @@ const TextInput = ({
             </IconContainer>
           ) : null
         } 
-        <View pointerEvents='none'>
+
+
+        <View pointerEvents={isCalendar ? 'none' : 'auto'} >
           <StyledTextInput
             autoCorrect={false}
             backgroundColor={COLORS.BLUE_1}
