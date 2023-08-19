@@ -10,6 +10,7 @@ import TextInput from '../../elements/TextInput';
 import Calendar from '../../elements/Calendar';
 import CustomPicker from '../../elements/CustomPicker';
 import { TextButton, ContainedButton} from '../../elements/Button';
+import TwoOptionsSelector from '../../elements/TwoOptionsSelector';
 
 export const MenuContainer = styled.View`
   flex: 0.1;
@@ -73,21 +74,10 @@ const Home = () => {
                   />
                 </View>
 
-              <View style={{ flex: 1 }}>
-                <TextInput
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  label='Hive name'
-                  placeholder='Name your hive'
-                  onBlur={() => {}}
-                  icon="ri-pencil-fill"
-                  outlined={true}
-                  onChangeText={(text) => setDomainVars(text)}
-                  value={domainVars}
-                />
-                </View>
 
-
+              <View style={{ flex: 1, marginLeft: 20}}>
+                <TwoOptionsSelector />
+              </View>
               {
                 /*
               <View style={{ flex: 1 }}>
