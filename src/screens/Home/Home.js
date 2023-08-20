@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import COLORS from '../../theme/colors';
 import { GET_APIARIOS } from '../../graphql/queries/index';
 import Menu from '../../components/Menu/index';
-import Hexagon from '../../components/Hexagon/Hexagon';
 import { useQuery } from "@apollo/client";
 import FabMenu from '../../components/Menu/FabMenu';
 import TextInput from '../../elements/TextInput';
