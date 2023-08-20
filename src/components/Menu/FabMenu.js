@@ -1,13 +1,15 @@
 import * as React from 'react';
+import { Image } from 'react-native';
 import { FAB, Portal } from 'react-native-paper';
 import { BackgroundOpacity } from '../../screens/sharedStyles';
 import styled from 'styled-components/native';
+import { RIcon } from './Menu.styles';
 import COLORS from '../../theme/colors'
 import { View } from "react-native";
 
 const Container = styled(FAB.Group)`
-  background-color: ${COLORS.YELLOW};
   position: absolute;
+  right: 115;
 `;
 
 const FabMenu = () => {
@@ -20,27 +22,77 @@ const FabMenu = () => {
   return (
       <Portal>
         {open ? <BackgroundOpacity /> : null}
-          <FAB.Group
+          <Container
             open={open}
-            style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              bottom: 120,
-              marginBottom: -28,
-              marginRight: 10,
-              borderRadius: 40,
-            }}
             visible
-            color={COLORS.BLACK_1}
-            icon={open ? 'calendar-today' : 'plus'}
+            color={COLORS.YELLOW}
+            fabStyle={{
+              backgroundColor: COLORS.YELLOW,
+              borderRadius: 50,
+              width: 65,
+              height: 65,
+              paddingRight: 15,
+            }}
+            icon={() => (
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+              }}>
+                <Image
+                  source={require('../../../assets/icon.png')}
+                  style={{ width: 35, height: 35 }}
+                />
+              </View>
+            )}
             actions={[
-              { icon: 'plus', onPress: () => console.log('Pressed add'), style: { backgroundColor: COLORS.YELLOW } },
+              { 
+                icon: () => (
+                  <View
+                    style={{
+                      width: 40,
+                      height: 40,
+                      paddingLeft: 2,
+                      paddingTop: 2,
+                  }}>
+                      <RIcon name="calendar-check-line" size={30} color={COLORS.BLACK_1} />
+                  </View>
+                ),
+                label: 'Inspection',
+                onPress: () => console.log('Pressed add'), 
+                style: { width: 50, height: 50, borderRadius: 50, backgroundColor: COLORS.YELLOW } 
+              },
               {
-                icon: 'star',
-                label: 'Star',
+                icon: () => (
+                  <View
+                    style={{
+                      width: 40,
+                      height: 40,
+                      paddingLeft: 2,
+                      paddingTop: 2,
+                  }}>
+                      <RIcon name="ri-survey-line" size={30} color={COLORS.BLACK_1} />
+                  </View>
+                ),
                 onPress: () => console.log('Pressed star'),
-                style: { backgroundColor: COLORS.YELLOW }
+                label: 'To-Do',
+                style: { width: 50, height: 50, borderRadius: 50, backgroundColor: COLORS.YELLOW }
+              },
+              {
+                icon: () => (
+                  <View
+                    style={{
+                      width: 40,
+                      height: 40,
+                      paddingLeft: 2,
+                      paddingTop: 2,
+                  }}>
+                      <RIcon name="profile-line" size={30} color={COLORS.BLACK_1} />
+                  </View>
+                ),
+                label: 'Record',
+                onPress: () => console.log('Pressed star'),
+                style: { width: 50, height: 50, borderRadius: 50, backgroundColor: COLORS.YELLOW }
               },
             ]}
             onStateChange={onStateChange}
@@ -49,7 +101,8 @@ const FabMenu = () => {
                 // do something if the speed dial is open
               }
             }}
-          />
+          >
+        </Container>
       </Portal>
   );
 };

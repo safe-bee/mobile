@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ROUTES } from './constants';
 import Home from './screens/Home/index'
 import Profile from './screens/Profile/index'
+import { MenuProvider } from './context/MenuContext';
 
 const Stack = createStackNavigator();
 
@@ -30,53 +31,60 @@ export default function Routes() {
   */
 
   return (
+    
     <NavigationContainer
       // fallback={<Loader backgroundColor={COLORS.PK.WHITE} />}
     >
-        <Stack.Navigator
-            headerMode="screen"
-            /*
-            screenOptions={() => ({
-            // eslint-disable-next-line react/prop-types
-            header: ({ scene, previous ,navigation }) =>
-                currentUser && !isInitialStartup ? (
-                <Header
-                    scene={scene}
-                    navigation={navigation}
-                    previous={previous}
-                />
-                ) : null,
-            })}*/
-        >
-            {
-                /*
-                <Stack.Screen
-                    name={ROUTES.SETTINGS}
-                    component={Settings}
-                    options={{
-                    cardStyleInterpolator: settingsNavAnimation,
-                    title: i18n.t('settings-SettingsNavigation-settings'),
-                    animationEnabled: false,
-                    }}
-                />
-                */
-            }
-            <Stack.Screen
-                name={ROUTES.HOME}
-                component={Home}
-                options={{
-                title: "Home",
+        <MenuProvider>
+          <Stack.Navigator
+              headerMode="screen"
+              screenOptions={{
+                headerShown: false,
+                animationEnabled: false,
               }}
-            />
-            <Stack.Screen
-                name={ROUTES.PROFILE}
-                component={Profile}
-                options={{
-                title: "Profile",
-              }}
-            />
-            
+              /*
+              screenOptions={() => ({
+              // eslint-disable-next-line react/prop-types
+              header: ({ scene, previous ,navigation }) =>
+                  currentUser && !isInitialStartup ? (
+                  <Header
+                      scene={scene}
+                      navigation={navigation}
+                      previous={previous}
+                  />
+                  ) : null,
+              })}*/
+          >
+              {
+                  /*
+                  <Stack.Screen
+                      name={ROUTES.SETTINGS}
+                      component={Settings}
+                      options={{
+                      cardStyleInterpolator: settingsNavAnimation,
+                      title: i18n.t('settings-SettingsNavigation-settings'),
+                      animationEnabled: false,
+                      }}
+                  />
+                  */
+              }
+              <Stack.Screen
+                  name={ROUTES.HOME}
+                  component={Home}
+                  options={{
+                  title: "Home",
+                }}
+              />
+              <Stack.Screen
+                  name={ROUTES.PROFILE}
+                  component={Profile}
+                  options={{
+                  title: "Profile",
+                }}
+              />
+              
         </Stack.Navigator>
+      </MenuProvider>
     </NavigationContainer>
   );
 }

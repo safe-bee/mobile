@@ -9,6 +9,9 @@ export const Container = styled.View`
    border-bottom-width: 0;
    border-left-width: 0;
    border-right-width: 0;
+   elevation: 5;
+   shadowColor: #000;
+   shadowOpacity: 0.1;
 `;
 
 export const IconContainer = styled.TouchableOpacity`
