@@ -3,7 +3,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ROUTES } from './constants';
 import Home from './screens/Home/index'
+import Header from './components/Header/index'
 import Profile from './screens/Profile/index'
+import Record from './screens/Record/index'
+import Todo from './screens/Todo/index'
+import Inspection from './screens/Inspection/index'
+import CreateApiary from './components/Wizard/CreateApiary/CreateApiaryWizard';
 import { MenuProvider } from './context/MenuContext';
 
 const Stack = createStackNavigator();
@@ -39,35 +44,17 @@ export default function Routes() {
           <Stack.Navigator
               headerMode="screen"
               screenOptions={{
-                headerShown: false,
                 animationEnabled: false,
-              }}
-              /*
-              screenOptions={() => ({
-              // eslint-disable-next-line react/prop-types
-              header: ({ scene, previous ,navigation }) =>
-                  currentUser && !isInitialStartup ? (
+                header: ({ scene, route, options, previous ,navigation }) =>
                   <Header
-                      scene={scene}
-                      navigation={navigation}
-                      previous={previous}
+                    route={route}
+                    options={options}
+                    navigation={navigation}
+                    previous={previous}
+                    scene={scene}
                   />
-                  ) : null,
-              })}*/
+              }}
           >
-              {
-                  /*
-                  <Stack.Screen
-                      name={ROUTES.SETTINGS}
-                      component={Settings}
-                      options={{
-                      cardStyleInterpolator: settingsNavAnimation,
-                      title: i18n.t('settings-SettingsNavigation-settings'),
-                      animationEnabled: false,
-                      }}
-                  />
-                  */
-              }
               <Stack.Screen
                   name={ROUTES.HOME}
                   component={Home}
@@ -80,6 +67,34 @@ export default function Routes() {
                   component={Profile}
                   options={{
                   title: "Profile",
+                }}
+              />
+              <Stack.Screen
+                  name={ROUTES.INSPECTION}
+                  component={Inspection}
+                  options={{
+                  title: "Inspection",
+                }}
+              />
+              <Stack.Screen
+                  name={ROUTES.TODO}
+                  component={Todo}
+                  options={{
+                  title: "Todo",
+                }}
+              />
+              <Stack.Screen
+                  name={ROUTES.RECORD}
+                  component={Record}
+                  options={{
+                  title: "Record",
+                }}
+              />
+              <Stack.Screen
+                  name={ROUTES.CREATE_APIARY}
+                  component={CreateApiary}
+                  options={{
+                  title: "Create Apiary",
                 }}
               />
               

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native'
 import styled from 'styled-components/native';
 import COLORS from '../../theme/colors';
 import Menu from '../../components/Menu/index';
@@ -14,11 +15,15 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-const Profile = () => {
+const Record = () => {
   return (
     <Container>
       <ContentContainer />
       
+        <Text>
+          Record
+        </Text>
+
       <FabMenu />
       
       <MenuContainer>
@@ -28,4 +33,4 @@ const Profile = () => {
   );
 }
 
-export default Profile;
+export default Record;

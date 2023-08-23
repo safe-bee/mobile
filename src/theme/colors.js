@@ -13,5 +13,6 @@ export default Object.freeze({
   GREY_60: '#5b6668',
   GREY_3: '##6d7779',
   GREY_4: '#2d343a',
+  HOME_GREY: 'rgba(247,247,247,255)'
 });
 

@@ -24,8 +24,7 @@ export const NewThreadFAB = styled(FAB)`
 `;
 
 export const BackgroundOpacity = styled.View({
-  ...StyleSheet.absoluteFill,
-  backgroundColor: COLORS.WHITE_1,
+  backgroundColor: 'rgba(0, 0, 0, 0.7)',
 });
 
 export const NewEmailOrThreadFAB = styled(FAB.Group)`
@@ -41,6 +40,29 @@ export const Row = styled.View`
 export const ButtonContainer = styled.View`
 `;
 
+/*
 export const MenuContainer = styled.View`
   flex: 0.12;
+`;
+*/
+
+export const MenuContainer = styled.View`
+  flex: 0.1;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: ${COLORS.WHITE};
+`;
+
+export const MainContentContainer = styled.View`
+  flex: 0.9;
+  background-color: ${COLORS.HOME_GREY};
+`;
+
+export const Content = styled.View`
+  margin-top: 12px;
+  margin-bottom: 12px;
+  justify-content: center;
+  flex-direction: row;
+  height: 100%;
+  padding: 20px;
 `;
