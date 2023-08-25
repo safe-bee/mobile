@@ -64,5 +64,5 @@ export const Content = styled.View`
   justify-content: center;
   flex-direction: row;
   height: 100%;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
 `;

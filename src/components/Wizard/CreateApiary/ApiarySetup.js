@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 import styled from 'styled-components/native';
 import COLORS from '../../../theme/colors';
 import TextInput from '../../../elements/TextInput/index';
@@ -27,36 +27,38 @@ const ApiarySetup = ({
       <Container>
         <MainContentContainer>
           <Content>
-            <View style={{ flex: 1, height: 300 }}>
-               <View style={{ flex: 1 }}>
-                  <TextInput
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    label='Hive name'
-                    placeholder='Name your hive'
-                    onBlur={() => {}}
-                    icon="ri-pencil-fill"
-                    outlined={true}
-                    onChangeText={(text) => setDomainVars(text)}
-                    value={domainVars}
-                   />
-                </View>
-
-                 <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
-                   <Calendar 
-                     onConfirm={(val) => console.log(val)}
-                     label='Date of task'
+          <ScrollView style={{ flex: 1 }}>
+              <View style={{ flex: 1, height: 300 }}>
+                <View style={{ flex: 1 }}>
+                    <TextInput
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      label='Hive name'
+                      placeholder='Name your hive'
+                      onBlur={() => {}}
+                      icon="ri-pencil-fill"
+                      outlined={true}
+                      onChangeText={(text) => setDomainVars(text)}
+                      value={domainVars}
                     />
-                 </View>
+                  </View>
 
-                <View style={{ flex: 1, marginTop: 10, flexDirection: 'column', alignItems: 'center' }}>
-                  <ContainedButton 
-                     disabled={false}
-                     onSubmit={() => setWizardPage('ApiaryEnvironment')}
-                     label="Next"
-                   />
-                 </View>
-            </View>
+                  <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
+                    <Calendar 
+                      onConfirm={(val) => console.log(val)}
+                      label='Date of task'
+                      />
+                  </View>
+
+                  <View style={{ flex: 1, marginTop: 10, flexDirection: 'column', alignItems: 'center' }}>
+                    <ContainedButton 
+                      disabled={false}
+                      onSubmit={() => setWizardPage('ApiaryEnvironment')}
+                      label="Next"
+                    />
+                  </View>
+              </View>
+            </ScrollView>
 
           </Content>
         </MainContentContainer>

@@ -8,7 +8,7 @@ import Icon from 'react-native-remix-icon';
 export const Container = styled(Appbar.Header)`
   elevation: 0;
   background-color: transparent;
-  height: 110px;
+  height: 105px;
 `;
 
 export const BackgroundImage = styled(Image)`

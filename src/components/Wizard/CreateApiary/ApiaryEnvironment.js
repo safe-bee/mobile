@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, ScrollView, View, TouchableOpacity, Text } from "react-native";
 import { Card } from 'react-native-paper';
 import styled from 'styled-components/native';
 import COLORS from '../../../theme/colors';
+import FONTS from '../../../theme/fonts';
 import { ContainedButton } from '../../../elements/Button/Button'
 import Menu from '../../../components/Menu/index'
 import { MenuContainer, MainContentContainer, Content } from '../../../screens/sharedStyles';
@@ -24,28 +25,49 @@ const ApiaryEnvironment = ({
         <Container>
           <MainContentContainer>
             <Content>
-              <View style={{ flex: 1, height: 400, justifyContent: 'center', alignContent: 'center' }}>
-                  <Card style={{ marginTop: 10, width: 180 }}>
-                    <Card.Cover style={{ height: 80, width: 180 }} source={require('../../../../assets/rural.jpeg')} />
-                  </Card>
+              <ScrollView style={{ flex: 1 }}>
+                <View style={{ paddingLeft: 25 }}>
+                  <Text style={{ fontFamily: FONTS.medium }}>
+                    Ambiente del Apiario
+                  </Text>
+                  <Text style={{ paddingTop: 10, fontFamily: FONTS.regular }}>
+                    Selecciona el ambiente que mejor se adapte a tu apiario.
+                  </Text>
+                </View>
+                <View style={{ flex: 1, height: 400, justifyContent: 'center', alignContent: 'center' }}>
+                    <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                      <TouchableOpacity>
+                        <Card style={{ alignItems:'center', marginTop: 20, width: 230, alignContent: 'center', elevation: 10 }}>
+                          <Card.Cover style={{ height: 80, width: 230 }} source={require('../../../../assets/rural.jpeg')} />
+                        </Card>
+                      </TouchableOpacity>
+                    </View>
 
-                  <Card style={{ marginTop: 10, width: 180 }}>
-                    <Card.Cover style={{ height: 80, width: 180 }} source={require('../../../../assets/suburban.jpeg')} />
-                  </Card>
+                    <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                      <TouchableOpacity>
+                        <Card style={{ marginTop: 20, width: 230, elevation: 10 }}>
+                          <Card.Cover style={{ height: 80, width: 230 }} source={require('../../../../assets/suburban.jpeg')} />
+                        </Card>
+                       </TouchableOpacity>
+                    </View>
 
-                  <Card style={{ marginTop: 10, width: 180 }}>
-                    <Card.Cover style={{ height: 80, width: 180 }} source={require('../../../../assets/urban.jpeg')} />
-                  </Card>
-                  
-                  <View style={{ flex: 1, marginTop: 10, flexDirection: 'column', alignItems: 'center' }}>
-                    <ContainedButton 
-                       disabled={false}
-                       onSubmit={() => setWizardPage('ApiaryLocation')}
-                       label="Next"
-                     />
-                   </View>
-              </View>
-  
+                    <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                      <TouchableOpacity>
+                        <Card style={{ marginTop: 20, width: 230, elevation: 10 }}>
+                          <Card.Cover style={{ height: 80, width: 230 }} source={require('../../../../assets/urban.jpeg')} />
+                        </Card>
+                      </TouchableOpacity>
+                    </View>
+                    
+                    <View style={{ flex: 1, marginTop: 20, flexDirection: 'column', alignItems: 'center' }}>
+                      <ContainedButton 
+                        disabled={false}
+                        onSubmit={() => setWizardPage('ApiaryLocation')}
+                        label="Next"
+                      />
+                    </View>
+                </View>
+              </ScrollView>
             </Content>
           </MainContentContainer>
   
