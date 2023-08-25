@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, View } from "react-native";
+import { StyleSheet, ScrollView, View, Dimensions } from "react-native";
 import styled from 'styled-components/native';
 import COLORS from '../../../theme/colors';
 import TextInput from '../../../elements/TextInput/index';
@@ -22,7 +22,7 @@ const ApiarySetup = ({
   setWizardPage,
 }) => {
   const [domainVars, setDomainVars] = useState(''); 
-
+  
   return (
       <Container>
         <MainContentContainer>
