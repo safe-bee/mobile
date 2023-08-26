@@ -9,7 +9,7 @@ import FONTS from '../../../theme/fonts';
 import { ContainedButton } from '../../../elements/Button/Button'
 import TextInput from '../../../elements/TextInput/index';
 import Menu from '../../../components/Menu/index'
-import { BUENOS_AIRES_COORD, LATITUD_DELTA, LONGITUD_DELTA } from './useCreateApiary';
+import { BUENOS_AIRES_COORD, LATITUD_DELTA, LONGITUD_DELTA, AV_CORRIENTES_COORD } from './useCreateApiary';
 import { MenuContainer, MainContentContainer, Content } from '../../../screens/sharedStyles';
 import {
   Label,
@@ -230,8 +230,10 @@ const ApiaryLocation = ({
 }) => {
 
   const ref = useRef();
-  const mapViewRef = useRef(null); 
-  const [markerCoords, setMarkerCoords] = useState(BUENOS_AIRES_COORD); 
+  const mapViewRef = useRef(null);
+  const [markerCoords, setMarkerCoords] = useState(BUENOS_AIRES_COORD);
+  const [mapInitialized, setMapInitialized] = useState(false);
+ 
   const { height } = Dimensions.get('window');
 
   const {
@@ -239,10 +241,16 @@ const ApiaryLocation = ({
     region,  
   } = wizardState?.fields; 
   
-
   useEffect(() => {
-    ref.current?.setAddressText(address?.value);
+    if (region?.latitude !== AV_CORRIENTES_COORD.latitude &&
+        region?.longitude !== AV_CORRIENTES_COORD.longitude &&
+        region?.longitude !== BUENOS_AIRES_COORD.longitude &&
+        region?.latitude !== BUENOS_AIRES_COORD.longitude
+      ) {
+        mapViewRef.current.animateToRegion(region?.value);
+    }
   }, []);
+
 
   useEffect(() => {
     if (address?.value) {
@@ -272,23 +280,29 @@ const ApiaryLocation = ({
   }
 
   const onRegionChange = async (region) => {
-    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${region.latitude},${region.longitude}&key=${API_KEY}`;
+    
+    // Por alguna razon se llama en el primer render con la coordenada AV_CORRIENTES, por eso agrego esta condicion al if
+    if (mapInitialized && 
+        region?.latitude !== AV_CORRIENTES_COORD.latitude && 
+        region?.longitude !== AV_CORRIENTES_COORD.longitude 
+    ) {
+      const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${region.latitude},${region.longitude}&key=${API_KEY}`;
 
-    const response = await fetch(apiUrl);
-    const data = await response.json();
+      const response = await fetch(apiUrl);
+      const data = await response.json();
 
-    if (data.status === 'OK') {
-      const formattedAddress = data.results[0].formatted_address;
-      // setAddress(formattedAddress);
-      wizardStateSetters?.updateField({ name: "address", value: formattedAddress });
-      const newRegion = {
-        ...region,
-        latitudeDelta: LATITUD_DELTA,
-        longitudeDelta: LONGITUD_DELTA,
+      if (data.status === 'OK') {
+        const formattedAddress = data.results[0].formatted_address;
+        // setAddress(formattedAddress);
+        wizardStateSetters?.updateField({ name: "address", value: formattedAddress });
+        const newRegion = {
+          ...region,
+          latitudeDelta: LATITUD_DELTA,
+          longitudeDelta: LONGITUD_DELTA,
+        }
+        wizardStateSetters?.updateField({ name: "region", value: newRegion });
       }
-      wizardStateSetters?.updateField({ name: "region", value: newRegion });
     }
-
   }
 
     // Funciones para actualizar las coordenadas de latitud y longitud
@@ -309,10 +323,6 @@ const ApiaryLocation = ({
     }
   
     const updateLongitude = (longitude) => {
-      
-      console.log("longitude");
-      console.log( parseFloat(longitude));
-      console.log( longitude);
       if (longitude !== "-" && longitude) {
         const newRegion = {
           ...markerCoords,
@@ -359,6 +369,7 @@ const ApiaryLocation = ({
                       provider={PROVIDER_GOOGLE}
                       onRegionChangeComplete={(region) => onRegionChange(region)}
                       onRegionChange={(region) => setMarkerCoords(region) }
+                      onMapReady={() => setMapInitialized(true)}
                       region={BUENOS_AIRES_COORD}
                       customMapStyle= {mapCustomStyle}
                     >

@@ -22,6 +22,14 @@ const ApiaryEnvironment = ({
 }) => {
     const cardWidth = 300;
     const cardHeight = 120;
+
+    const {
+      address,
+      region,  
+    } = wizardState?.fields; 
+    
+    console.log("APIARY ENVIRONMENT");
+    console.log(address.value);
     
     const cardStyle  = { height: cardHeight, width: cardWidth };
     const selectedCardStyle = { ...cardStyle, borderWidth: 2, borderColor: COLORS.YELLOW };

@@ -10,6 +10,13 @@ export const BUENOS_AIRES_COORD = {
     "longitudeDelta": LONGITUD_DELTA
 };
 
+export const AV_CORRIENTES_COORD = {
+    "latitude": -34.60381877255421, 
+    "latitudeDelta": LATITUD_DELTA,
+    "longitude": -58.379350751638405,
+    "longitudeDelta": LONGITUD_DELTA
+};
+
 
 
 export const useCreateApiary = ({
