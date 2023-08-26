@@ -10,13 +10,13 @@ import { TextButton, ContainedButton } from '../Button/index';
 const MyCalendar = ({
   label,
   onConfirm,
+  dateValue,
 }) => {
 
-   const today = new Date();
-   const formattedTodayDate = moment(today).format('MM/DD/YYYY');
+   const formattedTodayDate = moment(dateValue).format('MM/DD/YYYY');
    
    const [open, setOpen] = useState(false);
-   const [dateVal, setDate] = useState(today);
+   const [dateVal, setDate] = useState(dateValue);
    const [inputVal, setInputVal] = useState(formattedTodayDate);
 
    const handleConfirm = () => {
@@ -47,22 +47,25 @@ const MyCalendar = ({
         {
           open ?         
           <BottomPortal handleClosePress={() => setOpen(false)}>
-            <DateTimePicker display="spinner" value={dateVal} style={{ height: 150 }} onChange={(_, date) => setDate(date)}/>
-            <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-                <View style={{ alignItems:'center', flex: 0.5 }}>
-                  <TextButton 
-                    disabled={false}
-                    onSubmit={() => setOpen(false)}
-                    label="Cancel"
-                  />
-                </View>
-                <View style={{ alignItems:'center', flex: 0.5 }}>
-                  <ContainedButton 
-                    disabled={false}
-                    onSubmit={() => handleConfirm()}
-                    label="Confirm"
-                  />
-                </View>
+            
+            <View style={{ height: '50%', justifyContent: 'center'}}>
+              <DateTimePicker display="spinner" value={dateVal} style={{ height: 200, flexDirection: 'column', justifyContent: 'center' }} onChange={(_, date) => setDate(date)}/>
+              <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+                  <View style={{ alignItems:'center', flex: 0.5 }}>
+                    <TextButton 
+                      disabled={false}
+                      onSubmit={() => setOpen(false)}
+                      label="Cancel"
+                    />
+                  </View>
+                  <View style={{ alignItems:'center', flex: 0.5 }}>
+                    <ContainedButton 
+                      disabled={false}
+                      onSubmit={() => handleConfirm()}
+                      label="Confirm"
+                    />
+                  </View>
+              </View>
             </View>
           </BottomPortal> : null
         }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image } from 'react-native';
+import { Image, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useMenuContext } from '../../context/MenuContext';
 import { FAB, Portal } from 'react-native-paper';
@@ -15,7 +15,8 @@ const Container = styled(FAB.Group)`
   position: absolute;
   flex: 1;
   align-items: center;
-  padding-right: 110;
+  padding-right: 130px;
+  padding-bottom: 20px;
 `;
 
 const FabMenu = () => {
@@ -23,6 +24,8 @@ const FabMenu = () => {
   const [state, setState] = React.useState({ open: false });
   const { selectedIcon, selectIcon } = useMenuContext();
 
+  const screenWidth = Dimensions.get('window').width;
+  
   const onStateChange = ({ open }) => setState({ open });
 
   const { open } = state;

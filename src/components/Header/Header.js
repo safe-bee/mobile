@@ -3,14 +3,11 @@ import { Container, BackgroundImage, BackButton, RIcon } from './Header.styles';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import COLORS from '../../theme/colors'
 import { ROUTES } from '../../constants';
+import Dots from '../Dots/index';
 
 export default function Header({ navigation, route, options }) {
     const routeName = route?.name;
     const screenWidth = Dimensions.get('window').width;
-    console.log("hi")
-    console.log("routeName:", routeName); // Verifica si routeName se imprime correctamente
-    console.log("navigation:", navigation); // Verifica si navigation se pasa correctamente
-    console.log("options:", options); // Verifica si options se pasa correctamente
     return (
       <Container>
         <BackgroundImage

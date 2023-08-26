@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { View } from "react-native";
 import styled from 'styled-components/native';
+import { useCreateApiary } from './useCreateApiary';
 import ApiarySetup from './ApiarySetup';
 import ApiaryLocation from './ApiaryLocation';
 import ApiaryEnvironment from './ApiaryEnvironment';
 import Wizard from '../index'
-
+import Dots from '../../../components/Dots/index'
 
 const Container = styled.View`
   display: flex;
@@ -34,15 +36,28 @@ const createPages = () => ({
 const CreateApiaryWizard = () => {
     const [overrideWizardPage, setOverrideWizardPage] = useState('');
 
+    const {
+      fields,
+      updateField,
+      onSubmit,
+      isVisitedForm
+    } = useCreateApiary({
+      setError: () => {},
+      setSuccess: () => {},
+    });
+
+    
     return (
         <Container>
           <Wizard
             pages={createPages()}
             wizardState={{
-              
+              fields,
+              onSubmit,
+              isVisitedForm
             }}
             wizardStateSetters={{
-
+              updateField
             }}
             wizardPageOverride={overrideWizardPage}
             setWizardPageOverride={setOverrideWizardPage}

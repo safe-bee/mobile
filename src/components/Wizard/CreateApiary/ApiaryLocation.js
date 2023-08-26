@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
+import { View, ScrollView, Dimensions } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import styled from 'styled-components/native';
@@ -9,12 +9,13 @@ import FONTS from '../../../theme/fonts';
 import { ContainedButton } from '../../../elements/Button/Button'
 import TextInput from '../../../elements/TextInput/index';
 import Menu from '../../../components/Menu/index'
+import { BUENOS_AIRES_COORD } from './useCreateApiary';
 import { MenuContainer, MainContentContainer, Content } from '../../../screens/sharedStyles';
 import {
   Label,
   LabelContainer,
 } from '../../../elements/TextInput/TextInput.styles';
-
+import Dots from '../../../components/Dots/index'
 
 const Container = styled.View`
   flex: 1;
@@ -229,27 +230,40 @@ const ApiaryLocation = ({
 }) => {
 
   const ref = useRef();
-  const [domainVars, setDomainVars] = useState('hi'); 
-  const [address, setAddress] = useState('Buenos Aires, Argentina'); 
-  const [coordinate, setCoordinate] = useState({"latitude": -34.6038188, "latitudeDelta": 0.04389558785065617, "longitude": -58.3793510, "longitudeDelta": 0.06694793701170454 }); 
   const [markerCoords, setMarkerCoords] = useState({"latitude": -34.6038188, "latitudeDelta": 0.04389558785065617, "longitude": -58.3793510, "longitudeDelta": 0.06694793701170454 }); 
   const { height } = Dimensions.get('window');
 
-
-
+  const {
+    address,
+    region,  
+  } = wizardState?.fields; 
   
+  console.log("wizardState?.fields");
+  console.log(wizardState?.fields?.region.value);
+  console.log(wizardState?.fields?.address.value);
+
+
   useEffect(() => {
-    ref.current?.setAddressText(address);
+    ref.current?.setAddressText(address?.value);
   }, []);
 
   useEffect(() => {
-    if (address) {
-      ref.current?.setAddressText(address);
+    if (address?.value) {
+      ref.current?.setAddressText(address?.value);
     }
-  }, [address]);
+  }, [address?.value]);
+
+  /*
+  useEffect(() => {
+    if (region?.value.latitude && region?.value.longitude) {
+      onRegionChange();
+    }
+  }, [region?.value?.latitude, region?.value?.longitude]);
+  */
 
 
   const onAddressSelect = (details) => {
+    
     if (details) {
       const latitude = details.geometry.location.lat;
       const longitude = details.geometry.location.lng;
@@ -265,22 +279,22 @@ const ApiaryLocation = ({
         longitudeDelta,
       };
 
-      setCoordinate(region); 
+      wizardStateSetters?.updateField({ name: "region", value: region });
+      wizardStateSetters?.updateField({ name: "address", value: details.formatted_address });
     }
   }
 
   const onRegionChange = async (region) => {
     const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${region.latitude},${region.longitude}&key=${API_KEY}`;
 
-    console.log("region");
-    console.log(region);
     const response = await fetch(apiUrl);
     const data = await response.json();
 
     if (data.status === 'OK') {
       const formattedAddress = data.results[0].formatted_address;
-      setAddress(formattedAddress);
-      setCoordinate(region);
+      // setAddress(formattedAddress);
+      wizardStateSetters?.updateField({ name: "address", value: formattedAddress });
+      wizardStateSetters?.updateField({ name: "region", value: region });
     }
 
   }
@@ -289,107 +303,136 @@ const ApiaryLocation = ({
     <Container>
       <MainContentContainer>
         <Content>
-        <ScrollView style={{ flex: 1 }}>
-            <View style={{ flex: 1 }}>
-
-              <View style={{ flex: 1, height: height / 4 }}>
-                <MapView
-                  style={{ width: '100%', height: '100%' }}
-                  provider={PROVIDER_GOOGLE}
-                  onRegionChangeComplete={(region) => onRegionChange(region)}
-                  onRegionChange={(region) => setMarkerCoords(region) }
-                  region={{"latitude": -34.6038188, "latitudeDelta": 0.04389558785065617, "longitude": -58.3793510, "longitudeDelta": 0.06694793701170454 }}
-                  customMapStyle= {mapCustomStyle}
-                >
-                   <Marker
-                   draggable
-                      image={BEE_ICON}
-                      style={{ width: 10, height: 10 }} 
-                      coordinate={{ latitude: markerCoords.latitude, longitude: markerCoords.longitude }}
-                      title="Ubicación"
-                      description="Descripción de la ubicación"
-                  />
-                </MapView>
-              </View>
-
-              <View style={{ flex: 1, marginTop: 30  }}>
-                <View style={{ marginBottom: 20 }}> 
-                  <LabelContainer>
-                      <Label
-                        color=''
-                        fontFamily={FONTS.regular}
-                      >
-                        Direccion
-                      </Label>
-                  </LabelContainer>
-                  <GooglePlacesAutocomplete
-                    ref={ref}
-                    placeholder='Buscar una direccion'
-                    onPress={(data, details = null) => {
-                      onAddressSelect(details);
-                    }}
-                    query={{
-                      key: API_KEY,
-                      language: 'en',
-                    }}
-                    fetchDetails={true}
-                    keyboardShouldPersistTaps="handled"
-                    debounce={50}
-                    textInputProps={{ 
-                      style: {
-                        backgroundColor: COLORS.BLUE_1,
-                        width: '100%',
-                        height: 45,
-                        paddingLeft: 10,
-                        borderColor: COLORS.BLUE_1,
-                        borderWidth: 1,
-                        borderRadius: 8, 
-                       },
-                       placeholderTextColor: COLORS.GREY_40
-                    }}
-                  />
+            <ScrollView style={{ flex: 1 }}>
+                <View style={{ marginBottom: 20 }}>
+                    <Dots 
+                      pages={[
+                        {
+                          onPress: () => setWizardPage('ApiarySetup'),
+                          actualPage: false
+                        },
+                        {
+                          onPress: () => setWizardPage('ApiaryEnvironment'),
+                          actualPage: false
+                        },
+                        {
+                          onPress: () => setWizardPage('ApiaryLocation'),
+                          actualPage: true
+                        }
+                      ]}
+                    />
                 </View>
 
-              <View style={{ flex: 1, flexDirection: 'row' }}>
-                  <View style={{ flex: 0.5, paddingRight: 10 }}>
-                    <TextInput
-                      autoCapitalize="none"
-                      autoCorrect={false}
-                      label='Latitud'
-                      onBlur={() => {}}
-                      icon="ri-pencil-fill"
-                      outlined={true}
-                      onChangeText={(text) => setDomainVars(text)}
-                      value={coordinate.latitude.toString()}
-                    />
+                <View style={{ flex: 1 }}>
+                  <View style={{ flex: 1, height: height / 4 }}>
+                    <MapView
+                      style={{ width: '100%', height: '100%' }}
+                      provider={PROVIDER_GOOGLE}
+                      onRegionChangeComplete={(region) => onRegionChange(region)}
+                      onRegionChange={(region) => setMarkerCoords(region) }
+                      region={BUENOS_AIRES_COORD}
+                      customMapStyle= {mapCustomStyle}
+                    >
+                      <Marker
+                        draggable
+                        image={BEE_ICON}
+                        style={{ width: 10, height: 10 }} 
+                        coordinate={{ latitude: markerCoords.latitude, longitude: markerCoords.longitude }}
+                        title="Ubicación"
+                        description="Descripción de la ubicación"
+                      />
+                    </MapView>
+                </View>
+
+
+
+                <View style={{ flex: 1, marginTop: 30  }}>
+
+                    <View style={{ marginBottom: 20 }}> 
+                      <LabelContainer>
+                          <Label
+                            color=''
+                            fontFamily={FONTS.regular}
+                          >
+                            Direccion
+                          </Label>
+                      </LabelContainer>
+                      <GooglePlacesAutocomplete
+                        ref={ref}
+                        placeholder='Buscar una direccion'
+                        onPress={(data, details = null) => {
+                          onAddressSelect(details);
+                        }}
+                        query={{
+                          key: API_KEY,
+                          language: 'en',
+                        }}
+                        fetchDetails={true}
+                        keyboardShouldPersistTaps="handled"
+                        debounce={50}
+                        textInputProps={{ 
+                          style: {
+                            backgroundColor: COLORS.BLUE_1,
+                            width: '100%',
+                            height: 45,
+                            paddingLeft: 10,
+                            borderColor: COLORS.BLUE_1,
+                            borderWidth: 1,
+                            borderRadius: 8, 
+                          },
+                          placeholderTextColor: COLORS.GREY_40
+                        }}
+                      />
+                    </View>
+
+                  <View style={{ flex: 1, flexDirection: 'row' }}>
+                      <View style={{ flex: 0.5, paddingRight: 10 }}>
+                        <TextInput
+                          autoCapitalize="none"
+                          autoCorrect={false}
+                          label='Latitud'
+                          onBlur={() => {}}
+                          outlined={true}
+                          onChangeText={(text) => {
+                            if (text !== "-" && text) {
+                              wizardStateSetters?.updateField({ name: "region", value: { ...region.value, longitudeDelta: 0, latitudeDelta: 0, latitude: parseFloat(text) } })
+                            } 
+                          }}
+                          value={region.value.latitude.toString()}
+                          keyboardType="numeric"
+                        />
+                      </View>
+
+                      <View style={{ flex: 0.5 }}>
+                        <TextInput
+                          autoCapitalize="none"
+                          autoCorrect={false}
+                          label='Longitud'
+                          onBlur={() => {}}
+                          outlined={true}
+                          onChangeText={(text) => {
+                            if (text !== "-" && text) {
+                              wizardStateSetters?.updateField({ name: "region", value: { ...region.value, longitudeDelta: 0, latitudeDelta: 0, longitude: parseFloat(text) } })
+                            } 
+                          }}
+                          value={region.value.longitude.toString()}
+                          keyboardType="numeric"
+                        />
+                      </View>
+                    </View>
                   </View>
 
-                  <View style={{ flex: 0.5 }}>
-                    <TextInput
-                      autoCapitalize="none"
-                      autoCorrect={false}
-                      label='Longitud'
-                      onBlur={() => {}}
-                      icon="ri-pencil-fill"
-                      outlined={true}
-                      onChangeText={(text) => setDomainVars(text)}
-                      value={coordinate.longitude.toString()}
+
+                  <View style={{ flex: 1, marginTop: 10, flexDirection: 'column', alignItems: 'center' }}>
+                    <ContainedButton 
+                      disabled={false}
+                      onSubmit={()=>{}}
+                      label="Crear Apiario"
                     />
                   </View>
                 </View>
-              </View>
 
-
-              <View style={{ flex: 1, marginTop: 10, flexDirection: 'column', alignItems: 'center' }}>
-                <ContainedButton 
-                  disabled={false}
-                  onSubmit={()=>{}}
-                  label="Crear Apiario"
-                />
-              </View>
-            </View>
-          </ScrollView>
-
+            </ScrollView>
         </Content>
       </MainContentContainer>
 

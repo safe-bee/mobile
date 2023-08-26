@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import useValidatedInput from './useValidatedInput';
-import { arrayToObject } from '../helpers';
+import { arrayToObject } from '../utils/helpers';
 
 const useForm = (
   inputFields,
