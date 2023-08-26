@@ -9,7 +9,7 @@ import FONTS from '../../../theme/fonts';
 import { ContainedButton } from '../../../elements/Button/Button'
 import TextInput from '../../../elements/TextInput/index';
 import Menu from '../../../components/Menu/index'
-import { BUENOS_AIRES_COORD } from './useCreateApiary';
+import { BUENOS_AIRES_COORD, LATITUD_DELTA, LONGITUD_DELTA } from './useCreateApiary';
 import { MenuContainer, MainContentContainer, Content } from '../../../screens/sharedStyles';
 import {
   Label,
@@ -230,7 +230,8 @@ const ApiaryLocation = ({
 }) => {
 
   const ref = useRef();
-  const [markerCoords, setMarkerCoords] = useState({"latitude": -34.6038188, "latitudeDelta": 0.04389558785065617, "longitude": -58.3793510, "longitudeDelta": 0.06694793701170454 }); 
+  const mapViewRef = useRef(null); 
+  const [markerCoords, setMarkerCoords] = useState(BUENOS_AIRES_COORD); 
   const { height } = Dimensions.get('window');
 
   const {
@@ -238,10 +239,6 @@ const ApiaryLocation = ({
     region,  
   } = wizardState?.fields; 
   
-  console.log("wizardState?.fields");
-  console.log(wizardState?.fields?.region.value);
-  console.log(wizardState?.fields?.address.value);
-
 
   useEffect(() => {
     ref.current?.setAddressText(address?.value);
@@ -253,14 +250,6 @@ const ApiaryLocation = ({
     }
   }, [address?.value]);
 
-  /*
-  useEffect(() => {
-    if (region?.value.latitude && region?.value.longitude) {
-      onRegionChange();
-    }
-  }, [region?.value?.latitude, region?.value?.longitude]);
-  */
-
 
   const onAddressSelect = (details) => {
     
@@ -268,16 +257,14 @@ const ApiaryLocation = ({
       const latitude = details.geometry.location.lat;
       const longitude = details.geometry.location.lng;
 
-      // Definir las diferencias de latitud y longitud (ajustar estos valores según tus preferencias)
-      const latitudeDelta = 0.05; // Por ejemplo, un zoom de 0.05
-      const longitudeDelta = 0.05;
-
       const region = {
         latitude,
         longitude,
-        latitudeDelta,
-        longitudeDelta,
+        latitudeDelta: LATITUD_DELTA,
+        longitudeDelta: LONGITUD_DELTA,
       };
+
+      mapViewRef.current.animateToRegion(region);
 
       wizardStateSetters?.updateField({ name: "region", value: region });
       wizardStateSetters?.updateField({ name: "address", value: details.formatted_address });
@@ -294,10 +281,51 @@ const ApiaryLocation = ({
       const formattedAddress = data.results[0].formatted_address;
       // setAddress(formattedAddress);
       wizardStateSetters?.updateField({ name: "address", value: formattedAddress });
-      wizardStateSetters?.updateField({ name: "region", value: region });
+      const newRegion = {
+        ...region,
+        latitudeDelta: LATITUD_DELTA,
+        longitudeDelta: LONGITUD_DELTA,
+      }
+      wizardStateSetters?.updateField({ name: "region", value: newRegion });
     }
 
   }
+
+    // Funciones para actualizar las coordenadas de latitud y longitud
+    const updateLatitude = (latitude) => {
+      if (latitude !== "-" && latitude) {
+        const newRegion = {
+          ...markerCoords,
+          latitude: parseFloat(latitude),
+          latitudeDelta: LATITUD_DELTA,
+          longitudeDelta: LONGITUD_DELTA,
+        };
+
+        setMarkerCoords(newRegion); // Actualiza la posición del marcador en el mapa
+        wizardStateSetters?.updateField({ name: "region", value: newRegion });
+        mapViewRef.current.animateToRegion(newRegion);
+      }
+      
+    }
+  
+    const updateLongitude = (longitude) => {
+      
+      console.log("longitude");
+      console.log( parseFloat(longitude));
+      console.log( longitude);
+      if (longitude !== "-" && longitude) {
+        const newRegion = {
+          ...markerCoords,
+          longitude: parseFloat(longitude),
+          latitudeDelta: LATITUD_DELTA,
+          longitudeDelta: LONGITUD_DELTA,
+        };
+        setMarkerCoords(newRegion); 
+        wizardStateSetters?.updateField({ name: "region", value: newRegion });
+        mapViewRef.current.animateToRegion(newRegion);
+      }
+    }
+  
 
   return (
     <Container>
@@ -326,6 +354,7 @@ const ApiaryLocation = ({
                 <View style={{ flex: 1 }}>
                   <View style={{ flex: 1, height: height / 4 }}>
                     <MapView
+                      ref={mapViewRef}
                       style={{ width: '100%', height: '100%' }}
                       provider={PROVIDER_GOOGLE}
                       onRegionChangeComplete={(region) => onRegionChange(region)}
@@ -393,11 +422,7 @@ const ApiaryLocation = ({
                           label='Latitud'
                           onBlur={() => {}}
                           outlined={true}
-                          onChangeText={(text) => {
-                            if (text !== "-" && text) {
-                              wizardStateSetters?.updateField({ name: "region", value: { ...region.value, longitudeDelta: 0, latitudeDelta: 0, latitude: parseFloat(text) } })
-                            } 
-                          }}
+                          onChangeText={(text) => updateLatitude(text)}
                           value={region.value.latitude.toString()}
                           keyboardType="numeric"
                         />
@@ -410,11 +435,7 @@ const ApiaryLocation = ({
                           label='Longitud'
                           onBlur={() => {}}
                           outlined={true}
-                          onChangeText={(text) => {
-                            if (text !== "-" && text) {
-                              wizardStateSetters?.updateField({ name: "region", value: { ...region.value, longitudeDelta: 0, latitudeDelta: 0, longitude: parseFloat(text) } })
-                            } 
-                          }}
+                          onChangeText={(text) => updateLongitude(text)}
                           value={region.value.longitude.toString()}
                           keyboardType="numeric"
                         />

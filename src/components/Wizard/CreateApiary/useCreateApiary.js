@@ -1,12 +1,16 @@
 import useForm from '../../../hooks/useForm';
 
+export const LATITUD_DELTA = 0.05;
+export const LONGITUD_DELTA = 0.05;
 
 export const BUENOS_AIRES_COORD = {
     "latitude": -34.6038188,
-    "latitudeDelta": 0.04389558785065617,
+    "latitudeDelta": LATITUD_DELTA,
     "longitude": -58.3793510,
-    "longitudeDelta": 0.06694793701170454
+    "longitudeDelta": LONGITUD_DELTA
 };
+
+
 
 export const useCreateApiary = ({
     setError,
