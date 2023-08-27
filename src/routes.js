@@ -10,6 +10,8 @@ import Todo from './screens/Todo/index'
 import Inspection from './screens/Inspection/index'
 import CreateApiary from './components/Wizard/CreateApiary/CreateApiaryWizard';
 import { MenuProvider } from './context/MenuContext';
+import { SnackbarProvider } from './context/SnackbarContext'; 
+
 
 const Stack = createStackNavigator();
 
@@ -40,66 +42,68 @@ export default function Routes() {
     <NavigationContainer
       // fallback={<Loader backgroundColor={COLORS.PK.WHITE} />}
     >
-        <MenuProvider>
-          <Stack.Navigator
-              headerMode="screen"
-              screenOptions={{
-                animationEnabled: false,
-                header: ({ scene, route, options, previous ,navigation }) =>
-                  <Header
-                    route={route}
-                    options={options}
-                    navigation={navigation}
-                    previous={previous}
-                    scene={scene}
-                  />
-              }}
-          >
-              <Stack.Screen
-                  name={ROUTES.HOME}
-                  component={Home}
-                  options={{
-                  title: "Home",
+      <SnackbarProvider>
+          <MenuProvider>
+            <Stack.Navigator
+                headerMode="screen"
+                screenOptions={{
+                  animationEnabled: false,
+                  header: ({ scene, route, options, previous ,navigation }) =>
+                    <Header
+                      route={route}
+                      options={options}
+                      navigation={navigation}
+                      previous={previous}
+                      scene={scene}
+                    />
                 }}
-              />
-              <Stack.Screen
-                  name={ROUTES.PROFILE}
-                  component={Profile}
-                  options={{
-                  title: "Profile",
-                }}
-              />
-              <Stack.Screen
-                  name={ROUTES.INSPECTION}
-                  component={Inspection}
-                  options={{
-                  title: "Inspection",
-                }}
-              />
-              <Stack.Screen
-                  name={ROUTES.TODO}
-                  component={Todo}
-                  options={{
-                  title: "Todo",
-                }}
-              />
-              <Stack.Screen
-                  name={ROUTES.RECORD}
-                  component={Record}
-                  options={{
-                  title: "Record",
-                }}
-              />
-              <Stack.Screen
-                  name={ROUTES.CREATE_APIARY}
-                  component={CreateApiary}
-                  options={{
-                  title: "Create Apiary",
-                }}
-              />
-              
-        </Stack.Navigator>
-      </MenuProvider>
+            >
+                <Stack.Screen
+                    name={ROUTES.HOME}
+                    component={Home}
+                    options={{
+                    title: "Home",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.PROFILE}
+                    component={Profile}
+                    options={{
+                    title: "Profile",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.INSPECTION}
+                    component={Inspection}
+                    options={{
+                    title: "Inspection",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.TODO}
+                    component={Todo}
+                    options={{
+                    title: "Todo",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.RECORD}
+                    component={Record}
+                    options={{
+                    title: "Record",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.CREATE_APIARY}
+                    component={CreateApiary}
+                    options={{
+                    title: "Create Apiary",
+                  }}
+                />
+                
+          </Stack.Navigator>
+        </MenuProvider>
+      </SnackbarProvider>
     </NavigationContainer>
   );
 }

@@ -322,7 +322,7 @@ const ApiaryLocation = ({
       
     }
   
-    const updateLongitude = (longitude) => {
+  const updateLongitude = (longitude) => {
       if (longitude !== "-" && longitude) {
         const newRegion = {
           ...markerCoords,
@@ -334,8 +334,14 @@ const ApiaryLocation = ({
         wizardStateSetters?.updateField({ name: "region", value: newRegion });
         mapViewRef.current.animateToRegion(newRegion);
       }
-    }
+  }
   
+
+  const handleSubmit = () => {
+    
+    wizardState?.onSubmit()
+  }
+
 
   return (
     <Container>
@@ -458,7 +464,7 @@ const ApiaryLocation = ({
                   <View style={{ flex: 1, marginTop: 10, flexDirection: 'column', alignItems: 'center' }}>
                     <ContainedButton 
                       disabled={false}
-                      onSubmit={()=>{}}
+                      onSubmit={handleSubmit}
                       label="Crear Apiario"
                     />
                   </View>

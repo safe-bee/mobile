@@ -18,16 +18,20 @@ export const AV_CORRIENTES_COORD = {
 };
 
 
+const requiredValidation = {
+    type: "required",
+    errorMessage: "El campo es requerido."
+};
 
 export const useCreateApiary = ({
-    setError,
-    setSuccess
+  setError,
+  setSuccess
 }) => {
 
 const inputFields = {
     hiveName: {
         value: '',
-        validations: [],
+        validations: [requiredValidation],
     },
     dateTask: {
         value: new Date(),
@@ -35,7 +39,7 @@ const inputFields = {
     },
     environment: {
         value: '',
-        validations: [],
+        validations: [requiredValidation],
     },
     address: {
         value: 'Buenos Aires, Argentina',
@@ -49,8 +53,17 @@ const inputFields = {
 
 const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     inputFields,
-    async (values) => {
-        console.log(values);
+    async (formValues) => {
+
+        const input = {
+            hiveName: formValues.hiveName.value,
+            dateTask: formValues.dateTask.value,
+            environment: formValues.environment.value,
+            address: formValues.address.value,
+            region: formValues.region.value,
+        };
+
+        console.log(input);
         /*
             const apiObject = toAPIObject(values);
             const res = await handleUpdateUserPreferences(apiObject);

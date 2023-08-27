@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import COLORS from '../../../theme/colors';
 import FONTS from '../../../theme/fonts';
 import { ContainedButton } from '../../../elements/Button/Button'
+import { useSnackbar } from '../../../context/SnackbarContext';
 import Menu from '../../../components/Menu/index'
 import { MenuContainer, MainContentContainer, Content } from '../../../screens/sharedStyles';
 import Dots from '../../../components/Dots/index'
@@ -20,16 +21,12 @@ const ApiaryEnvironment = ({
   wizardStateSetters,
   setWizardPage,
 }) => {
+    
+  const { showSnackbar } = useSnackbar();
+  
     const cardWidth = 300;
     const cardHeight = 120;
 
-    const {
-      address,
-      region,  
-    } = wizardState?.fields; 
-    
-    console.log("APIARY ENVIRONMENT");
-    console.log(address.value);
     
     const cardStyle  = { height: cardHeight, width: cardWidth };
     const selectedCardStyle = { ...cardStyle, borderWidth: 2, borderColor: COLORS.YELLOW };
@@ -38,12 +35,22 @@ const ApiaryEnvironment = ({
     const surbanSelected = wizardState?.fields?.environment?.value === 'suburban';
     const ruralSelected = wizardState?.fields?.environment?.value === 'rural';
 
+    
+    const handleNext = () => {
+      if (wizardState?.fields?.environment?.value ) {
+        setWizardPage('ApiaryLocation');
+      } else {
+        showSnackbar("Error de Validacion!", "Corriga los siguientes errores: 'ambiente' no seleccionado");
+      }
+    };
+
+    
     return (
         <Container>
           <MainContentContainer>
             <Content>
               <ScrollView style={{ flex: 1 }}>
-                <View style={{ marginBottom: 20 }}>
+                <View style={{ marginBottom: 20, width: '100%' }}>
                   <Dots 
                     pages={[
                       {
@@ -97,7 +104,7 @@ const ApiaryEnvironment = ({
                     <View style={{ flex: 1, marginTop: 20, flexDirection: 'column', alignItems: 'center' }}>
                       <ContainedButton 
                         disabled={false}
-                        onSubmit={() => setWizardPage('ApiaryLocation')}
+                        onSubmit={handleNext}
                         label="Next"
                       />
                     </View>
