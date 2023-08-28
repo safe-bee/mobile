@@ -21,39 +21,52 @@ const ApiarioCard = ({ apiario }) => {
                 }}>
                <View style={{ alignItems: 'center', marginBottom: 5, }}>
                  <Text style={{ fontSize: 16, fontFamily: FONTS.medium }}>
-                    {apiario.nombreApiario}
+                    {apiario.nombre}
                  </Text>
                </View>
 
-            <ScrollView
-             keyboardShouldPersistTaps="handled"
-            >
-                {apiario.colmenas.map( colmena => (
+            {
+                apiario.colmenas.length ?
+                apiario.colmenas.map( colmena => (
+                    <ScrollView
+                    keyboardShouldPersistTaps="handled"
+                    >
                     <View style={{ alignItems: 'center', borderRadius: 5, backgroundColor: 'rgba(173, 216, 230, 0.5)', flex: 0.3, borderRadius: 8, marginTop: 10, flexDirection: 'row' }}>
                         <View style={{ flex: 0.2, alignItems: 'center' }}>
                             <Image
-                              source={require('../../../assets/hive4.png')} 
-                              style={{ width: 50, height: 50 }} 
+                                source={require('../../../assets/hive4.png')} 
+                                style={{ width: 50, height: 50 }} 
                             />
                         </View>
                         <View style={{ flex: 0.8, flexDirection: 'row' }}>
                             <Text style={{ fontSize: 15,fontFamily: FONTS.regular, color: COLORS.BLACK_2 }}>
-                                {colmena.nombreColmena}
+                                {colmena.nombre}
                             </Text>
                             <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => {}}>
                                 <Icon size={19} name="ri-pencil-fill" color={COLORS.BLACK_2} />
                             </TouchableOpacity>
                         </View>
                     </View>
-                ))}
-            </ScrollView>
+                    </ScrollView>
+                )) 
+                : <View style={{ flex: 0.8, justifyContent: 'center' }}>
+                    <Text style={{ paddingLeft: 10, fontSize: 15 ,fontFamily: FONTS.medium, color: COLORS.BLACK_1 }}>
+                        Parece que no tenes configurada ninguna colmena ahora. Ahora que tu apiario fue creado, podes empezar creando tus colmenas!
+                    </Text>
+                </View>
+             }
             
-            <View style={{ paddingVertical: 5 }}>
-                <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => {}}>
-                    <Icon size={30} name="ri-add-circle-line" color={COLORS.YELLOW} />
-                </TouchableOpacity>
+            <View style={{ paddingVertical: 5, alignItems: 'center' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+                    <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => {}}>
+                        <Icon size={30} name="ri-add-circle-line" color={COLORS.YELLOW} />
+                    </TouchableOpacity>
+                    <Text style={{ paddingLeft: 10, fontSize: 15,fontFamily: FONTS.medium, color: COLORS.YELLOW }}>
+                        Agregar Colmena
+                    </Text>
+                </View>
             </View>
-    
+            
             </Card.Content>
             <Card.Cover
               source={require('../../../assets/header.jpeg')}

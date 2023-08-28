@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 
 export const GET_APIARIOS = gql`
-  query apiarios {
+  query Apiarios {
     apiarios {
       id,
       nombre,
@@ -10,7 +10,11 @@ export const GET_APIARIOS = gql`
       fecha_creacion,
       latitud,
       longitud,
-      tipo_ambiente
+      tipo_ambiente,
+      colmenas {
+        datos_numero_deeps,
+        nombre
+      }
     }
   }
 `;

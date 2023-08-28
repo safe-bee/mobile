@@ -12,7 +12,9 @@ import CreateApiaryWizard from '../../components/Wizard/CreateApiary/CreateApiar
 import { ContainedButton } from '../../elements/Button';
 import TwoOptionsSelector from '../../elements/TwoOptionsSelector';
 import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
-import ApiarioCard from '../../components/ApiarioCard/'
+import ApiarioCard from '../../components/ApiarioCard/';
+import Loading from '../../components/Loading/index';
+
 
 const Container = styled.View`
   flex: 1;
@@ -23,6 +25,7 @@ const Home = () => {
 
   console.log("DATA IVOZ");
   console.log(data);
+  const apiarios = data?.apiarios;
   const navigation = useNavigation();
 
   
@@ -59,31 +62,35 @@ const Home = () => {
     },
   ];
 
+  console.log(loading);
   return (
     <Container>
       <MainContentContainer>
           <Content>
-            <View style={{ flex: 1, paddingHorizontal: 5 }}>
-
-              <ScrollView style={{ flex: 0.7 }}>
-                  {apiariosMock.map(apiario => (
-                    <View style={{ flex: 1, marginTop: 15 }}>
-                      <ApiarioCard apiario={apiario}/>
-                    </View>
-                  ))}
-              </ScrollView>
-              
-              <View style={{ flex: 0.3, flexDirection: 'row', alignItems: 'center', }}>
-                <View style={{ flex: 1, alignItems: 'center' }}>
-                  <ContainedButton 
-                    disabled={false}
-                    onSubmit={() => navigation.navigate(ROUTES.CREATE_APIARY)}
-                    label="CreateApiary"
-                  />
+            {
+              loading ?
+              <Loading size={50} /> : 
+              <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                <ScrollView style={{ flex: 0.7 }}>
+                    {apiarios.map(apiario => (
+                      <View style={{ flex: 1, marginTop: 15 }}>
+                        <ApiarioCard apiario={apiario}/>
+                      </View>
+                    ))}
+                </ScrollView>
+                
+                <View style={{ flex: 0.3, flexDirection: 'row', alignItems: 'center', }}>
+                  <View style={{ flex: 1, alignItems: 'center' }}>
+                    <ContainedButton 
+                      disabled={false}
+                      onSubmit={() => navigation.navigate(ROUTES.CREATE_APIARY)}
+                      label="CreateApiary"
+                    />
+                  </View>
                 </View>
-              </View>
-
             </View>
+            }
+            
           </Content>
       </MainContentContainer>
       
