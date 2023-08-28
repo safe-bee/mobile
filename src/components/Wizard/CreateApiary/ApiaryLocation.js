@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, ScrollView, Dimensions } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import { useSnackbar } from '../../../context/SnackbarContext';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import styled from 'styled-components/native';
 import BEE_ICON from '../../../../assets/icon.png';
@@ -233,6 +234,8 @@ const ApiaryLocation = ({
   const mapViewRef = useRef(null);
   const [markerCoords, setMarkerCoords] = useState(BUENOS_AIRES_COORD);
   const [mapInitialized, setMapInitialized] = useState(false);
+
+  const { showSnackbar } = useSnackbar();
  
   const { height } = Dimensions.get('window');
 
@@ -339,7 +342,15 @@ const ApiaryLocation = ({
 
   const handleSubmit = () => {
     
-    wizardState?.onSubmit()
+    console.log("ente");
+    if (wizardState?.fields?.hiveName?.value && wizardState?.fields?.environment?.value) {
+      console.log("ente1");
+      // setWizardPage('ApiaryEnvironment');
+      wizardState?.onSubmit();
+    } else if (!wizardState?.fields?.hiveName?.value || !wizardState?.fields?.environment?.value ) {
+      console.log("ente2");
+        showSnackbar("Error de Validacion!", "Corriga los errores");
+    }
   }
 
 

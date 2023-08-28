@@ -1,4 +1,8 @@
 import useForm from '../../../hooks/useForm';
+import { CREATE_APIARIOS, GET_APIARIOS } from '../../../graphql/mutations/createApiarios';
+import { ROUTES } from '../../../constants';
+import { useNavigation } from '@react-navigation/native';
+import { useMutation } from "@apollo/client";
 
 export const LATITUD_DELTA = 0.05;
 export const LONGITUD_DELTA = 0.05;
@@ -23,10 +27,14 @@ const requiredValidation = {
     errorMessage: "El campo es requerido."
 };
 
-export const useCreateApiary = ({
-  setError,
-  setSuccess
-}) => {
+
+export const useCreateApiary = () => {
+
+const [createApiarios] = useMutation(CREATE_APIARIOS, {
+    refetchQueries: [{ query: GET_APIARIOS }],
+});
+
+const navigation = useNavigation();
 
 const inputFields = {
     hiveName: {
@@ -55,30 +63,25 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     inputFields,
     async (formValues) => {
 
-        const input = {
-            hiveName: formValues.hiveName.value,
-            dateTask: formValues.dateTask.value,
-            environment: formValues.environment.value,
-            address: formValues.address.value,
-            region: formValues.region.value,
+        const variables = {
+            nombre: formValues.hiveName.value,
+            fecha_creacion: formValues.dateTask.value,
+            tipo_ambiente: formValues.environment.value.toUpperCase(),
+            direccion: formValues.address.value,
+            latitud: formValues.region.value.latitude,
+            longitud: formValues.region.value.longitude,
+            tipo_terreno: "CAMPO",
         };
 
-        console.log(input);
-        /*
-            const apiObject = toAPIObject(values);
-            const res = await handleUpdateUserPreferences(apiObject);
+        try {
+            const res = await createApiarios({ variables });
 
-            const {
-            updateUserPreferences: { errors },
-            } = res.data;
-
-            if (errors !== null && errors.length > 0) {
-            setError(i18n.t('settings-useStockMessages-error'));
-            } else {
-            setSuccess(i18n.t('settings-useStockMessages-success'));
-            handleStockMessagesUpdateSuccess(values);
+            if(!res.data.errors) {
+                navigation.navigate(ROUTES.HOME);
             }
-        */
+        } catch (e) {
+            console.log(e);
+        }
     }
   );
 

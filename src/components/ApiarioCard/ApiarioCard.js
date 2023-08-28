@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, View, TouchableOpacity, Text, Image } from "react-native";
+import { ScrollView, View, TouchableOpacity, Text, Image } from "react-native";
 import { Card } from 'react-native-paper';
 import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
 import Icon from 'react-native-remix-icon';
-
 
 
 const ApiarioCard = ({ apiario }) => {
@@ -27,7 +26,7 @@ const ApiarioCard = ({ apiario }) => {
 
             {
                 apiario.colmenas.length ?
-                apiario.colmenas.map( colmena => (
+                    apiario.colmenas.map( colmena => (
                     <ScrollView
                     keyboardShouldPersistTaps="handled"
                     >
@@ -49,7 +48,7 @@ const ApiarioCard = ({ apiario }) => {
                     </View>
                     </ScrollView>
                 )) 
-                : <View style={{ flex: 0.8, justifyContent: 'center' }}>
+                : <View style={{ flex: 1, justifyContent: 'center' }}>
                     <Text style={{ paddingLeft: 10, fontSize: 15 ,fontFamily: FONTS.medium, color: COLORS.BLACK_1 }}>
                         Parece que no tenes configurada ninguna colmena ahora. Ahora que tu apiario fue creado, podes empezar creando tus colmenas!
                     </Text>

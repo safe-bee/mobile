@@ -31,8 +31,8 @@ const ApiaryEnvironment = ({
     const cardStyle  = { height: cardHeight, width: cardWidth };
     const selectedCardStyle = { ...cardStyle, borderWidth: 2, borderColor: COLORS.YELLOW };
 
-    const urbanSelected = wizardState?.fields?.environment?.value === 'urban';
-    const surbanSelected = wizardState?.fields?.environment?.value === 'suburban';
+    const urbanSelected = wizardState?.fields?.environment?.value === 'urbano';
+    const surbanSelected = wizardState?.fields?.environment?.value === 'suburbano';
     const ruralSelected = wizardState?.fields?.environment?.value === 'rural';
 
     
@@ -86,7 +86,7 @@ const ApiaryEnvironment = ({
                     </View>
 
                     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                      <TouchableOpacity onPress={() => wizardStateSetters?.updateField({ name: "environment", value: 'suburban' })}>
+                      <TouchableOpacity onPress={() => wizardStateSetters?.updateField({ name: "environment", value: 'suburbano' })}>
                         <Card style={{ marginTop: 20, width: cardWidth, elevation: 10 }}>
                           <Card.Cover style={surbanSelected ? selectedCardStyle : cardStyle} source={require('../../../../assets/suburban.jpeg')} />
                         </Card>
@@ -94,7 +94,7 @@ const ApiaryEnvironment = ({
                     </View>
 
                     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <TouchableOpacity onPress={() => wizardStateSetters?.updateField({ name: "environment", value: 'urban' })}>
+                    <TouchableOpacity onPress={() => wizardStateSetters?.updateField({ name: "environment", value: 'urbano' })}>
                         <Card style={{ marginTop: 20, width: cardWidth, elevation: 10 }}>
                           <Card.Cover style={urbanSelected ? selectedCardStyle : cardStyle} source={require('../../../../assets/urban.jpeg')} />
                         </Card>

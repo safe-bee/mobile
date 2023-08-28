@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, ScrollView } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import COLORS from '../../theme/colors';
 import { GET_APIARIOS } from '../../graphql/queries/index';
@@ -21,48 +21,21 @@ const Container = styled.View`
 `;
 
 const Home = () => {
-  const { data, error, loading } = useQuery(GET_APIARIOS);
+  const { data, error, loading, refetch } = useQuery(GET_APIARIOS);
 
-  console.log("DATA IVOZ");
-  console.log(data);
+
   const apiarios = data?.apiarios;
   const navigation = useNavigation();
 
   
+  useFocusEffect(async () => {
+    refetch();
+  });
+
   if (error) {
     console.log("Error fetching apiarios", error);
   }
   
-
-  const apiariosMock = [
-    {
-      nombreApiario: 'Apiario 2',
-      colmenas: [
-        { nombreColmena: 'Colmena 4' },
-        { nombreColmena: 'Colmena 5' },
-      ],
-    },
-    {
-      nombreApiario: 'Apiario 3',
-      colmenas: [
-        { nombreColmena: 'Colmena 6' },
-        { nombreColmena: 'Colmena 7' },
-        { nombreColmena: 'Colmena 8' },
-        { nombreColmena: 'Colmena 9' },
-      ],
-    },
-    {
-      nombreApiario: 'Apiario 3',
-      colmenas: [
-        { nombreColmena: 'Colmena 6' },
-        { nombreColmena: 'Colmena 7' },
-        { nombreColmena: 'Colmena 8' },
-        { nombreColmena: 'Colmena 9' },
-      ],
-    },
-  ];
-
-  console.log(loading);
   return (
     <Container>
       <MainContentContainer>
@@ -84,7 +57,7 @@ const Home = () => {
                     <ContainedButton 
                       disabled={false}
                       onSubmit={() => navigation.navigate(ROUTES.CREATE_APIARY)}
-                      label="CreateApiary"
+                      label="Crear Apiario"
                     />
                   </View>
                 </View>
