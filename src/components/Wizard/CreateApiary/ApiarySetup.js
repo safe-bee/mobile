@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text } from "react-native";
+import { ScrollView, View, Text, ActivityIndicator } from "react-native";
 import styled from 'styled-components/native';
 import FONTS from '../../../theme/fonts';
 import COLORS from '../../../theme/colors';
@@ -10,7 +10,7 @@ import Menu from '../../../components/Menu/index'
 import Dots from '../../../components/Dots/index'
 import { MenuContainer, MainContentContainer, Content } from '../../../screens/sharedStyles';
 import { useSnackbar } from '../../../context/SnackbarContext';
-
+import Loading from '../../../components/Loading/index';
 
 
 const Container = styled.View`
