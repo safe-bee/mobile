@@ -342,13 +342,10 @@ const ApiaryLocation = ({
 
   const handleSubmit = () => {
     
-    console.log("ente");
     if (wizardState?.fields?.hiveName?.value && wizardState?.fields?.environment?.value) {
-      console.log("ente1");
       // setWizardPage('ApiaryEnvironment');
       wizardState?.onSubmit();
     } else if (!wizardState?.fields?.hiveName?.value || !wizardState?.fields?.environment?.value ) {
-      console.log("ente2");
         showSnackbar("Error de Validacion!", "Corriga los errores");
     }
   }

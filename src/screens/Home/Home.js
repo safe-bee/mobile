@@ -8,9 +8,7 @@ import { ROUTES } from '../../constants';
 import Menu from '../../components/Menu/index';
 import { useQuery } from "@apollo/client";
 import FabMenu from '../../components/Menu/FabMenu';
-import CreateApiaryWizard from '../../components/Wizard/CreateApiary/CreateApiaryWizard'
 import { ContainedButton } from '../../elements/Button';
-import TwoOptionsSelector from '../../elements/TwoOptionsSelector';
 import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
 import ApiarioCard from '../../components/ApiarioCard/';
 import Loading from '../../components/Loading/index';
@@ -21,16 +19,17 @@ const Container = styled.View`
 `;
 
 const Home = () => {
-  const { data, error, loading, refetch } = useQuery(GET_APIARIOS);
-
+  const { data, error, loading, refetch } = useQuery(GET_APIARIOS, { fetchPolicy: "cache-and-network" });
 
   const apiarios = data?.apiarios;
   const navigation = useNavigation();
 
   
-  useFocusEffect(async () => {
-    refetch();
-  });
+  useFocusEffect(
+    React.useCallback(() => {
+      refetch();
+    }, [])
+  );
 
   if (error) {
     console.log("Error fetching apiarios", error);

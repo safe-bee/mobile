@@ -10,17 +10,20 @@ export const SnackbarProvider = ({ children }) => {
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState('');
   const [secondMessage, setSecondMessage] = useState('');
+  const [type, setSnackType] = useState('');
 
-  const showSnackbar = (msg, sndMessage = '') => {
+  const showSnackbar = (msg, sndMessage = '', snackType) => {
     setMessage(msg);
     setSecondMessage(sndMessage);
     setVisible(true);
+    setSnackType(snackType)
   };
 
   const hideSnackbar = () => {
     setVisible(false);
     setMessage('');
     setSecondMessage('');
+    setSnackType('');
   };
 
   return (
@@ -32,7 +35,14 @@ export const SnackbarProvider = ({ children }) => {
             onDismiss={hideSnackbar}
             duration={Snackbar.DURATION_SHORT}
             wrapperStyle={{ top: 0 }}
-            style={{ backgroundColor: COLORS.RED_80, marginTop: 60 }}
+            style={{ backgroundColor: 
+              type === 'error' ? 
+              COLORS.RED_80 : 
+              type === 'success' ? 
+              COLORS.GREEN_1 :
+              '',
+               marginTop: 60 
+            }}
           >
             <View>
               <Text style={{ fontSize: 16, fontFamily: FONTS.medium, color: COLORS.WHITE }}>

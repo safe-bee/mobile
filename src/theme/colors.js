@@ -8,7 +8,7 @@ export default Object.freeze({
   GREY_90: '#333231',
   GREY_40: '#B3B0AB',
   RED_100: '#851704',
-  
+  GREEN_1: '#008000',
   BLUE_1: '#e0e9e8',
   GREY_60: '#5b6668',
   GREY_3: '##6d7779',

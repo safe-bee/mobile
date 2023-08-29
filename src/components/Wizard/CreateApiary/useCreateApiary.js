@@ -3,6 +3,7 @@ import { CREATE_APIARIOS, GET_APIARIOS } from '../../../graphql/mutations/create
 import { ROUTES } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
 import { useMutation } from "@apollo/client";
+import { useSnackbar } from '../../../context/SnackbarContext';
 
 export const LATITUD_DELTA = 0.05;
 export const LONGITUD_DELTA = 0.05;
@@ -33,6 +34,8 @@ export const useCreateApiary = () => {
 const [createApiarios] = useMutation(CREATE_APIARIOS, {
     refetchQueries: [{ query: GET_APIARIOS }],
 });
+
+const { showSnackbar } = useSnackbar();
 
 const navigation = useNavigation();
 
@@ -75,9 +78,12 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
 
         try {
             const res = await createApiarios({ variables });
-
-            if(!res.data.errors) {
-                navigation.navigate(ROUTES.HOME);
+            navigation.navigate(ROUTES.HOME);
+            
+            if (!res.data.errors) {
+                showSnackbar("El apiario se creo correctamente!", "", "success");
+            } else {
+                showSnackbar("Ha habido un error!", "", "error");
             }
         } catch (e) {
             console.log(e);
