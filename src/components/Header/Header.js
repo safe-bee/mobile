@@ -15,7 +15,7 @@ export default function Header({ navigation, route, options }) {
             resizeMode="cover"
             style={{ width: screenWidth }}
         />
-          {routeName === ROUTES.CREATE_APIARY 
+          {routeName === ROUTES.CREATE_APIARY  || routeName === ROUTES.CREATE_HIVE 
             ?   <TouchableOpacity onPress={() => navigation.goBack()}>
                   <BackButton>
                     <RIcon name="ri-arrow-left-s-line" size={23} color={COLORS.GREY_60} />

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { ScrollView, View, TouchableOpacity, Text, Image } from "react-native";
 import { Card } from 'react-native-paper';
+import { ROUTES } from '../../constants';
 import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
 import Icon from 'react-native-remix-icon';
 
 
 const ApiarioCard = ({ apiario }) => {
+    const navigation = useNavigation();
+    
     return (
       <View style={{ flex: 1 }}>
           <Card style={{ height: 210, flexDirection: 'row' }}>
@@ -57,7 +61,7 @@ const ApiarioCard = ({ apiario }) => {
             
             <View style={{ paddingVertical: 5, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-                    <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => {}}>
+                    <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => navigation.navigate(ROUTES.CREATE_HIVE, { apiarioId: apiario.id })}>
                         <Icon size={30} name="ri-add-circle-line" color={COLORS.YELLOW} />
                     </TouchableOpacity>
                     <Text style={{ paddingLeft: 10, fontSize: 15,fontFamily: FONTS.medium, color: COLORS.YELLOW }}>

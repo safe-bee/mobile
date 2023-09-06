@@ -16,6 +16,8 @@ const executeQuery = async (query, variables) => {
     try {
         const response = await fetch(API_URL, requestOptions);
         const data = await response.json();
+        console.log("RESPONSE QUERY");
+        console.log(data);
       } catch (error) {
         console.error(error);
       }

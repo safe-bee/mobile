@@ -1,0 +1,138 @@
+import React from 'react';
+import { ScrollView, View, Text, ActivityIndicator } from "react-native";
+import styled from 'styled-components/native';
+import FONTS from '../../../theme/fonts';
+import COLORS from '../../../theme/colors';
+import TextInput from '../../../elements/TextInput/index';
+import CustomPicker from '../../../elements/CustomPicker/index'
+import { ContainedButton } from '../../../elements/Button/Button'
+import Menu from '../../Menu/index'
+import Dots from '../../Dots/index'
+import { MenuContainer, MainContentContainer, Content } from '../../../screens/sharedStyles';
+import { useSnackbar } from '../../../context/SnackbarContext';
+import Loading from '../../Loading/index';
+
+
+const Container = styled.View`
+  flex: 1;
+  height: 100%;
+  width: 100%;
+`;
+
+const HiveQueen = ({
+  wizardState,
+  wizardStateSetters,
+  setWizardPage,
+}) => {
+
+  const { showSnackbar } = useSnackbar();
+
+  const handleNext = () => {
+    if (wizardState?.fields?.hiveName?.value) {
+      setWizardPage('HiveAdvanced');
+    } else {
+      showSnackbar("Error de Validacion!", "Corriga los siguientes errores: 'nombre apiario' no seleccionado");
+    }
+  };
+
+
+  const apiaryOptions = [{ value: wizardState?.apiario?.id, label: wizardState?.apiario?.nombre }];
+
+  console.log("ApIARIO")
+  console.log(wizardState?.apiario);
+
+
+  const tipoColmena = [
+    { value: 'HORIZONTAL', label: 'Horizontal' },
+    { value: 'LANGSTROTH', label: 'Langstroth' },
+    { value: 'NUCLEO', label: 'Nucleo' },
+    { value: 'TOPBAR', label: 'Topbar' },
+    { value: 'TRADICIONAL', label: 'Tradicional' },
+    { value: 'TRANSICIONAL', label: 'Transicional' },
+    { value: 'WARR', label: 'Warr' },
+  ];
+
+  return (
+      <Container>
+        <MainContentContainer>
+          <Content>
+            <ScrollView style={{ flex: 1 }}>
+               <View style={{ marginBottom: 20 }}>
+                <Dots 
+                  pages={[
+                    {
+                      onPress: () => setWizardPage('HiveSetup'),
+                      actualPage: false
+                    },
+                    {
+                      onPress: () => setWizardPage('HiveAdvanced'),
+                      actualPage: false
+                    },
+                    {
+                      onPress: () => setWizardPage('HiveQueen'),
+                      actualPage: true
+                    },
+                    {
+                      onPress: () => setWizardPage('HiveConfirm'),
+                      actualPage: false
+                    }
+                  ]}
+                />
+               </View>
+                <View style={{ flex: 1, height: 450, paddingHorizontal: 10 }}>
+                  <View style={{ marginBottom: 20, marginTop: 40 }}>
+                    <Text style={{ fontSize: 15, fontFamily: FONTS.medium }}>
+                      Detalles de Reina
+                    </Text>
+                  </View>
+                    <View style={{ flex: 1, flexDirection: 'column', marginVertical: 10, zIndex: 9999999 }}>
+                      <CustomPicker 
+                        //onChange={(tex) =>console.log(tex)}
+                        onChange={() => wizardStateSetters?.updateField({ name: "dateTask", value: text })}
+                        label='Tipo Reina'
+                        value={apiaryOptions[0]}
+                        options={apiaryOptions}
+                        />
+                    </View>
+
+                    <View style={{ flex: 1, flexDirection: 'column', marginVertical: 10, zIndex: 9999998 }}>
+                      <CustomPicker 
+                        onChange={(value) => wizardStateSetters?.updateField({ name: "hiveType", value })}
+                        label='Color Reina'
+                        value={wizardState?.fields?.hiveType?.value}
+                        options={tipoColmena}
+                        />
+                    </View>
+
+                    <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
+                      <Calendar 
+                        onConfirm={(text) => wizardStateSetters?.updateField({ name: "reinaFechaAceptacion", value: text })}
+                        label='Fecha de aceptacion de reina'
+                        dateValue={wizardState?.fields?.fechaEstablecimiento?.value}
+                        />
+                    </View>
+
+                    <View style={{ flex: 1, marginTop: 10, flexDirection: 'column', alignItems: 'center' }}>
+                      <ContainedButton 
+                        disabled={false}
+                        onSubmit={handleNext}
+                        label="Next"
+                      />
+                    </View>
+                </View>
+              </ScrollView>
+
+          </Content>
+        </MainContentContainer>
+
+        <MenuContainer>
+          <Menu />
+        </MenuContainer>
+
+
+      </Container>
+    )
+}
+
+
+export default HiveQueen;

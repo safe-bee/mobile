@@ -9,6 +9,7 @@ import Record from './screens/Record/index'
 import Todo from './screens/Todo/index'
 import Inspection from './screens/Inspection/index'
 import CreateApiary from './components/Wizard/CreateApiary/CreateApiaryWizard';
+import CreateHive from './components/Wizard/CreateHive/CreateHiveWizard';
 import { MenuProvider } from './context/MenuContext';
 import { SnackbarProvider } from './context/SnackbarContext'; 
 
@@ -96,6 +97,13 @@ export default function Routes() {
                 <Stack.Screen
                     name={ROUTES.CREATE_APIARY}
                     component={CreateApiary}
+                    options={{
+                    title: "Create Apiary",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.CREATE_HIVE}
+                    component={CreateHive}
                     options={{
                     title: "Create Apiary",
                   }}

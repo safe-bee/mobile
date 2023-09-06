@@ -6,7 +6,6 @@ import ApiarySetup from './ApiarySetup';
 import ApiaryLocation from './ApiaryLocation';
 import ApiaryEnvironment from './ApiaryEnvironment';
 import Wizard from '../index'
-import Dots from '../../../components/Dots/index'
 
 const Container = styled.View`
   display: flex;

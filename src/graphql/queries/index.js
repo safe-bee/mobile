@@ -18,3 +18,13 @@ export const GET_APIARIOS = gql`
     }
   }
 `;
+
+
+export const GET_APIARIO = gql`
+  query Apiario($apiarioId: Int!) {
+    apiario(id: $apiarioId) {
+      nombre,
+      id
+    }
+  }
+`;

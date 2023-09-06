@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { View, ScrollView } from "react-native";
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import styled from 'styled-components/native';
+import { useQuery } from "@apollo/client";
 import COLORS from '../../theme/colors';
 import { GET_APIARIOS } from '../../graphql/queries/index';
 import { ROUTES } from '../../constants';
 import Menu from '../../components/Menu/index';
-import { useQuery } from "@apollo/client";
 import FabMenu from '../../components/Menu/FabMenu';
 import { ContainedButton } from '../../elements/Button';
 import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
@@ -27,7 +27,7 @@ const Home = () => {
   
   useFocusEffect(
     React.useCallback(() => {
-      refetch();
+      // refetch();
     }, [])
   );
 

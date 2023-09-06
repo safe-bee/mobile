@@ -9,7 +9,6 @@ import { Label, LabelContainer } from '../TextInput/TextInput.styles';
 
 export default function CustomPicker({ options, onChange, value, label }) {
     const [open, setOpen] = useState(false);
-    const [value1, setValue] = useState(null);
     const [items, setItems] = useState(options);
   
     return (
@@ -23,10 +22,11 @@ export default function CustomPicker({ options, onChange, value, label }) {
        <DropDownPicker
          open={open}
          zIndex={999999}
-         value={value1}
+         value={value}
          items={items}
          setOpen={setOpen}
-         setValue={setValue}
+         setValue={onChange}
+         //onChangeValue={onChange}
          setItems={setItems}
          style={{
           borderColor: COLORS.BLUE_1,
@@ -42,7 +42,7 @@ export default function CustomPicker({ options, onChange, value, label }) {
           color: COLORS.BLACK_1,
          }}
          dropDownContainerStyle={{
-          backgroundColor: COLORS.WHITE,
+          backgroundColor: COLORS.BLUE_1,
           borderColor: COLORS.BLUE_1,
          }}
        />
