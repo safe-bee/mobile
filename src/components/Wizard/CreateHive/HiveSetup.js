@@ -28,19 +28,12 @@ const HiveSetup = ({
   const { showSnackbar } = useSnackbar();
 
   const handleNext = () => {
-    if (wizardState?.fields?.hiveName?.value) {
+    if (wizardState?.fields?.hiveType?.value && wizardState?.fields?.hiveName?.value) {
       setWizardPage('HiveAdvanced');
     } else {
-      showSnackbar("Error de Validacion!", "Corriga los siguientes errores: 'nombre apiario' no seleccionado");
+      showSnackbar("Error de Validacion!", "Corriga los siguientes errores");
     }
   };
-
-
-  const apiaryOptions = [{ value: wizardState?.apiario?.id, label: wizardState?.apiario?.nombre }];
-
-  console.log("ApIARIO")
-  console.log(wizardState?.apiario);
-
 
   const tipoColmena = [
     { value: 'HORIZONTAL', label: 'Horizontal' },
@@ -72,10 +65,12 @@ const HiveSetup = ({
                       onPress: () => setWizardPage('HiveQueen'),
                       actualPage: false
                     },
+                    /*
                     {
                       onPress: () => setWizardPage('HiveConfirm'),
                       actualPage: false
                     }
+                    */
                   ]}
                 />
                </View>
@@ -85,6 +80,7 @@ const HiveSetup = ({
                       Configuracion Colmena
                     </Text>
                   </View>
+
                    <View style={{ flex: 1 }}>
                       <TextInput
                         autoCapitalize="none"
@@ -99,15 +95,18 @@ const HiveSetup = ({
                         error={wizardState?.fields?.hiveName?.error}
                       />
                     </View>
-
-                    <View style={{ flex: 1, flexDirection: 'column', marginVertical: 10, zIndex: 9999999 }}>
-                      <CustomPicker 
-                        //onChange={(tex) =>console.log(tex)}
-                        //onChange={() => wizardStateSetters?.updateField({ name: "dateTask", value: text })}
+                   
+                   <View style={{ flex: 1 }}>
+                      <TextInput
+                        autoCapitalize="none"
+                        autoCorrect={false}
                         label='Apiario'
-                        value={apiaryOptions[0]}
-                        options={apiaryOptions}
-                        />
+                        onBlur={() => {}}
+                        outlined={true}
+                        disabled
+                        value={wizardState?.apiario?.nombre}
+                        editable={false}
+                      />
                     </View>
 
                     <View style={{ flex: 1, flexDirection: 'column', marginVertical: 10, zIndex: 9999998  }}>

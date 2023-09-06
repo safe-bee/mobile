@@ -1,5 +1,5 @@
 import useForm from '../../../hooks/useForm';
-import { CREATE_APIARIOS, GET_APIARIOS } from '../../../graphql/mutations/createApiarios';
+import { CREATE_COLMENAS } from '../../../graphql/mutations/createColmenas';
 import { ROUTES } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
 import { useMutation } from "@apollo/client";
@@ -12,11 +12,9 @@ const requiredValidation = {
 };
 
 
-export const useCreateHive = () => {
+export const useCreateHive = ({ apiarioId }) => {
 
-const [createApiarios] = useMutation(CREATE_APIARIOS, {
-    refetchQueries: [{ query: GET_APIARIOS }],
-});
+const [createApiarios] = useMutation(CREATE_COLMENAS, {});
 
 const { showSnackbar } = useSnackbar();
 
@@ -74,15 +72,23 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     async (formValues) => {
 
         const variables = {
+            apiarioId,
             nombre: formValues.hiveName.value,
-            fecha_creacion: formValues.dateTask.value,
-            tipo_ambiente: formValues.environment.value.toUpperCase(),
-            direccion: formValues.address.value,
-            latitud: formValues.region.value.latitude,
-            longitud: formValues.region.value.longitude,
-            tipo_terreno: "CAMPO",
+            tipo: formValues.hiveType.value,
+            datosNumeroDeep: formValues.datosNumeroDeep.value || null,
+            datosNumeroSupers: formValues.datosNumeroSupers.value || null,
+            datosTotalCuadros: formValues.datosNumeroCuadros.value || null,
+            datosColor: formValues.color.value || null,
+            datosFechaEstablecimiento: formValues.fechaEstablecimiento.value || null,
+            reinaTipo: formValues.tipoReina.value || null,
+            reinaColor: formValues.colorReina.value || null,
+            reinaFechaAceptacion: formValues.reinaFechaAceptacion.value || null,
+            reinaNotas: formValues.reinaNotas.value || null
         };
 
+        console.log(variables);
+
+        /*
         try {
             const res = await createApiarios({ variables });
             navigation.navigate(ROUTES.HOME);
@@ -95,6 +101,7 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
         } catch (e) {
             console.log(e);
         }
+        */
     }
   );
 

@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import FONTS from '../../../theme/fonts';
 import COLORS from '../../../theme/colors';
 import TextInput from '../../../elements/TextInput/index';
-import Calendar from '../../../elements/Calendar/index'
+import Calendar from '../../../elements/Calendar/index';
 import { ContainedButton } from '../../../elements/Button/Button'
 import Menu from '../../../components/Menu/index'
 import Dots from '../../../components/Dots/index'
@@ -28,7 +28,7 @@ const ApiarySetup = ({
   const { showSnackbar } = useSnackbar();
 
   const handleNext = () => {
-    if (wizardState?.fields?.hiveName?.value) {
+    if (wizardState?.fields?.apiaryName?.value) {
       setWizardPage('ApiaryEnvironment');
     } else {
       showSnackbar("Error de Validacion!", "Corriga los siguientes errores: 'nombre apiario' no seleccionado");
@@ -68,14 +68,14 @@ const ApiarySetup = ({
                       <TextInput
                         autoCapitalize="none"
                         autoCorrect={false}
-                        label='Hive name'
-                        placeholder='Name your hive'
+                        label='Nombre apiario'
+                        placeholder='Nombre de tu apiario'
                         onBlur={() => {}}
                         icon="ri-pencil-fill"
                         outlined={true}
-                        onChangeText={(text) => wizardStateSetters?.updateField({ name: "hiveName", value: text })}
-                        value={wizardState?.fields?.hiveName?.value}
-                        error={wizardState?.fields?.hiveName?.error}
+                        onChangeText={(text) => wizardStateSetters?.updateField({ name: "apiaryName", value: text })}
+                        value={wizardState?.fields?.apiaryName?.value}
+                        error={wizardState?.fields?.apiaryName?.error}
                       />
                     </View>
 

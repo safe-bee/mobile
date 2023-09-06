@@ -26,14 +26,9 @@ const HiveAdvanced = ({
   setWizardPage,
 }) => {
 
-  const { showSnackbar } = useSnackbar();
 
   const handleNext = () => {
-    if (wizardState?.fields?.hiveName?.value) {
-      setWizardPage('ApiaryEnvironment');
-    } else {
-      showSnackbar("Error de Validacion!", "Corriga los siguientes errores: 'nombre apiario' no seleccionado");
-    }
+     setWizardPage('HiveQueen');
   };
 
   const hiveColorOptions = [{ value: 'azul', label: 'Azul' }, { value: 'verde', label: 'Verde' }, { value: 'amarillo', label: 'Amarillo' }]
@@ -58,10 +53,12 @@ const HiveAdvanced = ({
                       onPress: () => setWizardPage('HiveQueen'),
                       actualPage: false
                     },
+                    /*
                     {
                       onPress: () => setWizardPage('HiveConfirm'),
                       actualPage: false
                     }
+                    */
                   ]}
                 />
                </View>

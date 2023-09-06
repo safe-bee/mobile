@@ -342,10 +342,10 @@ const ApiaryLocation = ({
 
   const handleSubmit = () => {
     
-    if (wizardState?.fields?.hiveName?.value && wizardState?.fields?.environment?.value) {
+    if (wizardState?.fields?.apiaryName?.value && wizardState?.fields?.environment?.value) {
       // setWizardPage('ApiaryEnvironment');
       wizardState?.onSubmit();
-    } else if (!wizardState?.fields?.hiveName?.value || !wizardState?.fields?.environment?.value ) {
+    } else if (!wizardState?.fields?.apiaryName?.value || !wizardState?.fields?.environment?.value ) {
         showSnackbar("Error de Validacion!", "Corriga los errores");
     }
   }

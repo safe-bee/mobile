@@ -32,10 +32,12 @@ const createPages = () => ({
       start: false,
       component: HiveQueen,
     },
+    /*
     HiveConfirm: {
       start: false,
       component: HiveConfirm,
     },
+    */
 });
 
 
@@ -55,6 +57,7 @@ const CreateHiveWizard = ({ route }) => {
     } = useCreateHive({
       setError: () => {},
       setSuccess: () => {},
+      apiarioId: data?.apiario?.id
     });
 
     return (

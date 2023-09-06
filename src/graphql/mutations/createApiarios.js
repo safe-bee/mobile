@@ -7,7 +7,6 @@ export const CREATE_APIARIOS = gql`
     $latitud: Float!
     $longitud: Float!
     $direccion: String!
-    $tipo_terreno: TipoTerreno!
     $tipo_ambiente: TipoAmbiente!
     $fecha_creacion: DateTime!
   ) {
@@ -16,7 +15,6 @@ export const CREATE_APIARIOS = gql`
       latitud: $latitud
       longitud: $longitud
       direccion: $direccion
-      tipo_terreno: $tipo_terreno
       tipo_ambiente: $tipo_ambiente
       fecha_creacion: $fecha_creacion
     ) {
@@ -25,7 +23,6 @@ export const CREATE_APIARIOS = gql`
       latitud
       longitud
       direccion
-      tipo_terreno
       tipo_ambiente
     }
   } 

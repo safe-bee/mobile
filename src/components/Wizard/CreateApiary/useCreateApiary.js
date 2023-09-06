@@ -1,5 +1,7 @@
 import useForm from '../../../hooks/useForm';
-import { CREATE_APIARIOS, GET_APIARIOS } from '../../../graphql/mutations/createApiarios';
+import { CREATE_APIARIOS } from '../../../graphql/mutations/createApiarios';
+import { GET_APIARIOS } from '../../../graphql/queries/index';
+import executeQuery from '../../../graphql/api';
 import { ROUTES } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
 import { useMutation } from "@apollo/client";
@@ -31,16 +33,16 @@ const requiredValidation = {
 
 export const useCreateApiary = () => {
 
-const [createApiarios] = useMutation(CREATE_APIARIOS, {
+ const [createApiarios] = useMutation(CREATE_APIARIOS, {
     refetchQueries: [{ query: GET_APIARIOS }],
-});
+ })
 
 const { showSnackbar } = useSnackbar();
 
 const navigation = useNavigation();
 
 const inputFields = {
-    hiveName: {
+    apiaryName: {
         value: '',
         validations: [requiredValidation],
     },
@@ -67,13 +69,12 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     async (formValues) => {
 
         const variables = {
-            nombre: formValues.hiveName.value,
+            nombre: formValues.apiaryName.value,
             fecha_creacion: formValues.dateTask.value,
             tipo_ambiente: formValues.environment.value.toUpperCase(),
             direccion: formValues.address.value,
             latitud: formValues.region.value.latitude,
             longitud: formValues.region.value.longitude,
-            tipo_terreno: "CAMPO",
         };
 
         try {

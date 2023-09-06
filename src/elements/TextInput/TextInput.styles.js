@@ -42,7 +42,7 @@ export const StyledTextInput = styled.TextInput`
   ::placeholder {
     color: ${COLORS.GREY_3};
   }
-  ${({ textArea }) => textArea && `height: 124;`}
+  ${({ textArea }) => textArea && `height: 60;`}
 `;
 
 export const ErrorContainer = styled.View`

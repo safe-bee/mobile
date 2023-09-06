@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, ActivityIndicator } from "react-native";
+import { ScrollView, View, Text, Image } from "react-native";
 import styled from 'styled-components/native';
 import FONTS from '../../../theme/fonts';
 import COLORS from '../../../theme/colors';
@@ -65,49 +65,18 @@ const HiveConfirm = ({
                 />
                </View>
                 <View style={{ flex: 1, height: 450, paddingHorizontal: 10 }}>
-                  <View style={{ marginBottom: 20, marginTop: 40 }}>
-                    <Text style={{ fontSize: 15, fontFamily: FONTS.medium }}>
-                      Configuracion Colmena
-                    </Text>
-                  </View>
                    <View style={{ flex: 1 }}>
-                      <TextInput
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        label='Nombre colmena'
-                        placeholder='Nombre para colmena'
-                        onBlur={() => {}}
-                        icon="ri-pencil-fill"
-                        outlined={true}
-                        onChangeText={(text) => wizardStateSetters?.updateField({ name: "hiveName", value: text })}
-                        value={wizardState?.fields?.hiveName?.value}
-                        error={wizardState?.fields?.hiveName?.error}
+                    <Image
+                          source={require('../../../../assets/hive4.png')} 
+                          style={{ width: 150, height: 150 }} 
                       />
-                    </View>
-
-                    <View style={{ flex: 1, flexDirection: 'column', marginVertical: 10}}>
-                      <CustomPicker 
-                        onChange={() => wizardStateSetters?.updateField({ name: "dateTask", value: text })}
-                        label='Apiario'
-                        value={wizardState?.fields?.dateTask?.value}
-                        options={apiaryOptions}
-                        />
-                    </View>
-
-                    <View style={{ flex: 1, flexDirection: 'column', marginVertical: 10 }}>
-                      <CustomPicker 
-                        onChange={() => wizardStateSetters?.updateField({ name: "dateTask", value: text })}
-                        label='Tipo Colmena'
-                        value={wizardState?.fields?.dateTask?.value}
-                        options={apiaryOptions}
-                        />
                     </View>
 
                     <View style={{ flex: 1, marginTop: 10, flexDirection: 'column', alignItems: 'center' }}>
                       <ContainedButton 
                         disabled={false}
                         onSubmit={handleNext}
-                        label="Next"
+                        label="Crear Colmena"
                       />
                     </View>
                 </View>
