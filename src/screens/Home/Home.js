@@ -19,17 +19,11 @@ const Container = styled.View`
 `;
 
 const Home = () => {
-  const { data, error, loading, refetch } = useQuery(GET_APIARIOS, { fetchPolicy: "cache-and-network" });
+  const { data, error, loading } = useQuery(GET_APIARIOS, { fetchPolicy: "cache-and-network" });
 
   const apiarios = data?.apiarios;
   const navigation = useNavigation();
 
-  
-  useFocusEffect(
-    React.useCallback(() => {
-      // refetch();
-    }, [])
-  );
 
   if (error) {
     console.log("Error fetching apiarios", error);

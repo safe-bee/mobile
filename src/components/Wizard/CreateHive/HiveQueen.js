@@ -98,7 +98,7 @@ const HiveQueen = ({
                     <View style={{ flex: 1, flexDirection: 'column', marginVertical: 10, zIndex: 9999999 }}>
                       <CustomPicker 
                         //onChange={(tex) =>console.log(tex)}
-                        onChange={() => wizardStateSetters?.updateField({ name: "tipoReina", value: text })}
+                        onChange={(text) => wizardStateSetters?.updateField({ name: "tipoReina", value: text })}
                         label='Tipo Reina'
                         value={wizardState?.fields?.tipoReina?.value}
                         options={tipoReina}

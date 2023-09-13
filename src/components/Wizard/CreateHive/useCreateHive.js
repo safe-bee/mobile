@@ -1,10 +1,10 @@
 import useForm from '../../../hooks/useForm';
 import { CREATE_COLMENAS } from '../../../graphql/mutations/createColmenas';
+import { GET_APIARIOS } from '../../../graphql/queries/index';
 import { ROUTES } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from '../../../context/SnackbarContext';
-
 
 const requiredValidation = {
     type: "required",
@@ -14,7 +14,9 @@ const requiredValidation = {
 
 export const useCreateHive = ({ apiarioId }) => {
 
-const [createApiarios] = useMutation(CREATE_COLMENAS, {});
+const [createColmenas] = useMutation(CREATE_COLMENAS, {
+  refetchQueries: [{ query: GET_APIARIOS }],
+});
 
 const { showSnackbar } = useSnackbar();
 
@@ -72,8 +74,8 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     async (formValues) => {
 
         const variables = {
-            apiarioId,
             nombre: formValues.hiveName.value,
+            apiarioId,
             tipo: formValues.hiveType.value,
             datosNumeroDeep: formValues.datosNumeroDeep.value || null,
             datosNumeroSupers: formValues.datosNumeroSupers.value || null,
@@ -88,9 +90,9 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
 
         console.log(variables);
 
-        /*
+        
         try {
-            const res = await createApiarios({ variables });
+            const res = await createColmenas({ variables });
             navigation.navigate(ROUTES.HOME);
             
             if (!res.data.errors) {
@@ -101,7 +103,7 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
         } catch (e) {
             console.log(e);
         }
-        */
+        
     }
   );
 
