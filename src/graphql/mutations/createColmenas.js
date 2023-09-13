@@ -15,7 +15,8 @@ export const CREATE_COLMENAS = gql`
     $reinaTipo: TipoReina, 
     $reinaColor: ColorReina, 
     $reinaFechaAceptacion: DateTime, 
-    $reinaNotas: String) {
+    $reinaNotas: String
+  ) {
     createColmena(
         nombre: $nombre, 
         apiarioId: $apiarioId, 
