@@ -7,17 +7,21 @@ const ContainedButton = ({
   onSubmit,
   contentStyle = {},
   label = '',
+  icon = () => {},
   formButton = true,
+  buttonColor = COLORS.YELLOW,
+  labelColor = COLORS.BLACK_2
 }) => {
     return (
       <Button
         disabled={disabled}
         mode="contained"
         onPress={onSubmit}
+        icon={icon}
         uppercase={false}
         contentStyle={contentStyle}
-        style={{ borderRadius: 20, backgroundColor: COLORS.YELLOW, width: formButton ? '80%' : '100%' }}
-        labelStyle={{ color: COLORS.BLACK_2, fontWeight: 'bold' }}
+        style={{ borderRadius: 20, backgroundColor: buttonColor, width: formButton ? '80%' : '100%' }}
+        labelStyle={{ color: labelColor, fontWeight: 'bold' }}
       >
         {label}
       </Button>

@@ -8,12 +8,15 @@ import FONTS from '../../theme/fonts';
 import Icon from 'react-native-remix-icon';
 
 
-const ApiarioCard = ({ apiario, setOpenDeleteModal }) => {
+const ApiarioCard = ({ apiario, setSelectedApiario, setMoreOptionsPress }) => {
     const navigation = useNavigation();
     
     const onMoreOptionsPress = () => {
-        () => setOpenDeleteModal(true)
-    }
+        setSelectedApiario(apiario);
+        setMoreOptionsPress(true);
+    };
+
+    
     return (
       <View style={{ flex: 1 }}>
           <Card style={{ height: 210, flexDirection: 'row' }}>
