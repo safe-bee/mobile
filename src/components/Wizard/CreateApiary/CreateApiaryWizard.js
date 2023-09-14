@@ -39,7 +39,8 @@ const CreateApiaryWizard = () => {
       fields,
       updateField,
       onSubmit,
-      isVisitedForm
+      isVisitedForm,
+      mutationLoading
     } = useCreateApiary({
       setError: () => {},
       setSuccess: () => {},
@@ -53,7 +54,8 @@ const CreateApiaryWizard = () => {
             wizardState={{
               fields,
               onSubmit,
-              isVisitedForm
+              isVisitedForm,
+              mutationLoading
             }}
             wizardStateSetters={{
               updateField

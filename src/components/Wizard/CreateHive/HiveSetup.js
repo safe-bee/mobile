@@ -31,7 +31,7 @@ const HiveSetup = ({
     if (wizardState?.fields?.hiveType?.value && wizardState?.fields?.hiveName?.value) {
       setWizardPage('HiveAdvanced');
     } else {
-      showSnackbar("Error de Validacion!", "Corriga los siguientes errores");
+      showSnackbar("Error de Validacion!", "Corriga los siguientes errores", "error");
     }
   };
 

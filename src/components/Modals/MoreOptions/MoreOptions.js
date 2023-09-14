@@ -33,7 +33,7 @@ const MoreOptions = ({
                   </TouchableOpacity>
                 </View>
 
-                <View style={{ paddingHorizontal: 15, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+                <View style={{ paddingHorizontal: 15, flex: 0.5, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                       <ContainedButton 
                          disabled={false}
@@ -46,7 +46,7 @@ const MoreOptions = ({
                     </View>
                 </View>
 
-                <View style={{ paddingHorizontal: 15, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+                <View style={{ paddingHorizontal: 15, flex: 0.5, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                       <ContainedButton 
                          disabled={false}

@@ -140,6 +140,7 @@ const HiveQueen = ({
                         disabled={false}
                         onSubmit={handleSubmit}
                         label="Crear colmena"
+                        icon={ wizardState?.mutationLoading ? () => <ActivityIndicator color={COLORS.WHITE} /> : () => {} }
                       />
                     </View>
                 </View>

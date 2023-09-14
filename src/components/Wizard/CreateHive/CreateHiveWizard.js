@@ -53,7 +53,8 @@ const CreateHiveWizard = ({ route }) => {
       fields,
       updateField,
       onSubmit,
-      isVisitedForm
+      isVisitedForm,
+      mutationLoading
     } = useCreateHive({
       setError: () => {},
       setSuccess: () => {},
@@ -72,7 +73,8 @@ const CreateHiveWizard = ({ route }) => {
                   fields,
                   onSubmit,
                   isVisitedForm,
-                  apiario: data?.apiario
+                  apiario: data?.apiario,
+                  mutationLoading
                 }}
                 wizardStateSetters={{
                 updateField

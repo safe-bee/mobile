@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, ScrollView, Dimensions } from "react-native";
+import { View, ScrollView, Dimensions, ActivityIndicator } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { useSnackbar } from '../../../context/SnackbarContext';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -236,6 +236,8 @@ const ApiaryLocation = ({
   const [mapInitialized, setMapInitialized] = useState(false);
 
   const { showSnackbar } = useSnackbar();
+
+  console.log(wizardState?.mutationLoading);
  
   const { height } = Dimensions.get('window');
 
@@ -474,6 +476,7 @@ const ApiaryLocation = ({
                       disabled={false}
                       onSubmit={handleSubmit}
                       label="Crear Apiario"
+                      icon={ wizardState?.mutationLoading ? () => <ActivityIndicator color={COLORS.WHITE} /> : () => {} }
                     />
                   </View>
                 </View>

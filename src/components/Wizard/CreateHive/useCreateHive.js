@@ -14,7 +14,7 @@ const requiredValidation = {
 
 export const useCreateHive = ({ apiarioId }) => {
 
-const [createColmenas] = useMutation(CREATE_COLMENAS, {
+const [createColmenas, { loading }] = useMutation(CREATE_COLMENAS, {
   refetchQueries: [{ query: GET_APIARIOS }],
 });
 
@@ -87,9 +87,6 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             reinaFechaAceptacion: formValues.reinaFechaAceptacion.value || null,
             reinaNotas: formValues.reinaNotas.value || null
         };
-
-        console.log(variables);
-
         
         try {
             const res = await createColmenas({ variables });
@@ -111,7 +108,8 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
       fields,
       updateField,
       onSubmit,
-      isVisitedForm
+      isVisitedForm,
+      mutationLoading: loading
   }
 }
 

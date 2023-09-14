@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
-import { View, Image, TouchableOpacity } from "react-native";
+import { Modal, Portal, Text, Button } from 'react-native-paper';
+import { View, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import COLORS from '../../../theme/colors';
 import FONTS from '../../../theme/fonts';
 import { ContainedButton, TextButton } from '../../../elements/Button';
@@ -20,7 +20,7 @@ const DeleteApario = ({
   
     const { showSnackbar } = useSnackbar();
 
-    const [deleteApiario] = useMutation(DELETE_APIARIO, {
+    const [deleteApiario, { loading }] = useMutation(DELETE_APIARIO, {
         refetchQueries: [{ query: GET_APIARIOS }],
     });
 
@@ -63,6 +63,7 @@ const DeleteApario = ({
                          disabled={false}
                          onSubmit={() => handleDeleteApiario()}
                          label="Borrar apiario"
+                         icon={ loading ? () => <ActivityIndicator color={COLORS.WHITE} /> : () => {} }
                       />
                     </View>
                 </View>

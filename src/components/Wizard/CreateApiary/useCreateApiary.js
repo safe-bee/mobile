@@ -33,7 +33,7 @@ const requiredValidation = {
 
 export const useCreateApiary = () => {
 
- const [createApiarios] = useMutation(CREATE_APIARIOS, {
+ const [createApiarios, { loading }] = useMutation(CREATE_APIARIOS, {
     refetchQueries: [{ query: GET_APIARIOS }],
  })
 
@@ -96,7 +96,8 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
       fields,
       updateField,
       onSubmit,
-      isVisitedForm
+      isVisitedForm,
+      mutationLoading: loading
   }
 }
 

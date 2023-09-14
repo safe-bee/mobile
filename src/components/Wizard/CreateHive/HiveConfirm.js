@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, Image } from "react-native";
+import { ScrollView, View, Text, ActivityIndicator } from "react-native";
 import styled from 'styled-components/native';
 import FONTS from '../../../theme/fonts';
 import COLORS from '../../../theme/colors';
@@ -35,8 +35,9 @@ const HiveConfirm = ({
     }
   };
 
-  const apiaryOptions = [{ value: 'test', label: 'test' }]
 
+  console.log("wizardState?.mutationLoading");
+  console.log(wizardState?.mutationLoading);
   return (
       <Container>
         <MainContentContainer>
@@ -77,6 +78,7 @@ const HiveConfirm = ({
                         disabled={false}
                         onSubmit={handleNext}
                         label="Crear Colmena"
+                        icon={ wizardState?.mutationLoading ? () => <ActivityIndicator color={COLORS.WHITE} /> : () => {} }
                       />
                     </View>
                 </View>
