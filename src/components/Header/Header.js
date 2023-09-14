@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, BackgroundImage, BackButton, RIcon } from './Header.styles';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import COLORS from '../../theme/colors'
-import { ROUTES } from '../../constants';
+import { ROUTES_WITH_BACK_ACTION } from '../../constants';
 import Dots from '../Dots/index';
 
 export default function Header({ navigation, route, options }) {
@@ -15,7 +15,7 @@ export default function Header({ navigation, route, options }) {
             resizeMode="cover"
             style={{ width: screenWidth }}
         />
-          {routeName === ROUTES.CREATE_APIARY  || routeName === ROUTES.CREATE_HIVE || routeName === ROUTES.RECORD || routeName === ROUTES.DOCUMENT_FLORA
+          {ROUTES_WITH_BACK_ACTION.includes(routeName)
             ?   <TouchableOpacity onPress={() => navigation.goBack()}>
                   <BackButton>
                     <RIcon name="ri-arrow-left-s-line" size={23} color={COLORS.GREY_60} />

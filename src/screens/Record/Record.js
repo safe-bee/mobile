@@ -35,37 +35,37 @@ const Record = () => {
     {
       label: "Feed bees",
       imagePath: require("../../../assets/alimentacion2-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.FEED_BEES,
     },
     {
       label: "Mite assessment",
       imagePath: require("../../../assets/varroa-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.MITE_ASSESSMENT,
     },
     {
       label: "Treatment",
       imagePath: require("../../../assets/tratamiento-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.TREATMENT,
     },
     {
       label: "Harvest honey",
       imagePath: require("../../../assets/cuadros-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.HARVEST_HONEY,
     },
     {
       label: "Winterize",
       imagePath: require("../../../assets/hibernacion-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.WINTERIZE,
     },
     {
       label: "Dead hive",
       imagePath: require("../../../assets/muerte-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.DEAD_HIVE,
     },
     {
       label: "Log symptoms",
       imagePath: require("../../../assets/cuadros-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.LOG_SYMPTOMS,
     },
   ];
 
