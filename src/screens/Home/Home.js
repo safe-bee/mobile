@@ -8,6 +8,7 @@ import { GET_APIARIOS } from '../../graphql/queries/index';
 import { ROUTES } from '../../constants';
 import Menu from '../../components/Menu/index';
 import DeleteApario from '../../components/Modals/DeleteApiario/index';
+import MoreOptions from '../../components/Modals/MoreOptions/index';
 import FabMenu from '../../components/Menu/FabMenu';
 import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
 import { ContainedButton } from '../../elements/Button';
@@ -22,6 +23,8 @@ const Container = styled.View`
 const Home = () => {
   const { data, error, loading } = useQuery(GET_APIARIOS, { fetchPolicy: "cache-and-network" });
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openMoreOptionsModal, setMoreOptionsModal] = useState(false);
+  const [selectedApiario, setSelectedApiario] = useState(null);
 
   const apiarios = data?.apiarios;
   const navigation = useNavigation();
@@ -42,7 +45,7 @@ const Home = () => {
                 <ScrollView style={{ flex: 0.7 }}>
                     {apiarios.map(apiario => (
                       <View style={{ flex: 1, marginTop: 15 }}>
-                        <ApiarioCard apiario={apiario} setOpenDeleteModal={setOpenDeleteModal} />
+                        <ApiarioCard apiario={apiario} setMoreOptionsPress={setMoreOptionsModal} setSelectedApiario={setSelectedApiario} />
                       </View>
                     ))}
                 </ScrollView>
@@ -61,7 +64,20 @@ const Home = () => {
           </Content>
           {
             openDeleteModal
-            ? <DeleteApario visible={openDeleteModal} onDismiss={() => setOpenDeleteModal(false)} />
+            ? <DeleteApario
+                visible={openDeleteModal}
+                onDismiss={() => setOpenDeleteModal(false)}
+                selectedApiario={selectedApiario}
+              />
+            : null
+          }
+          {
+            openMoreOptionsModal
+            ? <MoreOptions
+                visible={openMoreOptionsModal}
+                onDismiss={() => setMoreOptionsModal(false)}
+                handleDeletePress={() => setOpenDeleteModal(true)} 
+              />
             : null
           }
       </MainContentContainer>
