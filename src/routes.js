@@ -7,6 +7,7 @@ import Header from './components/Header/index'
 import Profile from './screens/Profile/index'
 import Record from './screens/Record/index'
 import Todo from './screens/Todo/index'
+import DocumentFlora from './screens/DocumentFlora/index'
 import Inspection from './screens/Inspection/index'
 import CreateApiary from './components/Wizard/CreateApiary/CreateApiaryWizard';
 import CreateHive from './components/Wizard/CreateHive/CreateHiveWizard';
@@ -45,6 +46,7 @@ export default function Routes() {
     >
       <SnackbarProvider>
           <MenuProvider>
+            
             <Stack.Navigator
                 headerMode="screen"
                 screenOptions={{
@@ -108,8 +110,16 @@ export default function Routes() {
                     title: "Create Apiary",
                   }}
                 />
+                <Stack.Screen
+                    name={ROUTES.DOCUMENT_FLORA}
+                    component={DocumentFlora}
+                    options={{
+                    title: "Create Apiary",
+                  }}
+                />
                 
           </Stack.Navigator>
+          
         </MenuProvider>
       </SnackbarProvider>
     </NavigationContainer>

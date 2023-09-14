@@ -5,13 +5,16 @@ import {
   Text,
   FlatList,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
-import { MainContentContainer, Content } from "../../screens/sharedStyles";
+import { MainContentContainer, Content, MenuContainer } from "../../screens/sharedStyles";
 import FONTS from "../../theme/fonts";
 import { ROUTES } from "../../constants";
 import RecordOptionCard from "../../components/RecordOptionCard/RecordOptionCard";
+import Menu from "../../components/Menu/index";
+import FabMenu from '../../components/Menu/FabMenu';
 
 export const ContentContainer = styled.View`
   flex: 0.9;
@@ -27,7 +30,7 @@ const Record = () => {
     {
       label: "Document flora",
       imagePath: require("../../../assets/cosecha-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.DOCUMENT_FLORA,
     },
     {
       label: "Feed bees",
@@ -71,7 +74,7 @@ const Record = () => {
       <MainContentContainer>
         <Content>
           <ScrollView style={{ flex: 1 }}>
-            <View style={{ marginBottom: 20, marginTop: 40 }}>
+            <View style={{ marginBottom: 20 }}>
               <Text style={{ fontSize: 15, fontFamily: FONTS.medium }}>
                 Select a record type
               </Text>
@@ -81,17 +84,30 @@ const Record = () => {
               data={recordOptions}
               keyExtractor={(item, index) => index}
               numColumns={2}
+              contentContainerStyle={{ alignItems: 'center' }}
               renderItem={({ item }) => (
-                <TouchableWithoutFeedback
-                  onPress={() => navigation.navigate(item.href)}
-                >
-                  <RecordOptionCard item={item} />
-                </TouchableWithoutFeedback>
+                <View>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate(item.href)}
+                  >
+                    <RecordOptionCard item={item} />
+                  </TouchableOpacity>
+                </View>
               )}
             />
           </ScrollView>
         </Content>
+    
       </MainContentContainer>
+
+      <View>
+        <FabMenu />
+      </View>
+        
+      <MenuContainer>
+        <Menu />
+      </MenuContainer>
+
     </Container>
   );
 };

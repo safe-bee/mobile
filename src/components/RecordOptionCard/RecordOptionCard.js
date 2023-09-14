@@ -6,7 +6,7 @@ import FONTS from "../../theme/fonts";
 
 const RecordOptionCard = ({ item }) => {
   return (
-    <Card style={{ flex: 1/2, marginBottom: 20, justifyContent: 'center' }}>
+    <Card style={{ flex: 1/2, height: 100, width: 160, marginBottom: 20, justifyContent: 'center' }}>
       <Card.Content>
         <View style={{ alignItems: "center", marginBottom: 5 }}>
           <Image source={item.imagePath} style={{ width: 50, height: 50 }} />

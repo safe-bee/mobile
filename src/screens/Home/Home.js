@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, ScrollView } from "react-native";
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import styled from 'styled-components/native';
@@ -7,9 +7,10 @@ import COLORS from '../../theme/colors';
 import { GET_APIARIOS } from '../../graphql/queries/index';
 import { ROUTES } from '../../constants';
 import Menu from '../../components/Menu/index';
+import DeleteApario from '../../components/Modals/DeleteApiario/index';
 import FabMenu from '../../components/Menu/FabMenu';
-import { ContainedButton } from '../../elements/Button';
 import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
+import { ContainedButton } from '../../elements/Button';
 import ApiarioCard from '../../components/ApiarioCard/';
 import Loading from '../../components/Loading/index';
 
@@ -20,6 +21,7 @@ const Container = styled.View`
 
 const Home = () => {
   const { data, error, loading } = useQuery(GET_APIARIOS, { fetchPolicy: "cache-and-network" });
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const apiarios = data?.apiarios;
   const navigation = useNavigation();
@@ -40,7 +42,7 @@ const Home = () => {
                 <ScrollView style={{ flex: 0.7 }}>
                     {apiarios.map(apiario => (
                       <View style={{ flex: 1, marginTop: 15 }}>
-                        <ApiarioCard apiario={apiario}/>
+                        <ApiarioCard apiario={apiario} setOpenDeleteModal={setOpenDeleteModal} />
                       </View>
                     ))}
                 </ScrollView>
@@ -56,17 +58,22 @@ const Home = () => {
                 </View>
             </View>
             }
-            
           </Content>
+          {
+            openDeleteModal
+            ? <DeleteApario visible={openDeleteModal} onDismiss={() => setOpenDeleteModal(false)} />
+            : null
+          }
       </MainContentContainer>
       
-      <View >
+      <View>
         <FabMenu />
       </View>
       
       <MenuContainer>
         <Menu />
       </MenuContainer>
+
     </Container>
   );
 }
