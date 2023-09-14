@@ -1,6 +1,6 @@
 import { ApolloClient, ApolloLink, InMemoryCache, HttpLink } from "@apollo/client";
 
-const API_URL = "http://localhost:4000/dev/graphql";
+const API_URL = "https://di18zlis8e.execute-api.us-east-1.amazonaws.com/";
 
 const httpLink = new HttpLink({
   uri: API_URL,
