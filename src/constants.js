@@ -1,13 +1,31 @@
 export const ROUTES = Object.freeze({
-  HOME: 'home',
-  PROFILE: 'profile',
-  RECORD: 'record',
-  TODO: 'todo',
-  INSPECTION: 'inspection',
-  CREATE_APIARY: 'create apiary',
-  CREATE_HIVE: 'create hive',
-  DOCUMENT_FLORA: 'document flora',
+  HOME: "home",
+  PROFILE: "profile",
+  RECORD: "record",
+  TODO: "todo",
+  INSPECTION: "inspection",
+  CREATE_APIARY: "create apiary",
+  CREATE_HIVE: "create hive",
+  DOCUMENT_FLORA: "document flora",
+  FEED_BEES: "feed bees",
+  MITE_ASSESSMENT: "mite assessment",
+  TREATMENT: "treatment",
+  HARVEST_HONEY: "harvest honey",
+  WINTERIZE: "winterize",
+  DEAD_HIVE: "dead hive",
+  LOG_SYMPTOMS: "log symptoms",
 });
 
-
-
+export const ROUTES_WITH_BACK_ACTION = [
+  ROUTES.CREATE_APIARY,
+  ROUTES.CREATE_HIVE,
+  ROUTES.RECORD,
+  ROUTES.DOCUMENT_FLORA,
+  ROUTES.FEED_BEES,
+  ROUTES.MITE_ASSESSMENT,
+  ROUTES.TREATMENT,
+  ROUTES.HARVEST_HONEY,
+  ROUTES.WINTERIZE,
+  ROUTES.DEAD_HIVE,
+  ROUTES.LOG_SYMPTOMS,
+];

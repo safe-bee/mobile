@@ -12,12 +12,12 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const DocumentFlora = () => {
+const Treatment = () => {
   return (
     <Container>
       <MainContentContainer>
         <Content>
-          <Text>DocumentFlora</Text>
+          <Text>Treatment</Text>
         </Content>
       </MainContentContainer>
 
@@ -32,4 +32,4 @@ const DocumentFlora = () => {
   );
 };
 
-export default DocumentFlora;
+export default Treatment;
