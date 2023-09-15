@@ -31,7 +31,7 @@ const ApiarySetup = ({
     if (wizardState?.fields?.apiaryName?.value) {
       setWizardPage('ApiaryEnvironment');
     } else {
-      showSnackbar("Error de Validacion!", "Corriga los siguientes errores: 'nombre apiario' no seleccionado");
+      showSnackbar("Error de Validacion!", "Corriga los siguientes errores: 'nombre apiario' no seleccionado", "error");
     }
   };
 

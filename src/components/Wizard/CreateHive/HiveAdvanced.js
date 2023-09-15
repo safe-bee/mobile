@@ -103,7 +103,7 @@ const HiveAdvanced = ({
                       <TextInput
                         autoCapitalize="none"
                         autoCorrect={false}
-                        label='Total # of frames'
+                        label='Total # de cuadros'
                         placeholder='Total # of frames'
                         onBlur={() => {}}
                         icon="ri-pencil-fill"
@@ -136,7 +136,7 @@ const HiveAdvanced = ({
                       <ContainedButton 
                         disabled={false}
                         onSubmit={handleNext}
-                        label="Next"
+                        label="Siguiente"
                       />
                     </View>
                 </View>

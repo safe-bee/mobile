@@ -6,7 +6,6 @@ import Wizard from '../index'
 import HiveSetup from './HiveSetup';
 import HiveAdvanced from './HiveAdvanced';
 import HiveQueen from './HiveQueen';
-import HiveConfirm from './HiveConfirm';
 import { GET_APIARIO } from '../../../graphql/queries/index';
 import Loading from '../../Loading/index';
 
