@@ -13,6 +13,7 @@ import CreateApiary from './components/Wizard/CreateApiary/CreateApiaryWizard';
 import CreateHive from './components/Wizard/CreateHive/CreateHiveWizard';
 import { MenuProvider } from './context/MenuContext';
 import { SnackbarProvider } from './context/SnackbarContext'; 
+import ApiaryDetail from './screens/ApiaryDetail/index';
 
 
 const Stack = createStackNavigator();
@@ -115,6 +116,13 @@ export default function Routes() {
                     component={DocumentFlora}
                     options={{
                     title: "Create Apiary",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.APIARY_DETAIL}
+                    component={ApiaryDetail}
+                    options={{
+                    title: "Apiary Detail",
                   }}
                 />
                 

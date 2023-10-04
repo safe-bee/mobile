@@ -4,7 +4,7 @@ import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
 
 const TwoOptionsSelector = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(1);
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -22,7 +22,7 @@ const TwoOptionsSelector = () => {
         ]}
         onPress={() => handleOptionClick(1)}
       >
-        <Text style={styles.optionText}>Activity</Text>
+        <Text style={styles.optionText}>Actividad</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[
@@ -31,7 +31,7 @@ const TwoOptionsSelector = () => {
         ]}
         onPress={() => handleOptionClick(2)}
       >
-        <Text style={styles.optionText}>Hive History</Text>
+        <Text style={styles.optionText}>Historial Colmena</Text>
       </TouchableOpacity>
       <View
         style={[
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 260,
+    width: 300,
     backgroundColor: COLORS.BLUE_1,
     borderRadius: 5,
     textAlign: 'center'
@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
   },
   selectedOption: {
     backgroundColor: COLORS.YELLOW,
-    width: 130,
     alignContent: 'center',
     justifyContent: 'center'
   },

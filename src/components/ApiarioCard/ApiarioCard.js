@@ -19,7 +19,7 @@ const ApiarioCard = ({ apiario, setSelectedApiario, setMoreOptionsPress }) => {
     
     return (
       <View style={{ flex: 1 }}>
-          <Card style={{ height: 210, flexDirection: 'row' }}>
+          <Card style={{ height: 210, flexDirection: 'row' }} onPress={() => navigation.navigate(ROUTES.APIARY_DETAIL)}>
             <Card.Content
                 style={{
                     position: 'absolute',

@@ -6,6 +6,7 @@ export const ROUTES = Object.freeze({
   INSPECTION: 'inspection',
   CREATE_APIARY: 'create apiary',
   CREATE_HIVE: 'create hive',
+  APIARY_DETAIL: 'apiary detail',
   DOCUMENT_FLORA: 'document flora',
 });
 
