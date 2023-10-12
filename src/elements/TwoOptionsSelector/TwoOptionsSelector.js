@@ -3,8 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
 
-const TwoOptionsSelector = () => {
-  const [selectedOption, setSelectedOption] = useState(1);
+const TwoOptionsSelector = ({ setSelectedOption, selectedOption }) => {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);

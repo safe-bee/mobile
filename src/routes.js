@@ -6,6 +6,7 @@ import Home from './screens/Home/index'
 import Header from './components/Header/index'
 import Profile from './screens/Profile/index'
 import Record from './screens/Record/index'
+import HiveDetails from './screens/HiveDetails/index'
 import Todo from './screens/Todo/index'
 import DocumentFlora from './screens/DocumentFlora/index'
 import Inspection from './screens/Inspection/index'
@@ -123,6 +124,13 @@ export default function Routes() {
                     component={ApiaryDetail}
                     options={{
                     title: "Apiary Detail",
+                  }}
+                />
+                 <Stack.Screen
+                    name={ROUTES.HIVE_DETAILS}
+                    component={HiveDetails}
+                    options={{
+                    title: "Hive Details",
                   }}
                 />
                 

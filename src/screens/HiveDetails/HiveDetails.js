@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, Text, TouchableOpacity } from "react-native";
+import { View, Image, Text } from "react-native";
 import styled from 'styled-components/native';
 import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
@@ -9,19 +9,15 @@ import { Divider, Card } from 'react-native-paper';
 import FabMenu from '../../components/Menu/FabMenu';
 import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
 import TwoOptionsSelector from '../../elements/TwoOptionsSelector/index';
-import Animation from './Animation';
 import { ScrollView } from 'react-native-gesture-handler';
-import Icon from 'react-native-remix-icon';
-import ToDos from './ToDos';
-import HiveHistory from './HiveHistory';
 
 const Container = styled.View`
   flex: 1;
 `;
 
-const ApiaryDetail = () => {
+const HiveDetails = () => {
     
-  const [tabSelected, setTabSelected] = useState(1);
+  const [openCardIndex, setOpenCard] = useState(null);
 
   return (
       <Container>
@@ -30,30 +26,11 @@ const ApiaryDetail = () => {
               
               <View style={{ direction: 'row', flex: 1 }}>
                 
-                <View style={{ flex: 0.5, alignItems: 'center' }}>
+                <View style={{ flex: 0.3, alignItems: 'center' }}>
                   <Image
                     source={require('../../../assets/hive4.png')} 
                     style={{ width: 100, height: 100 }} 
                   />
-                  <TouchableOpacity onPress={()=>{}}>
-                    <View 
-                      style={{
-                          alignItems: 'center', 
-                          justifyContent: 'center', 
-                          backgroundColor: COLORS.WHITE, 
-                          borderRadius: 40, 
-                          height: 25, 
-                          width: 25,
-                          shadowColor: 'black', // Color de la sombra
-                          shadowOffset: { width: 0, height: 1 }, // Tamaño de la sombra
-                          shadowOpacity: 0.3,
-                          shadowRadius: 4, // Radio de la sombra
-                          elevation: 10, // Ef
-                      }}
-                    >
-                      <Icon size={22} name="ri-more-fill" color={COLORS.BLACK_1} />
-                    </View>
-                  </TouchableOpacity>
                   <Text
                     style={{
                       fontSize: 16,
@@ -66,15 +43,15 @@ const ApiaryDetail = () => {
                   </Text>
                 </View>
 
-                <View style={{ flex: 0.15, alignItems: 'center', justifyContent: 'center' }}>
-                  <TwoOptionsSelector setSelectedOption={setTabSelected} selectedOption={tabSelected} />
+                <View style={{ flex: 0.1, alignItems: 'center' }}>
+                  <TwoOptionsSelector />
                 </View>
 
                 <View style={{ overflow: 'hidden', paddingBottom: 5}}>
                   <View 
                     style={{ 
                       width: '100%', 
-                      height: 10, 
+                      height: 20, 
                       backgroundColor: COLORS.HOME_GREY,
                       flexDirection: 'row',
                       borderBottomLeftRadius: 10,
@@ -87,12 +64,20 @@ const ApiaryDetail = () => {
                     }} 
                   />                
                 </View>
-                  
-                {
-                  tabSelected === 1
-                  ? <ToDos />
-                  : <HiveHistory />
-                }
+            
+
+                
+                <ScrollView style={{ flex: 0.3 }}>
+                    <View style={{ height: '100%', alignItems: 'center', paddingTop: 10 }}>
+                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={1}/>
+                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={2} />
+                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={3} />
+                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={4} />
+                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={5} />
+                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={6} />
+                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={7} />
+                    </View>
+                </ScrollView>
 
               </View>
 
@@ -114,4 +99,4 @@ const ApiaryDetail = () => {
     );
   }
   
-  export default ApiaryDetail;
+  export default HiveDetails;
