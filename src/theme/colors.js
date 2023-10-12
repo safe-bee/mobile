@@ -10,6 +10,7 @@ export default Object.freeze({
   RED_100: '#851704',
   RED_60: '#CD5C5C',
   GREEN_1: '#008000',
+  GREEN_2: '#147267',
   BLUE_1: '#e0e9e8',
   BLUE_2: '#355070',
   GREY_60: '#5b6668',

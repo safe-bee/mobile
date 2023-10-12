@@ -15,6 +15,7 @@ import CreateHive from './components/Wizard/CreateHive/CreateHiveWizard';
 import { MenuProvider } from './context/MenuContext';
 import { SnackbarProvider } from './context/SnackbarContext'; 
 import ApiaryDetail from './screens/ApiaryDetail/index';
+import InspectionDetails from './screens/InspectionDetails/index';
 
 
 const Stack = createStackNavigator();
@@ -131,6 +132,13 @@ export default function Routes() {
                     component={HiveDetails}
                     options={{
                     title: "Hive Details",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.INSPECTION_DETAILS}
+                    component={InspectionDetails}
+                    options={{
+                    title: "Inspection Details",
                   }}
                 />
                 

@@ -9,6 +9,7 @@ export const ROUTES = Object.freeze({
   APIARY_DETAIL: 'apiary detail',
   DOCUMENT_FLORA: 'document flora',
   HIVE_DETAILS: 'hive details',
+  INSPECTION_DETAILS: 'inspection details',
 });
 
 

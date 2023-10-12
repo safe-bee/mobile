@@ -14,132 +14,103 @@ const InspectionCard = ({
     openCardIndex,
     index
 }) => {
-  
-  const handlePressDetails = () => {
-    if (index === openCardIndex) {
-        setOpenCard(null);
-    } else {
-        setOpenCard(index);
-    }
-  };
-
+  const navigation = useNavigation();
+ 
   return (
     <Card
         style={{
             width: '80%',
-            height: openCardIndex !== index ? 70 : (70 + 49*5 ),
+            height: (70 + 49*5 ),
             marginTop: 12
         }}
     >
         <Card.Content
             style={{ height: '100%', backgroundColor: '#aab7bd' }}
         >
-            {
-                openCardIndex === index ?
-                (
-                    <View style={styles.container}>
-                        
-                        <View style={styles.headerExpanded}>
-                            <View style={styles.leftHeader}>
-                                <Text style={styles.title}>Inspeccion</Text>
-                                <Text style={styles.date}>12 de Agosto</Text>
-                            </View>
-                            
-                            <View style={styles.rightHeaderExpanded}>
-                                <TouchableOpacity style={styles.arrowUp} onPress={handlePressDetails}>
-                                    <Icon name="ri-arrow-right-s-line" size={30} color={COLORS.GREY_3} />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        
-                        <Card.Content 
-                        >
-                            <View style={styles.detailsHeader}>
-                                <View style={{ alignItems: 'center', flex: 0.3 }}>
-                                    <View style={styles.icon}>
-                                        <Icon name="ri-emotion-happy-line" size={23} color={COLORS.WHITE} />
-                                    </View>
-                                </View>
-                                <View style={{ marginTop: 8, flex: 0.7 }}>
-                                    <Text style={styles.detailsHeaderText}>
-                                        Hive Population 
-                                    </Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.detailsHeader}>
-                                <View style={{ alignItems: 'center', flex: 0.3 }}>
-                                    <View style={styles.icon}>
-                                        <Icon name="ri-vip-crown-line" size={21} color={COLORS.WHITE} />
-                                    </View>
-                                </View>
-                                <View style={{ marginTop: 8, flex: 0.7 }}>
-                                    <Text style={styles.detailsHeaderText}>
-                                        Hive Population 
-                                    </Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.detailsHeader}>
-                                <View style={{ alignItems: 'center', flex: 0.3 }}>
-                                    <View style={styles.icon}>
-                                        <Icon name="ri-virus-line" size={22} color={COLORS.WHITE} />
-                                    </View>
-                                </View>
-                                <View style={{ marginTop: 8, flex: 0.7 }}>
-                                    <Text style={styles.detailsHeaderText}>
-                                        Hive Population 
-                                    </Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.detailsHeader}>
-                                <View style={{ alignItems: 'center', flex: 0.3 }}>
-                                    <View style={styles.icon}>
-                                        <Icon name="ri-empathize-line" size={22} color={COLORS.WHITE} />
-                                    </View>
-                                </View>
-                                <View style={{ marginTop: 8, flex: 0.7 }}>
-                                    <Text style={styles.detailsHeaderText}>
-                                        Hive Population 
-                                    </Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.detailsHeader}>
-                                <View style={{ alignItems: 'center', flex: 0.3 }}>
-                                    <View style={styles.icon}>
-                                        <Icon name="ri-leaf-line" size={22} color={COLORS.WHITE} />
-                                    </View>
-                                </View>
-                                <View style={{ marginTop: 8, flex: 0.7 }}>
-                                    <Text style={styles.detailsHeaderText}>
-                                        Hive Population 
-                                    </Text>
-                                </View>
-                            </View>
-                        </Card.Content>
-
-                      </View>
-                ) : 
-                (
-                    <View style={styles.container}>
-                        
-                        <View style={styles.header}>
-                            <View style={styles.leftHeader}>
-                                <Text style={styles.title}>Colmena 1</Text>
-                                <Text style={styles.date}>12 de Agosto</Text>
-                            </View>
-                            <View style={styles.rightHeader}>
-                                <TouchableOpacity onPress={handlePressDetails}>
-                                    <Icon name="ri-emotion-happy-line" size={10} color={COLORS.GREY_3} />
-                                </TouchableOpacity>
+            <View style={styles.container}>
+                
+                <View style={styles.headerExpanded}>
+                    <View style={styles.leftHeader}>
+                        <Text style={styles.title}>Inspeccion</Text>
+                        <Text style={styles.date}>12 de Agosto</Text>
+                    </View>
+                    
+                    <View style={styles.rightHeaderExpanded}>
+                        <TouchableOpacity style={styles.arrowUp} onPress={() => navigation.navigate(ROUTES.INSPECTION_DETAILS)}>
+                            <Icon name="ri-arrow-right-s-line" size={30} color={COLORS.GREY_3} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                
+                <Card.Content 
+                >
+                    <View style={styles.detailsHeader}>
+                        <View style={{ alignItems: 'center', flex: 0.3 }}>
+                            <View style={styles.icon}>
+                                <Icon name="ri-emotion-happy-line" size={23} color={COLORS.WHITE} />
                             </View>
                         </View>
+                        <View style={{ marginTop: 8, flex: 0.7 }}>
+                            <Text style={styles.detailsHeaderText}>
+                                Hive Population 
+                            </Text>
+                        </View>
+                    </View>
 
-                      </View>
-                )
-            }
+                    <View style={styles.detailsHeader}>
+                        <View style={{ alignItems: 'center', flex: 0.3 }}>
+                            <View style={styles.icon}>
+                                <Icon name="ri-vip-crown-line" size={21} color={COLORS.WHITE} />
+                            </View>
+                        </View>
+                        <View style={{ marginTop: 8, flex: 0.7 }}>
+                            <Text style={styles.detailsHeaderText}>
+                                Hive Population 
+                            </Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.detailsHeader}>
+                        <View style={{ alignItems: 'center', flex: 0.3 }}>
+                            <View style={styles.icon}>
+                                <Icon name="ri-virus-line" size={22} color={COLORS.WHITE} />
+                            </View>
+                        </View>
+                        <View style={{ marginTop: 8, flex: 0.7 }}>
+                            <Text style={styles.detailsHeaderText}>
+                                Hive Population 
+                            </Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.detailsHeader}>
+                        <View style={{ alignItems: 'center', flex: 0.3 }}>
+                            <View style={styles.icon}>
+                                <Icon name="ri-empathize-line" size={22} color={COLORS.WHITE} />
+                            </View>
+                        </View>
+                        <View style={{ marginTop: 8, flex: 0.7 }}>
+                            <Text style={styles.detailsHeaderText}>
+                                Hive Population 
+                            </Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.detailsHeader}>
+                        <View style={{ alignItems: 'center', flex: 0.3 }}>
+                            <View style={styles.icon}>
+                                <Icon name="ri-leaf-line" size={22} color={COLORS.WHITE} />
+                            </View>
+                        </View>
+                        <View style={{ marginTop: 8, flex: 0.7 }}>
+                            <Text style={styles.detailsHeaderText}>
+                                Hive Population 
+                            </Text>
+                        </View>
+                    </View>
+                </Card.Content>
+
+                </View>
             
             
         </Card.Content>
@@ -159,14 +130,16 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
     },
     headerExpanded: {
-        flex: 0.5,
+        flex: 0.7,
         height: '100%',
         flexDirection: 'row',
-        backgroundColor: '#aab7bd'
+        backgroundColor: '#aab7bd',
+        alignItems: 'center'
     },
     leftHeader: {
       height: '100%',
       flex: 0.4,
+      justifyContent: 'center'
     },
     rightHeader: {
        flex: 0.6,
@@ -209,7 +182,7 @@ const styles = StyleSheet.create({
     },
     detailsHeader: {
       flexDirection: 'row',
-      marginTop: 5,
+      marginTop: 7,
       justifyContent: 'center'
     },
     detailsSubText: {
