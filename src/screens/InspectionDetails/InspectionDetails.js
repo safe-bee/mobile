@@ -24,7 +24,7 @@ const InspectionDetails = () => {
         <View style={{ flex: 1}}>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                  <Text style={{ color: COLORS.GREEN_2, fontSize: 24, fontWeight: 'bold', fontFamily: FONTS.medium}}>
-                    Inspection Summary
+                    Resumen de inspeccion
                 </Text>
             </View> 
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
@@ -105,29 +105,29 @@ const InspectionDetails = () => {
             
             <View style={{ marginTop: 35, marginLeft: 30 }}>
                  <Text style={{ color: COLORS.BLACK_1, fontSize: 17, fontWeight: 'bold', fontFamily: FONTS.medium}}>
-                    Details
+                    Detalles
                 </Text>
                 <View style={{ marginTop: 10 }}>
                   <View>
                     <Text style={{ color: COLORS.GREEN_2, fontSize: 12, fontFamily: FONTS.regular}}>
-                        Symptoms
+                        Sintomas
                     </Text>
                  </View>
                   <View style={{ marginTop: 5 }}>
                     <Text style={{ color: COLORS.BLACK_1, fontSize: 12, fontFamily: FONTS.regular}}>
-                        None
+                        Ninguno
                     </Text>
                   </View>
                 </View>
                 <View style={{ marginTop: 10 }}>
                   <View>
                     <Text style={{ color: COLORS.GREEN_2, fontSize: 12, fontFamily: FONTS.regular}}>
-                        Symptoms
+                        Sintomas
                     </Text>
                  </View>
                   <View style={{ marginTop: 5 }}>
                     <Text style={{ color: COLORS.BLACK_1, fontSize: 12, fontFamily: FONTS.regular}}>
-                        None
+                        Ninguno
                     </Text>
                   </View>
                 </View>

@@ -9,13 +9,63 @@ const ToDos = () => {
     return (
         <ScrollView style={{ flex: 0.3 }}>
             <View style={{ height: '100%', alignItems: 'center', paddingTop: 10 }}>
-                <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={1}/>
-                <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={2} />
-                <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={3} />
-                <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={4} />
-                <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={5} />
-                <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={6} />
-                <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={7} />
+                <HideableCard 
+                  setOpenCard={setOpenCard} 
+                  openCardIndex={openCardIndex} 
+                  index={1}
+                  header={"Tratamiento"} 
+                  date={"19 de octubre"}
+                  details={[
+                    {
+                        title: 'Enfermedad tratada',
+                        moreInfo: 'Enfermedad X'
+                    },
+                    {
+                        title: 'Enfermedad tratada',
+                        moreInfo: 'Enfermedad X'
+                    },
+                    {
+                        title: 'Enfermedad tratada',
+                        moreInfo: 'Enfermedad X'
+                    },
+                    {
+                        title: 'Enfermedad tratada',
+                        moreInfo: 'Enfermedad X'
+                    },                   {
+                        title: 'Enfermedad tratada',
+                        moreInfo: 'Enfermedad X'
+                    }
+                 ]}
+                />
+                <HideableCard 
+                  setOpenCard={setOpenCard} 
+                  openCardIndex={openCardIndex} 
+                  index={2}
+                  header={"Cosecha"} 
+                  date={"10 de octubre"}
+                  details={[
+                    {
+                        title: 'Tipo de cosecha',
+                        moreInfo: 'Cosecha Z'
+                    },
+                    {
+                        title: 'Tipo de cosecha',
+                        moreInfo: 'Cosecha Z'
+                    },
+                    {
+                        title: 'Tipo de cosecha',
+                        moreInfo: 'Cosecha Z'
+                    },
+                    {
+                        title: 'Tipo de cosecha',
+                        moreInfo: 'Cosecha Z'
+                    },
+                    {
+                        title: 'Tipo de cosecha',
+                        moreInfo: 'Cosecha Z'
+                    }
+                 ]}
+                />
             </View>
         </ScrollView>
     )

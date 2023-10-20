@@ -15,7 +15,7 @@ const Container = styled(FAB.Group)`
   position: absolute;
   flex: 1;
   align-items: center;
-  padding-right: 130px;
+  padding-right: 145px;
   padding-bottom: 20px;
 `;
 
@@ -87,7 +87,7 @@ const FabMenu = () => {
                       <RIcon name="calendar-check-line" size={30} color={COLORS.WHITE_1} />
                   </View>
                 ),
-                label: 'Inspection',
+                label: 'Inspecciones',
                 labelStyle: { fontFamily: FONTS.regular },
                 labelTextColor: COLORS.WHITE,
                 onPress: () => handleInspectionIconPress(), 
@@ -106,7 +106,7 @@ const FabMenu = () => {
                   </View>
                 ),
                 onPress: () => handleTodoIconPress(),
-                label: 'To-Do',
+                label: 'Alertas',
                 labelStyle: { fontFamily: FONTS.regular },
                 labelTextColor: COLORS.WHITE,
                 style: { width: 50, height: 50, borderRadius: 50, backgroundColor: COLORS.YELLOW }
@@ -123,7 +123,7 @@ const FabMenu = () => {
                       <RIcon name="profile-line" size={30} color={COLORS.WHITE_1} />
                   </View>
                 ),
-                label: 'Record',
+                label: 'Acciones',
                 labelStyle: { fontFamily: FONTS.regular },
                 labelTextColor: COLORS.WHITE,
                 onPress: () => handleRecordIconPress(),

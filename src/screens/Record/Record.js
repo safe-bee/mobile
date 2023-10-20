@@ -28,42 +28,42 @@ const Record = () => {
   const navigation = useNavigation();
   const recordOptions = [
     {
-      label: "Document flora",
+      label: "Cosecha",
       imagePath: require("../../../assets/cosecha-removebg-preview.png"),
       href: ROUTES.DOCUMENT_FLORA,
     },
     {
-      label: "Feed bees",
+      label: "Alimentar abejas",
       imagePath: require("../../../assets/alimentacion2-removebg-preview.png"),
       href: ROUTES.RECORD,
     },
     {
-      label: "Mite assessment",
+      label: "Tratamiento Varroa",
       imagePath: require("../../../assets/varroa-removebg-preview.png"),
       href: ROUTES.RECORD,
     },
     {
-      label: "Treatment",
+      label: "Tratamientos",
       imagePath: require("../../../assets/tratamiento-removebg-preview.png"),
       href: ROUTES.RECORD,
     },
     {
-      label: "Harvest honey",
+      label: "Cambio de cuadros",
       imagePath: require("../../../assets/cuadros-removebg-preview.png"),
       href: ROUTES.RECORD,
     },
     {
-      label: "Winterize",
+      label: "Hibernacion",
       imagePath: require("../../../assets/hibernacion-removebg-preview.png"),
       href: ROUTES.RECORD,
     },
     {
-      label: "Dead hive",
+      label: "Muerte colmena",
       imagePath: require("../../../assets/muerte-removebg-preview.png"),
       href: ROUTES.RECORD,
     },
     {
-      label: "Log symptoms",
+      label: "Registrar sintomas",
       imagePath: require("../../../assets/cuadros-removebg-preview.png"),
       href: ROUTES.RECORD,
     },
@@ -76,7 +76,7 @@ const Record = () => {
           <ScrollView style={{ flex: 1 }}>
             <View style={{ marginBottom: 20 }}>
               <Text style={{ fontSize: 15, fontFamily: FONTS.medium }}>
-                Select a record type
+                Seleccione una Accion
               </Text>
             </View>
             <FlatList

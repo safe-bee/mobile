@@ -10,6 +10,7 @@ export const ROUTES = Object.freeze({
   DOCUMENT_FLORA: 'document flora',
   HIVE_DETAILS: 'hive details',
   INSPECTION_DETAILS: 'inspection details',
+  SHOW_HIVE_DETAILS: 'show hive details',
 });
 
 

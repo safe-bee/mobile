@@ -12,9 +12,13 @@ import Icon from 'react-native-remix-icon';
 const HideableCard = ({
     setOpenCard,
     openCardIndex,
-    index
+    index,
+    header,
+    date,
+    details,
 }) => {
   
+
   const handlePressDetails = () => {
     if (index === openCardIndex) {
         setOpenCard(null);
@@ -41,8 +45,8 @@ const HideableCard = ({
                         
                         <View style={styles.headerExpanded}>
                             <View style={styles.leftHeader}>
-                                <Text style={styles.title}>Colmena 1</Text>
-                                <Text style={styles.date}>12 de Agosto</Text>
+                                <Text style={styles.title}>{header}</Text>
+                                <Text style={styles.date}>{date}</Text>
                             </View>
                             
                             <View style={styles.rightHeaderExpanded}>
@@ -71,70 +75,24 @@ const HideableCard = ({
                                 </TouchableOpacity>
                             </View>
                         </View>
-
                         <View style={styles.details}>
-                            <View style={styles.detailsRow}>
-                                <View style={styles.detailsHeader}>
-                                    <Text style={styles.detailsHeaderText}>
-                                        Treatment disease treated
-                                    </Text>
-                                </View>
-                                <View style={styles.detailsHeader}>
-                                    <Text style={styles.detailsSubText}>
-                                        Test
-                                    </Text>
-                                </View>
-                            </View>
-                            <View style={styles.detailsRow}>
-                                <View style={styles.detailsHeader}>
-                                    <Text style={styles.detailsHeaderText}>
-                                        Treatment disease treated
-                                    </Text>
-                                </View>
-                                <View style={styles.detailsHeader}>
-                                    <Text style={styles.detailsSubText}>
-                                        Test
-                                    </Text>
-                                </View>
-                            </View>
-                            <View style={styles.detailsRow}>
-                                <View style={styles.detailsHeader}>
-                                    <Text style={styles.detailsHeaderText}>
-                                        Treatment disease treated
-                                    </Text>
-                                </View>
-                                <View style={styles.detailsHeader}>
-                                    <Text style={styles.detailsSubText}>
-                                        Test
-                                    </Text>
-                                </View>
-                            </View>
-                            <View style={styles.detailsRow}>
-                                <View style={styles.detailsHeader}>
-                                    <Text style={styles.detailsHeaderText}>
-                                        Treatment disease treated
-                                    </Text>
-                                </View>
-                                <View style={styles.detailsHeader}>
-                                    <Text style={styles.detailsSubText}>
-                                        Test
-                                    </Text>
-                                </View>
-                            </View>
-                            <View style={styles.detailsRow}>
-                                <View style={styles.detailsHeader}>
-                                    <Text style={styles.detailsHeaderText}>
-                                        Treatment disease treated
-                                    </Text>
-                                </View>
-                                <View style={styles.detailsHeader}>
-                                    <Text style={styles.detailsSubText}>
-                                        Test
-                                    </Text>
-                                </View>
-                            </View>
+                            {
+                                details.map(detail => (
+                                    <View style={styles.detailsRow}>
+                                        <View style={styles.detailsHeader}>
+                                            <Text style={styles.detailsHeaderText}>
+                                                {detail.title}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.detailsHeader}>
+                                            <Text style={styles.detailsSubText}>
+                                                {detail.moreInfo}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                ))
+                            }
                         </View>
-
                       </View>
                 ) : 
                 (
@@ -142,8 +100,8 @@ const HideableCard = ({
                         
                         <View style={styles.header}>
                             <View style={styles.leftHeader}>
-                                <Text style={styles.title}>Colmena 1</Text>
-                                <Text style={styles.date}>12 de Agosto</Text>
+                                <Text style={styles.title}>{header}</Text>
+                                <Text style={styles.date}>{date}</Text>
                             </View>
                             <View style={styles.rightHeader}>
                                 <TouchableOpacity onPress={handlePressDetails}>
@@ -179,7 +137,7 @@ const styles = StyleSheet.create({
     },
     leftHeader: {
       height: '100%',
-      flex: 0.4,
+      flex: 1,
     },
     rightHeader: {
        flex: 0.6,
@@ -191,6 +149,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flex: 0.6,
         justifyContent: 'flex-end',
+        
     },  
     title: {
       fontSize: 16,
@@ -206,7 +165,6 @@ const styles = StyleSheet.create({
       paddingLeft: 5,
     },
     details: {
-
     },
     detailsRow: {
       marginTop: 5

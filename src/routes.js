@@ -141,7 +141,6 @@ export default function Routes() {
                     title: "Inspection Details",
                   }}
                 />
-                
           </Stack.Navigator>
           
         </MenuProvider>

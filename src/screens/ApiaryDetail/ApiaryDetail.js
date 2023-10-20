@@ -14,6 +14,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-remix-icon';
 import ToDos from './ToDos';
 import HiveHistory from './HiveHistory';
+import HiveDetailsMoreOptions from '../../components/Modals/HiveDetailsMoreOptions/index';
 
 const Container = styled.View`
   flex: 1;
@@ -22,6 +23,7 @@ const Container = styled.View`
 const ApiaryDetail = () => {
     
   const [tabSelected, setTabSelected] = useState(1);
+  const [openMoreOptionsModal, setMoreOptionsModal] = useState(false);
 
   return (
       <Container>
@@ -30,12 +32,17 @@ const ApiaryDetail = () => {
               
               <View style={{ direction: 'row', flex: 1 }}>
                 
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={{ color: COLORS.GREEN_2, fontSize: 16, fontWeight: 'bold', fontFamily: FONTS.medium}}>
+                      Detalles de colmena
+                  </Text>
+                </View> 
                 <View style={{ flex: 0.5, alignItems: 'center' }}>
                   <Image
                     source={require('../../../assets/hive4.png')} 
                     style={{ width: 100, height: 100 }} 
                   />
-                  <TouchableOpacity onPress={()=>{}}>
+                  <TouchableOpacity onPress={()=>setMoreOptionsModal(true)}>
                     <View 
                       style={{
                           alignItems: 'center', 
@@ -97,7 +104,15 @@ const ApiaryDetail = () => {
               </View>
 
 
-              
+              {
+                openMoreOptionsModal
+                ? <HiveDetailsMoreOptions
+                    visible={openMoreOptionsModal}
+                    onDismiss={() => setMoreOptionsModal(false)}
+                    handleDeletePress={() => setOpenDeleteModal(true)} 
+                  />
+                : null
+              }
 
 
             </Content>

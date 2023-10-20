@@ -1,102 +1,117 @@
-import React, { useEffect, useState } from 'react';
-import { View, Image, Text } from "react-native";
+import React from 'react';
 import styled from 'styled-components/native';
+import { Image, View, TouchableOpacity, Text, StyleSheet, ScrollView } from "react-native";
+import { Card } from 'react-native-paper';
 import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
 import Menu from '../../components/Menu/index';
-import HideableCard from '../../components/HideableCard/index';
-import { Divider, Card } from 'react-native-paper';
 import FabMenu from '../../components/Menu/FabMenu';
 import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
-import TwoOptionsSelector from '../../elements/TwoOptionsSelector/index';
-import { ScrollView } from 'react-native-gesture-handler';
+import Icon from 'react-native-remix-icon';
 
-const Container = styled.View`
+export const ContentContainer = styled.View`
+  flex: 0.9;
+`;
+
+export const Container = styled.View`
   flex: 1;
 `;
 
 const HiveDetails = () => {
-    
-  const [openCardIndex, setOpenCard] = useState(null);
-
   return (
-      <Container>
-        <MainContentContainer>
-            <Content>
-              
-              <View style={{ direction: 'row', flex: 1 }}>
+    <Container>
+      <MainContentContainer>
+        <View style={{ flex: 1}}>
+
+            <View style={{ flex: 0.3, alignItems: 'center' }}>
+                <Image
+                  source={require('../../../assets/hive4.png')} 
+                  style={{ width: 100, height: 100 }} 
+                />
+                <Text
+                  style={{
+                    fontSize: 16,
+                    paddingTop: 10,
+                    fontFamily: FONTS.medium,
+                    color: COLORS.GREEN_1,
+                  }}
+                >
+                  Colmena 1
+                </Text>
+            </View>
+
+
+            <View style={{ flex: 0.4, alignItems: 'center', marginTop: 20 }}>
+                <View style={{ alignSelf: 'left', marginLeft: 60, marginBottom: 12 }}>
+                    <Text style={{ color: COLORS.GREEN_2, fontSize: 15, fontWeight: 'bold', fontFamily: FONTS.medium}}>
+                        Detalles de Colmena
+                    </Text>
+                </View> 
                 
-                <View style={{ flex: 0.3, alignItems: 'center' }}>
-                  <Image
-                    source={require('../../../assets/hive4.png')} 
-                    style={{ width: 100, height: 100 }} 
-                  />
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      paddingTop: 10,
-                      fontFamily: FONTS.medium,
-                      color: COLORS.GREEN_1,
-                    }}
-                  >
-                    Colmena 1
-                  </Text>
-                </View>
+                <Card style={{ width: '70%'}}>
+                    <Card.Content>
+                      <ScrollView>
+                         
+                         <View>
+                            <View>
+                              <Text style={{ color: COLORS.GREEN_2, fontSize: 12, fontFamily: FONTS.regular}}>
+                                  Nombre
+                              </Text>
+                            </View>
 
-                <View style={{ flex: 0.1, alignItems: 'center' }}>
-                  <TwoOptionsSelector />
-                </View>
+                            <View style={{ marginTop: 3 }}>
+                              <Text style={{ color: COLORS.BLACK_1, fontSize: 12, fontFamily: FONTS.regular}}>
+                                  Colmena 1
+                              </Text>
+                            </View>
+                        </View>
 
-                <View style={{ overflow: 'hidden', paddingBottom: 5}}>
-                  <View 
-                    style={{ 
-                      width: '100%', 
-                      height: 20, 
-                      backgroundColor: COLORS.HOME_GREY,
-                      flexDirection: 'row',
-                      borderBottomLeftRadius: 10,
-                      borderBottomRightRadius: 10,
-                      shadowColor: 'black',
-                      shadowOffset: { width: 1, height: 1 },
-                      shadowOpacity:  0.4,
-                      shadowRadius: 3,
-                      elevation: 5,
-                    }} 
-                  />                
-                </View>
+                        <View style={{ marginTop: 10 }}>
+                            <View>
+                              <Text style={{ color: COLORS.GREEN_2, fontSize: 12, fontFamily: FONTS.regular}}>
+                                  Fecha de creacion
+                              </Text>
+                            </View>
+
+                            <View style={{ marginTop: 3 }}>
+                              <Text style={{ color: COLORS.BLACK_1, fontSize: 12, fontFamily: FONTS.regular}}>
+                                  10 de Agosto del 2023
+                              </Text>
+                            </View>
+                        </View>
+
+                        <View style={{ marginTop: 10 }}>
+                            <View>
+                              <Text style={{ color: COLORS.GREEN_2, fontSize: 12, fontFamily: FONTS.regular}}>
+                                  Tipo de colmena
+                              </Text>
+                            </View>
+
+                            <View style={{ marginTop: 3 }}>
+                              <Text style={{ color: COLORS.BLACK_1, fontSize: 12, fontFamily: FONTS.regular}}>
+                                  Langstroh
+                              </Text>
+                            </View>
+                        </View>
+
+                      </ScrollView>
+                    </Card.Content> 
+                </Card>
+            </View>
             
-
-                
-                <ScrollView style={{ flex: 0.3 }}>
-                    <View style={{ height: '100%', alignItems: 'center', paddingTop: 10 }}>
-                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={1}/>
-                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={2} />
-                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={3} />
-                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={4} />
-                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={5} />
-                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={6} />
-                      <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={7} />
-                    </View>
-                </ScrollView>
-
-              </View>
-
-
-              
-
-
-            </Content>
-        </MainContentContainer>
-        
-        <View >
-          <FabMenu />
         </View>
-        
-        <MenuContainer>
-          <Menu />
-        </MenuContainer>
-      </Container>
-    );
-  }
-  
-  export default HiveDetails;
+
+      </MainContentContainer>
+      
+      <View>
+        <FabMenu />
+      </View>
+      
+      <MenuContainer>
+        <Menu />
+      </MenuContainer>
+    </Container>
+  );
+}
+
+export default HiveDetails;

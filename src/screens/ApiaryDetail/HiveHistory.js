@@ -16,8 +16,20 @@ const HiveHistory = () => {
                         Agosto | 2023
                     </Text>
                 </View>
-                <InspectionCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={1}/>
-                <HideableCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} index={1}/>
+                <InspectionCard setOpenCard={setOpenCard} openCardIndex={openCardIndex} />
+                <HideableCard 
+                  setOpenCard={setOpenCard} 
+                  openCardIndex={openCardIndex} 
+                  index={1}
+                  header={"Document flora"} 
+                  date={"19 de octubre"}
+                  details={[
+                    {
+                        title: 'Flora tratada',
+                        moreInfo: 'Aca va la flora tratada'
+                    }
+                 ]}
+                />
             </View>
         </ScrollView>
     )
