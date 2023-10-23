@@ -13,7 +13,7 @@ const HiveDetailsMoreOptions = ({
     visible,
     onDismiss,
     handleDeletePress,
-    apiarioId
+    colmenaId
 }) => {
   const navigation = useNavigation();
     const containerStyle = { backgroundColor: 'white', margin: 20, elevation: 10, borderRadius: 10, };
@@ -24,7 +24,7 @@ const HiveDetailsMoreOptions = ({
     };
 
     const handleViewDetailsPage = () => {
-      navigation.navigate(ROUTES.HIVE_DETAILS, { apiarioId });
+      navigation.navigate(ROUTES.HIVE_DETAILS, { colmenaId });
       onDismiss();
     };
 

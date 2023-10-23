@@ -8,6 +8,7 @@ import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
 import Menu from '../../components/Menu/index';
 import FabMenu from '../../components/Menu/FabMenu';
+import DeleteHive from '../../components/Modals/DeleteHive/index';
 import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
 import TwoOptionsSelector from '../../elements/TwoOptionsSelector/index';
 import Icon from 'react-native-remix-icon';
@@ -25,6 +26,7 @@ const ApiaryDetail = () => {
     
   const [tabSelected, setTabSelected] = useState(1);
   const [openMoreOptionsModal, setMoreOptionsModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const route = useRoute();
   const { id } = route.params;
 
@@ -122,10 +124,21 @@ const ApiaryDetail = () => {
                     visible={openMoreOptionsModal}
                     onDismiss={() => setMoreOptionsModal(false)}
                     handleDeletePress={() => setOpenDeleteModal(true)} 
-                    apiarioId={id}
+                    colmenaId={id}
                   />
                 : null
               }
+
+              {
+                openDeleteModal
+                ? <DeleteHive
+                    visible={openDeleteModal}
+                    onDismiss={() => setOpenDeleteModal(false)}
+                    colmenaId={id}
+                  />
+                : null
+               }
+          
 
             </Content>
         </MainContentContainer>

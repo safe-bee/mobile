@@ -25,8 +25,8 @@ export const Container = styled.View`
 const HiveDetails = () => {
   
   const route = useRoute();
-  const { apiarioId } = route.params;
-  const { data, loading } = useQuery(GET_COLMENA, { variables: { id: apiarioId },  fetchPolicy: "cache-and-network" });
+  const { colmenaId } = route.params;
+  const { data, loading } = useQuery(GET_COLMENA, { variables: { id: colmenaId },  fetchPolicy: "cache-and-network" });
 
   console.log("data");
   console.log(data);
