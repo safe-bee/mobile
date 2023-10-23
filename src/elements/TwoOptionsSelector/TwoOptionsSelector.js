@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import COLORS from '../../theme/colors';
-import FONTS from '../../theme/fonts';
 
 const TwoOptionsSelector = ({ setSelectedOption, selectedOption }) => {
 
@@ -21,7 +20,7 @@ const TwoOptionsSelector = ({ setSelectedOption, selectedOption }) => {
         ]}
         onPress={() => handleOptionClick(1)}
       >
-        <Text style={styles.optionText}>Actividad</Text>
+        <Text style={styles.optionText}>Tareas</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[
@@ -30,7 +29,7 @@ const TwoOptionsSelector = ({ setSelectedOption, selectedOption }) => {
         ]}
         onPress={() => handleOptionClick(2)}
       >
-        <Text style={styles.optionText}>Historial Colmena</Text>
+        <Text style={styles.optionText}>Registros</Text>
       </TouchableOpacity>
       <View
         style={[

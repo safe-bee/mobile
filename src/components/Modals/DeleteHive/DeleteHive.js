@@ -54,6 +54,7 @@ const DeleteHive = ({
                       style={{ width: 130, height: 130 }} 
                     />
                 </View>
+                
                 <View style={{ padding: 13, alignItems: 'center' }}>
                     <Text style={{ fontFamily: FONTS.light, color: COLORS.BLACK_2 }}>
                         Si borras esta, toda la informacion va ser permanentemente perdida.
@@ -61,7 +62,7 @@ const DeleteHive = ({
                     </Text>
                 </View>
 
-                <View style={{ paddingHorizontal: 15, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+                <View style={{ paddingHorizontal: 15, flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                       <ContainedButton 
                          disabled={false}
@@ -71,6 +72,7 @@ const DeleteHive = ({
                       />
                     </View>
                 </View>
+
             </View>
         </Modal>
       </Portal>

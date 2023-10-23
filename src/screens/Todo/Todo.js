@@ -1,9 +1,11 @@
 import React from 'react';
 import { ScrollView, View, Text, ActivityIndicator } from "react-native";
 import styled from 'styled-components/native';
+import { useQuery } from "@apollo/client";
 import FONTS from '../../theme/fonts';
 import COLORS from '../../theme/colors';
 import TextInput from '../../elements/TextInput/index';
+import useCreateTodo from './useCreateTodo';
 import CustomPicker from '../../elements/CustomPicker/index'
 import Calendar from '../../elements/Calendar/index'
 import { ContainedButton } from '../../elements/Button/Button'
@@ -21,32 +23,24 @@ const Todo = () => {
 
   const { showSnackbar } = useSnackbar();
 
+  const {
+    fields,
+    updateField,
+    onSubmit,
+    isVisitedForm,
+    mutationLoading,
+    tipoAlertas,
+    apiarios,
+    colmenas
+  } = useCreateTodo();
+
   const handleNext = () => {
-    if (wizardState?.fields?.hiveType?.value && wizardState?.fields?.hiveName?.value) {
-      setWizardPage('HiveAdvanced');
+    if (fields?.colmena?.value) {
+      onSubmit();
     } else {
-      showSnackbar("Error de Validacion!", "Corriga los siguientes errores", "error");
+      showSnackbar("Error de Validacion!", "No seleccionaste ninguna colmena, revisa haber creado una previamente.", "error");
     }
   };
-
-  const tipoAlerta = [
-    { value: 'COSECHA', label: 'Cosecha' },
-    { value: 'TRATAMIENTOS', label: 'Tratamientos' },
-    { value: 'HIBERNACION', label: 'Hibernacion' },
-    { value: 'MUERTE', label: 'Muerte' },
-    { value: 'ALIMENTACION', label: 'Alimentacion' },
-    { value: 'TRATAMIENTO_VARROA', label: 'Tratamiento Varroa' },
-    { value: 'CAMBIO_DE_CUADROS', label: 'Cambio de cuadros' },
-  ];
-
-  const apiarios = [
-    { value: 'APIARIO1', label: 'Apiario 1' },
-  ];
-
-  const colmenas = [
-    { value: 'COLMENA1', label: 'Colmena 1' },
-  ];
-
 
 
   return (
@@ -54,7 +48,7 @@ const Todo = () => {
         <MainContentContainer>
           <Content>
             <ScrollView style={{ flex: 1 }}>
-                <View style={{ flex: 1, height: 580, paddingHorizontal: 10 }}>
+                <View style={{ flex: 1, height: 650, paddingHorizontal: 10 }}>
                   <View style={{ marginBottom: 20, marginTop: 40 }}>
                     <Text style={{ fontSize: 15, fontFamily: FONTS.medium }}>
                       Creacion de Alerta
@@ -63,43 +57,55 @@ const Todo = () => {
 
                   <View style={{ flex: 1, flexDirection: 'column', marginVertical: 5, zIndex: 99999999  }}>
                       <CustomPicker 
-                        onChange={(value) => wizardStateSetters?.updateField({ name: "hiveType", value })}
+                        onChange={(value) => updateField({ name: "tipoAlerta", value })}
                         label='Tipo de Alerta'
-                        value={{ value: 'COSECHA', label: 'Cosecha' }}
-                        options={tipoAlerta}
+                        value={fields?.tipoAlerta?.value}
+                        options={tipoAlertas}
                         />
                   </View>
 
-                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 15, zIndex: 9999999  }}>
+                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 8, zIndex: 9999999  }}>
                     <CustomPicker 
-                      onChange={(value) => wizardStateSetters?.updateField({ name: "hiveType", value })}
+                      onChange={(value) => updateField({ name: "apiario", value })}
                       label='Apiario'
-                      value={{ value: 'APIARIO1', label: 'Apiario 1' }}
+                      value={fields?.apiario.value}
                       options={apiarios}
                       />
                   </View>
 
-                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 15, zIndex: 9999998  }}>
+                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 8, zIndex: 9999998  }}>
                     <CustomPicker 
-                      onChange={(value) => wizardStateSetters?.updateField({ name: "hiveType", value })}
+                      onChange={(value) => updateField({ name: "colmena", value })}
                       label='Colmena'
-                      value={{ value: 'COLMENA', label: 'Colmena 1' }}
+                      value={fields?.colmena.value}
                       options={colmenas}
                     />
                   </View>
 
-                   <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginVertical: 15 }}>
+                   <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginVertical: 8 }}>
                       <Calendar 
-                        onConfirm={(text) => wizardStateSetters?.updateField({ name: "fechaEstablecimiento", value: text })}
+                        onConfirm={(text) => updateField({ name: "fechaDeTarea", value: text })}
                         label='Fecha de la Alerta'
-                        dateValue={new Date()}
+                        dateValue={fields?.fechaDeTarea?.value}
                         />
                     </View>
 
+                    <View style={{ flex: 1, marginVertical: 8 }}>
+                      <TextInput
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        label='Notas'
+                        onBlur={() => {}}
+                        outlined={true}
+                        onChangeText={(text) => updateField({ name: "notas", value: text })}
+                        value={fields?.notas?.value}
+                        textArea
+                      />
+                    </View>
 
-                    <View style={{ flex: 1, marginTop: 20, flexDirection: 'column', alignItems: 'center' }}>
+                    <View style={{ flex: 1, marginTop: 50, flexDirection: 'column', alignItems: 'center' }}>
                       <ContainedButton 
-                        disabled={false}
+                        disabled={!isVisitedForm}
                         onSubmit={handleNext}
                         label="Crear Alerta"
                       />

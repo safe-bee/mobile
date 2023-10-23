@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -11,6 +11,14 @@ export default function CustomPicker({ options, onChange, value, label }) {
     const [open, setOpen] = useState(false);
     const [items, setItems] = useState(options);
   
+
+      useEffect(() => {
+        if (options) {
+          setItems(options)
+        }
+      }, [options]);
+
+    
     return (
       <>
        <LabelContainer>
@@ -40,6 +48,7 @@ export default function CustomPicker({ options, onChange, value, label }) {
           fontFamily: FONTS.regular,
           fontWeight: '100',
           color: COLORS.BLACK_1,
+          textTransform: 'capitalize',
          }}
          dropDownContainerStyle={{
           backgroundColor: COLORS.BLUE_1,
