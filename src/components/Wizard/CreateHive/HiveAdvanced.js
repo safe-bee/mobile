@@ -62,43 +62,12 @@ const HiveAdvanced = ({
                   ]}
                 />
                </View>
-                <View style={{ flex: 1, height: 550, paddingHorizontal: 10, zIndex: -30000 }}>
+                <View style={{ flex: 1, height: 450, paddingHorizontal: 10, zIndex: -30000 }}>
                   <View style={{ marginBottom: 20, marginTop: 40 }}>
                     <Text style={{ fontSize: 15, fontFamily: FONTS.medium }}>
                       Configuracion Colmena
                     </Text>
                   </View>
-                   <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                      <View style={{ flex: 0.45 }}>
-                        <TextInput
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            label='# Deeps'
-                            placeholder='# Deeps'
-                            onBlur={() => {}}
-                            icon="ri-pencil-fill"
-                            outlined={true}
-                            onChangeText={(text) => wizardStateSetters?.updateField({ name: "datosNumeroDeep", value: text })}
-                            value={wizardState?.fields?.datosNumeroDeep?.value}
-                            error={wizardState?.fields?.datosNumeroDeep?.error}
-                        />
-                      </View>
-                      <View style={{ flex: 0.45 }}>
-                        <TextInput
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            label='# Supers'
-                            placeholder='# Supers'
-                            onBlur={() => {}}
-                            icon="ri-pencil-fill"
-                            outlined={true}
-                            onChangeText={(text) => wizardStateSetters?.updateField({ name: "datosNumeroSupers", value: text })}
-                            value={wizardState?.fields?.datosNumeroSupers?.value}
-                            error={wizardState?.fields?.datosNumeroSupers?.error}
-                        />
-                      </View>
-                    </View>
-
                     <View style={{ flex: 1 }}>
                       <TextInput
                         autoCapitalize="none"

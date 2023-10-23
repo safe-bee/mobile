@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
+import { Modal, Portal } from 'react-native-paper';
 import { View, Image, TouchableOpacity } from "react-native";
 import COLORS from '../../../theme/colors';
 import { useNavigation } from '@react-navigation/native';
@@ -13,6 +13,7 @@ const HiveDetailsMoreOptions = ({
     visible,
     onDismiss,
     handleDeletePress,
+    apiarioId
 }) => {
   const navigation = useNavigation();
     const containerStyle = { backgroundColor: 'white', margin: 20, elevation: 10, borderRadius: 10, };
@@ -23,7 +24,7 @@ const HiveDetailsMoreOptions = ({
     };
 
     const handleViewDetailsPage = () => {
-      navigation.navigate(ROUTES.HIVE_DETAILS);
+      navigation.navigate(ROUTES.HIVE_DETAILS, { apiarioId });
       onDismiss();
     };
 

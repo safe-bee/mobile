@@ -36,8 +36,6 @@ const HiveConfirm = ({
   };
 
 
-  console.log("wizardState?.mutationLoading");
-  console.log(wizardState?.mutationLoading);
   return (
       <Container>
         <MainContentContainer>

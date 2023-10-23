@@ -237,8 +237,6 @@ const ApiaryLocation = ({
 
   const { showSnackbar } = useSnackbar();
 
-  console.log(wizardState?.mutationLoading);
- 
   const { height } = Dimensions.get('window');
 
   const {

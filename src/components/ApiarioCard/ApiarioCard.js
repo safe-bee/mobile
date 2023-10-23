@@ -16,10 +16,9 @@ const ApiarioCard = ({ apiario, setSelectedApiario, setMoreOptionsPress }) => {
         setMoreOptionsPress(true);
     };
 
-    
     return (
       <View style={{ flex: 1 }}>
-          <Card style={{ height: 210, flexDirection: 'row' }} onPress={() => navigation.navigate(ROUTES.APIARY_DETAIL)}>
+          <Card style={{ height: 210, flexDirection: 'row' }}>
             <Card.Content
                 style={{
                     position: 'absolute',
@@ -40,7 +39,7 @@ const ApiarioCard = ({ apiario, setSelectedApiario, setMoreOptionsPress }) => {
             {
                 apiario.colmenas.length ?
                     apiario.colmenas.map( colmena => (
-                    <View style={{ alignItems: 'center', borderRadius: 5, backgroundColor: 'rgba(173, 216, 230, 0.5)', flex: 0.3, borderRadius: 8, marginTop: 10, flexDirection: 'row' }}>
+                    <TouchableOpacity onPress={() => navigation.navigate(ROUTES.APIARY_DETAIL, { id: colmena.id })} style={{ alignItems: 'center', borderRadius: 5, backgroundColor: 'rgba(173, 216, 230, 0.5)', flex: 0.3, borderRadius: 8, marginTop: 10, flexDirection: 'row' }}>
                         <View style={{ flex: 0.2, alignItems: 'center' }}>
                             <Image
                               source={require('../../../assets/hive4.png')} 
@@ -51,11 +50,11 @@ const ApiarioCard = ({ apiario, setSelectedApiario, setMoreOptionsPress }) => {
                             <Text style={{ fontSize: 15,fontFamily: FONTS.regular, color: COLORS.BLACK_2 }}>
                                 {colmena.nombre}
                             </Text>
-                            <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => {}}>
+                            <TouchableOpacity style={{ marginLeft: 10 }}>
                                 <Icon size={19} name="ri-pencil-fill" color={COLORS.BLACK_2} />
                             </TouchableOpacity>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 )) 
                 : <View style={{ flex: 1, justifyContent: 'center' }}>
                     <Text style={{ paddingLeft: 10, fontSize: 15 ,fontFamily: FONTS.medium, color: COLORS.BLACK_1 }}>

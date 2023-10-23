@@ -1,5 +1,5 @@
 
-const API_URL = "http://localhost:4000/dev/graphql";
+const API_URL = "https://di18zlis8e.execute-api.us-east-1.amazonaws.com/";
 
 const executeQuery = async (query, variables) => {
     const requestOptions = {
@@ -23,5 +23,20 @@ const executeQuery = async (query, variables) => {
       }
 };
 
+
+/*
+
+  useEffect(() => {
+    const testQuery = async () => {
+      const data = await executeQuery(GET_COLMENA, { id });
+      console.log("data");
+      console.log(data);
+    };
+
+    testQuery();
+  }, []);
+
+
+*/
 
 export default executeQuery;

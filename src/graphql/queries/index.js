@@ -13,7 +13,8 @@ export const GET_APIARIOS = gql`
       tipo_ambiente,
       colmenas {
         datos_numero_deeps,
-        nombre
+        nombre,
+        id
       }
     }
   }
@@ -25,6 +26,25 @@ export const GET_APIARIO = gql`
     apiario(id: $apiarioId) {
       nombre,
       id
+    }
+  }
+`;
+
+
+export const GET_COLMENA = gql`
+  query Colmena($id: Int!) {
+    colmena(id: $id) {
+      apiarioId,
+      tipo,
+      datos_fecha_establecimiento
+      datos_color,
+      datos_origen,
+      datos_total_cuadros,
+      nombre,
+      reina_color,
+      reina_tipo,
+      reina_notas,
+      reina_fecha_aceptacion
     }
   }
 `;

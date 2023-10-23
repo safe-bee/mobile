@@ -30,6 +30,7 @@ const Home = () => {
   const navigation = useNavigation();
 
 
+  
   if (error) {
     console.log("Error fetching apiarios", error);
   }
@@ -41,14 +42,29 @@ const Home = () => {
             {
               loading ?
               <Loading size={50} /> : 
+              apiarios.length > 0 ?
+                <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                  <ScrollView style={{ flex: 0.7 }}>
+                      {apiarios.map(apiario => (
+                        <View style={{ flex: 1, marginTop: 15 }}>
+                          <ApiarioCard apiario={apiario} setMoreOptionsPress={setMoreOptionsModal} setSelectedApiario={setSelectedApiario} />
+                        </View>
+                      ))}
+                  </ScrollView>
+                  
+                  <View style={{ flex: 0.3, flexDirection: 'row', alignItems: 'center', }}>
+                    <View style={{ flex: 1, alignItems: 'center' }}>
+                      <ContainedButton 
+                        disabled={false}
+                        onSubmit={() => navigation.navigate(ROUTES.CREATE_APIARY)}
+                        label="Crear Apiario"
+                      />
+                    </View>
+                  </View>
+              </View>
+            : (
               <View style={{ flex: 1, paddingHorizontal: 5 }}>
-                <ScrollView style={{ flex: 0.7 }}>
-                    {apiarios.map(apiario => (
-                      <View style={{ flex: 1, marginTop: 15 }}>
-                        <ApiarioCard apiario={apiario} setMoreOptionsPress={setMoreOptionsModal} setSelectedApiario={setSelectedApiario} />
-                      </View>
-                    ))}
-                </ScrollView>
+                
                 
                 <View style={{ flex: 0.3, flexDirection: 'row', alignItems: 'center', }}>
                   <View style={{ flex: 1, alignItems: 'center' }}>
@@ -59,8 +75,9 @@ const Home = () => {
                     />
                   </View>
                 </View>
-            </View>
-            }
+              </View>
+            )
+          }
           </Content>
           {
             openDeleteModal
@@ -97,62 +114,3 @@ const Home = () => {
 export default Home;
 
 
-
-
-
-{
-  /*
-
- <View style={{ flex: 1, zIndex: 9999 }}>
-    <CustomPicker
-      options={options}
-      value={{ value: "test", label: "test" }}
-      onChange={() =>{}}
-      label='Choose an option'
-    />
-  </View>
-
-
-
-<View style={{ flex: 1, marginLeft: 20}}>
-  <TwoOptionsSelector />
-</View>
-
-<View style={{ flex: 1 }}>
-  <TextInput
-    autoCapitalize="none"
-    autoCorrect={false}
-    label='Hive name'
-    placeholder='Name your hive'
-    onBlur={() => {}}
-    icon="ri-pencil-fill"
-    outlined={true}
-    onChangeText={(text) => setDomainVars(text)}
-    value={domainVars}
-  />
-  </View>
-
-<View style={{ flex: 1 }}>
-  <TextInput
-    autoCapitalize="none"
-    autoCorrect={false}
-    label='Hive name'
-    placeholder='Name your hive'
-    onBlur={() => {}}
-    icon="ri-pencil-fill"
-    outlined={true}
-    onChangeText={(text) => setDomainVars(text)}
-    value={domainVars}
-  />
-</View>
-<View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
-  <Calendar 
-    onConfirm={(val) => console.log(val)}
-    label='Date of task'
-    
-  />
-</View>
-
-
-  */
-}
