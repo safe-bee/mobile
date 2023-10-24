@@ -1,17 +1,17 @@
 import React from 'react';
 import { ScrollView, View, Text, ActivityIndicator } from "react-native";
 import styled from 'styled-components/native';
-import { useQuery } from "@apollo/client";
-import FONTS from '../../theme/fonts';
-import COLORS from '../../theme/colors';
-import TextInput from '../../elements/TextInput/index';
-import useCreateTodo from './useCreateTodo';
-import CustomPicker from '../../elements/CustomPicker/index'
-import Calendar from '../../elements/Calendar/index'
-import { ContainedButton } from '../../elements/Button/Button'
-import { MenuContainer, MainContentContainer, Content } from '../../screens/sharedStyles';
-import { useSnackbar } from '../../context/SnackbarContext';
-import Menu from '../../components/Menu/index';
+import FONTS from '../../../theme/fonts';
+import COLORS from '../../../theme/colors';
+import TextInput from '../../../elements/TextInput/index';
+import useCreateHarvestHoney from './useCreateHarvestHoney';
+import CustomPicker from '../../../elements/CustomPicker/index'
+import Calendar from '../../../elements/Calendar/index'
+import { ContainedButton } from '../../../elements/Button/Button'
+import { MenuContainer, MainContentContainer, Content } from '../../sharedStyles';
+import { useSnackbar } from '../../../context/SnackbarContext';
+import Menu from '../../../components/Menu/index';
+
 
 const Container = styled.View`
   flex: 1;
@@ -19,7 +19,7 @@ const Container = styled.View`
   width: 100%;
 `;
 
-const Todo = () => {
+const HarvestHoney = () => {
 
   const { showSnackbar } = useSnackbar();
   
@@ -29,10 +29,10 @@ const Todo = () => {
     onSubmit,
     isVisitedForm,
     mutationLoading,
-    tipoAlertas,
+    tipoUnidades,
     apiarios,
     colmenas
-  } = useCreateTodo();
+  } = useCreateHarvestHoney();
 
   const handleNext = () => {
     if (fields?.colmena?.value) {
@@ -48,20 +48,11 @@ const Todo = () => {
         <MainContentContainer>
           <Content>
             <ScrollView style={{ flex: 1 }}>
-                <View style={{ flex: 1, height: 650, paddingHorizontal: 10 }}>
+                <View style={{ flex: 1, height: 750, paddingHorizontal: 10 }}>
                   <View style={{ marginBottom: 20, marginTop: 40 }}>
                     <Text style={{ fontSize: 15, fontFamily: FONTS.medium }}>
-                      Creacion de Alerta
+                      Registrar Cosecha
                     </Text>
-                  </View>
-
-                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 5, zIndex: 99999999  }}>
-                      <CustomPicker 
-                        onChange={(value) => updateField({ name: "tipoAlerta", value })}
-                        label='Tipo de Alerta'
-                        value={fields?.tipoAlerta?.value}
-                        options={tipoAlertas}
-                        />
                   </View>
 
                   <View style={{ flex: 1, flexDirection: 'column', marginVertical: 8, zIndex: 9999999  }}>
@@ -82,11 +73,29 @@ const Todo = () => {
                     />
                   </View>
 
+                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 8, zIndex: 9999997  }}>
+                    <CustomPicker 
+                      onChange={(value) => updateField({ name: "colmena", value })}
+                      label='Tarea asociada'
+                      value={fields?.colmena.value}
+                      options={colmenas}
+                    />
+                  </View>
+
                    <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginVertical: 8 }}>
                       <Calendar 
-                        onConfirm={(text) => updateField({ name: "fechaDeTarea", value: text })}
-                        label='Fecha de la Alerta'
-                        dateValue={fields?.fechaDeTarea?.value}
+                        onConfirm={(text) => updateField({ name: "fechaDeRegistro", value: text })}
+                        label='Fecha del registro'
+                        dateValue={fields?.fechaDeRegistro?.value}
+                        />
+                    </View>
+
+                    <View style={{ flex: 1, flexDirection: 'column', marginVertical: 5, zIndex: 99999999  }}>
+                      <CustomPicker 
+                        onChange={(value) => updateField({ name: "tipoUnidad", value })}
+                        label='Metodo'
+                        value={fields?.tipoUnidad?.value}
+                        options={tipoUnidades}
                         />
                     </View>
 
@@ -94,12 +103,12 @@ const Todo = () => {
                       <TextInput
                         autoCapitalize="none"
                         autoCorrect={false}
-                        label='Notas'
+                        label='Cantidad'
                         onBlur={() => {}}
                         outlined={true}
-                        onChangeText={(text) => updateField({ name: "notas", value: text })}
-                        value={fields?.notas?.value}
-                        textArea
+                        onChangeText={(text) => updateField({ name: "cantidad", value: text })}
+                        value={fields?.porcentaje?.value}
+                        keyboardType="numeric"
                       />
                     </View>
 
@@ -107,7 +116,7 @@ const Todo = () => {
                       <ContainedButton 
                         disabled={!isVisitedForm}
                         onSubmit={handleNext}
-                        label="Crear Alerta"
+                        label="Crear Tarea"
                         icon={ mutationLoading ? () => <ActivityIndicator color={COLORS.WHITE} /> : () => {} }
                       />
                     </View>
@@ -128,4 +137,4 @@ const Todo = () => {
 }
 
 
-export default Todo;
+export default HarvestHoney;

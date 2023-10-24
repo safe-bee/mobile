@@ -7,8 +7,7 @@ import Header from './components/Header/index'
 import Profile from './screens/Profile/index'
 import Record from './screens/Record/index'
 import HiveDetails from './screens/HiveDetails/index'
-import Todo from './screens/Todo/index'
-import DocumentFlora from './screens/DocumentFlora/index'
+import Tarea from './screens/Tarea/index'
 import Inspection from './screens/Inspection/index'
 import CreateApiary from './components/Wizard/CreateApiary/CreateApiaryWizard';
 import CreateHive from './components/Wizard/CreateHive/CreateHiveWizard';
@@ -16,6 +15,13 @@ import { MenuProvider } from './context/MenuContext';
 import { SnackbarProvider } from './context/SnackbarContext'; 
 import ApiaryDetail from './screens/ApiaryDetail/index';
 import InspectionDetails from './screens/InspectionDetails/index';
+import CambioDeCuadros from './screens/Record/CambioDeCuadros/CambioDeCuadros';
+import DeadHive from './screens/Record/DeadHive/index';
+import DocumentFlora from './screens/Record/DocumentFlora/index'
+import HarvestHoney from './screens/Record/HarvestHoney/index';
+import MiteAssesment from './screens/Record/MiteAssesment/index';
+import Treatment from './screens/Record/Treatment/index';
+import Winterize from './screens/Record/Winterize/index';
 
 
 const Stack = createStackNavigator();
@@ -75,70 +81,112 @@ export default function Routes() {
                     name={ROUTES.PROFILE}
                     component={Profile}
                     options={{
-                    title: "Profile",
+                    title: "Perfil",
                   }}
                 />
                 <Stack.Screen
                     name={ROUTES.INSPECTION}
                     component={Inspection}
                     options={{
-                    title: "Inspection",
+                    title: "Inspeccion",
                   }}
                 />
                 <Stack.Screen
-                    name={ROUTES.TODO}
-                    component={Todo}
+                    name={ROUTES.TAREA}
+                    component={Tarea}
                     options={{
-                    title: "Todo",
+                    title: "Tarea",
                   }}
                 />
                 <Stack.Screen
                     name={ROUTES.RECORD}
                     component={Record}
                     options={{
-                    title: "Record",
+                    title: "Registrar",
                   }}
                 />
                 <Stack.Screen
                     name={ROUTES.CREATE_APIARY}
                     component={CreateApiary}
                     options={{
-                    title: "Create Apiary",
+                    title: "Crear apiario",
                   }}
                 />
                 <Stack.Screen
                     name={ROUTES.CREATE_HIVE}
                     component={CreateHive}
                     options={{
-                    title: "Create Apiary",
-                  }}
-                />
-                <Stack.Screen
-                    name={ROUTES.DOCUMENT_FLORA}
-                    component={DocumentFlora}
-                    options={{
-                    title: "Create Apiary",
+                    title: "Crear colmena",
                   }}
                 />
                 <Stack.Screen
                     name={ROUTES.APIARY_DETAIL}
                     component={ApiaryDetail}
                     options={{
-                    title: "Apiary Detail",
+                    title: "Detalle de apiario",
                   }}
                 />
                  <Stack.Screen
                     name={ROUTES.HIVE_DETAILS}
                     component={HiveDetails}
                     options={{
-                    title: "Hive Details",
+                    title: "Detalle de colmena",
                   }}
                 />
                 <Stack.Screen
                     name={ROUTES.INSPECTION_DETAILS}
                     component={InspectionDetails}
                     options={{
-                    title: "Inspection Details",
+                    title: "Detalle de inspeccion",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.CAMBIO_CUADROS}
+                    component={CambioDeCuadros}
+                    options={{
+                    title: "Cambio de cuadros",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.DEAD_HIVE}
+                    component={DeadHive}
+                    options={{
+                    title: "Muerte colmena",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.HARVEST_HONEY}
+                    component={HarvestHoney}
+                    options={{
+                    title: "Cosecha",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.TREATMENT}
+                    component={Treatment}
+                    options={{
+                    title: "Tratamiento",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.WINTERIZE}
+                    component={Winterize}
+                    options={{
+                    title: "Hibernacion",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.MITE_ASSESMENT}
+                    component={MiteAssesment}
+                    options={{
+                    title: "Tratamiento varroa",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.DOCUMENT_FLORA}
+                    component={DocumentFlora}
+                    options={{
+                    title: "Alimentar abejas",
                   }}
                 />
           </Stack.Navigator>

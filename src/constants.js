@@ -1,16 +1,22 @@
 export const ROUTES = Object.freeze({
   HOME: 'home',
-  PROFILE: 'profile',
-  RECORD: 'record',
-  TODO: 'todo',
-  INSPECTION: 'inspection',
-  CREATE_APIARY: 'create apiary',
-  CREATE_HIVE: 'create hive',
-  APIARY_DETAIL: 'apiary detail',
-  DOCUMENT_FLORA: 'document flora',
-  HIVE_DETAILS: 'hive details',
-  INSPECTION_DETAILS: 'inspection details',
-  SHOW_HIVE_DETAILS: 'show hive details',
+  PROFILE: 'perfil',
+  RECORD: 'registrar',
+  TAREA: 'tarea',
+  INSPECTION: 'inspeccion',
+  CREATE_APIARY: 'crear apiario',
+  CREATE_HIVE: 'crear colmena',
+  APIARY_DETAIL: 'detalles de apiario',
+  HIVE_DETAILS: 'detalles colmena',
+  INSPECTION_DETAILS: 'detalles de inspeccion',
+  SHOW_HIVE_DETAILS: 'mostrar detalles colmena',
+  DOCUMENT_FLORA: 'alimentacion',
+  TREATMENT: 'tratamiento',
+  DEAD_HIVE: 'muerte',
+  WINTERIZE: 'hibernacion',
+  MITE_ASSESMENT: 'varroa',
+  HARVEST_HONEY: 'cosecha',
+  CAMBIO_CUADROS: 'cambio cuadros'
 });
 
 

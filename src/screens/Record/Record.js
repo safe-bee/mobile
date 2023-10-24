@@ -30,42 +30,37 @@ const Record = () => {
     {
       label: "Cosecha",
       imagePath: require("../../../assets/cosecha-removebg-preview.png"),
-      href: ROUTES.DOCUMENT_FLORA,
+      href: ROUTES.HARVEST_HONEY,
     },
     {
       label: "Alimentar abejas",
       imagePath: require("../../../assets/alimentacion2-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.DOCUMENT_FLORA,
     },
     {
       label: "Tratamiento Varroa",
       imagePath: require("../../../assets/varroa-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.MITE_ASSESMENT,
     },
     {
-      label: "Tratamientos",
+      label: "Tratamiento",
       imagePath: require("../../../assets/tratamiento-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.TREATMENT,
     },
     {
       label: "Cambio de cuadros",
       imagePath: require("../../../assets/cuadros-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.CAMBIO_CUADROS,
     },
     {
       label: "Hibernacion",
       imagePath: require("../../../assets/hibernacion-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.WINTERIZE,
     },
     {
       label: "Muerte colmena",
       imagePath: require("../../../assets/muerte-removebg-preview.png"),
-      href: ROUTES.RECORD,
-    },
-    {
-      label: "Registrar sintomas",
-      imagePath: require("../../../assets/cuadros-removebg-preview.png"),
-      href: ROUTES.RECORD,
+      href: ROUTES.DEAD_HIVE,
     },
   ];
 

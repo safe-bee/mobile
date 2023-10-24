@@ -35,9 +35,9 @@ const FabMenu = () => {
     selectIcon('record');
   };
  
-  const handleTodoIconPress = () => {
-    navigation.navigate(ROUTES.TODO, { navigation });
-    selectIcon('todo');
+  const handleTareaIconPress = () => {
+    navigation.navigate(ROUTES.TAREA, { navigation });
+    selectIcon('tarea');
   };
  
   const handleInspectionIconPress = () => {
@@ -87,7 +87,7 @@ const FabMenu = () => {
                       <RIcon name="calendar-check-line" size={30} color={COLORS.WHITE_1} />
                   </View>
                 ),
-                label: 'Inspecciones',
+                label: 'Inspeccion',
                 labelStyle: { fontFamily: FONTS.regular },
                 labelTextColor: COLORS.WHITE,
                 onPress: () => handleInspectionIconPress(), 
@@ -105,8 +105,8 @@ const FabMenu = () => {
                       <RIcon name="ri-survey-line" size={30} color={COLORS.WHITE_1} />
                   </View>
                 ),
-                onPress: () => handleTodoIconPress(),
-                label: 'Alertas',
+                onPress: () => handleTareaIconPress(),
+                label: 'Tarea',
                 labelStyle: { fontFamily: FONTS.regular },
                 labelTextColor: COLORS.WHITE,
                 style: { width: 50, height: 50, borderRadius: 50, backgroundColor: COLORS.YELLOW }
@@ -123,7 +123,7 @@ const FabMenu = () => {
                       <RIcon name="profile-line" size={30} color={COLORS.WHITE_1} />
                   </View>
                 ),
-                label: 'Acciones',
+                label: 'Registrar',
                 labelStyle: { fontFamily: FONTS.regular },
                 labelTextColor: COLORS.WHITE,
                 onPress: () => handleRecordIconPress(),
