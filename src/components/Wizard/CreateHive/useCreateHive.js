@@ -31,14 +31,6 @@ const inputFields = {
         value: '',
         validations: [requiredValidation],
     },
-    datosNumeroDeep: {
-        value: '',
-        validations: [],
-    },
-    datosNumeroSupers: {
-        value: '',
-        validations: [],
-    },
     datosNumeroCuadros: {
         value: '',
         validations: [],
@@ -77,8 +69,6 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             nombre: formValues.hiveName.value,
             apiarioId,
             tipo: formValues.hiveType.value,
-            datosNumeroDeep: formValues.datosNumeroDeep.value || null,
-            datosNumeroSupers: formValues.datosNumeroSupers.value || null,
             datosTotalCuadros: formValues.datosNumeroCuadros.value || null,
             datosColor: formValues.color.value || null,
             datosFechaEstablecimiento: formValues.fechaEstablecimiento.value || null,

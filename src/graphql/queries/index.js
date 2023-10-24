@@ -12,7 +12,6 @@ export const GET_APIARIOS = gql`
       longitud,
       tipo_ambiente,
       colmenas {
-        datos_numero_deeps,
         nombre,
         id
       }
@@ -44,7 +43,15 @@ export const GET_COLMENA = gql`
       reina_color,
       reina_tipo,
       reina_notas,
-      reina_fecha_aceptacion
+      reina_fecha_aceptacion,
+      tareas {
+        id
+        descripcion
+        fecha
+        colmenaId
+        terminada
+        tipoRegistro 
+      }
     }
   }
 `;

@@ -22,7 +22,7 @@ const Container = styled.View`
 const Todo = () => {
 
   const { showSnackbar } = useSnackbar();
-
+  
   const {
     fields,
     updateField,
@@ -108,6 +108,7 @@ const Todo = () => {
                         disabled={!isVisitedForm}
                         onSubmit={handleNext}
                         label="Crear Alerta"
+                        icon={ mutationLoading ? () => <ActivityIndicator color={COLORS.WHITE} /> : () => {} }
                       />
                     </View>
 

@@ -34,7 +34,10 @@ const ApiaryDetail = () => {
   const { data, loading } = useQuery(GET_COLMENA, { variables: { id },  fetchPolicy: "cache-and-network" });
 
   const colmena = data?.colmena;
+  const tareas = colmena?.tareas;
 
+  console.log("tareas");
+  console.log(tareas);
   return (
       <Container>
         <MainContentContainer>
@@ -111,7 +114,7 @@ const ApiaryDetail = () => {
                         
                       {
                         tabSelected === 1
-                        ? <ToDos />
+                        ? <ToDos tareas={tareas} />
                         : <HiveHistory />
                       }
                   </View>

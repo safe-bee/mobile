@@ -1,8 +1,8 @@
 import useForm from '../../hooks/useForm';
 import { useEffect } from 'react';
-import { CREATE_COLMENAS } from '../../graphql/mutations/createColmenas';
-import { useMutation, useQuery } from "@apollo/client";
+import { CREATE_TAREA } from '../../graphql/mutations/createTarea';
 import { GET_APIARIOS } from '../../graphql/queries/index';
+import { useMutation, useQuery } from "@apollo/client";
 import { ROUTES } from '../../constants';
 import { useNavigation } from '@react-navigation/native';
 import { useSnackbar } from '../../context/SnackbarContext';
@@ -27,15 +27,15 @@ const tipoAlertas = [
 
 const useCreateTodo = () => {
 
-const { data, error, loading: apiariosLoading } = useQuery(GET_APIARIOS, { fetchPolicy: "cache-and-network" });
+const { data, loading: apiariosLoading } = useQuery(GET_APIARIOS, { fetchPolicy: "cache-and-network" });
+
+const [createTarea, { loading }] = useMutation(CREATE_TAREA, {
+    refetchQueries: [{ query: GET_APIARIOS }],
+});
 
 const apiarios = data?.apiarios.map(apiario => ({ value: apiario.id, label: apiario.nombre }));
 
 const colmenasXApiario = data?.apiarios.map(apiario => ({ id: apiario.id, colmenas: apiario.colmenas.map(colmena => ({ label: colmena.nombre, value: colmena.id })) }));
-
-const [createColmenas, { loading }] = useMutation(CREATE_COLMENAS, {
-  refetchQueries: [{ query: GET_APIARIOS }],
-});
 
 
 const { showSnackbar } = useSnackbar();
@@ -44,7 +44,7 @@ const navigation = useNavigation();
 
 const inputFields = {
     tipoAlerta: {
-        value: tipoAlertas[0],
+        value: tipoAlertas[0].value,
         validations: [requiredValidation],
     },
     apiario: {
@@ -75,14 +75,15 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             fecha: formValues.fechaDeTarea.value,
             tipoRegistro: formValues.tipoAlerta.value
         };
-       console.log(variables);
+       console.log("colmenaId");
+       console.log(formValues.colmena.value);
         
        try {
-            const res = await createColmenas({ variables });
+            const res = await createTarea({ variables });
             navigation.navigate(ROUTES.HOME);
         
             if (!res.data.errors) {
-                showSnackbar("El apiario se creo correctamente!", "", "success");
+                showSnackbar("La tarea se creo correctamente!", "", "success");
             } else {
                 showSnackbar("Ha habido un error!", "", "error");
             }

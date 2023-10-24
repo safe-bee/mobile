@@ -6,8 +6,7 @@ import { ROUTES } from '../../constants';
 import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
 import Icon from 'react-native-remix-icon';
-
-
+import { formatDate } from '../../utils/helpers';
 
 const HideableCard = ({
     setOpenCard,
@@ -46,7 +45,7 @@ const HideableCard = ({
                         <View style={styles.headerExpanded}>
                             <View style={styles.leftHeader}>
                                 <Text style={styles.title}>{header}</Text>
-                                <Text style={styles.date}>{date}</Text>
+                                <Text style={styles.date}>{formatDate(date)}</Text>
                             </View>
                             
                             <View style={styles.rightHeaderExpanded}>
@@ -101,7 +100,7 @@ const HideableCard = ({
                         <View style={styles.header}>
                             <View style={styles.leftHeader}>
                                 <Text style={styles.title}>{header}</Text>
-                                <Text style={styles.date}>{date}</Text>
+                                <Text style={styles.date}>{formatDate(date)}</Text>
                             </View>
                             <View style={styles.rightHeader}>
                                 <TouchableOpacity onPress={handlePressDetails}>
@@ -155,6 +154,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontFamily: FONTS.medium,
       color: COLORS.GREEN_1,
+      textTransform: 'capitalize'
     },
     date: {
       fontSize: 14,

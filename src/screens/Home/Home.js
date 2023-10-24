@@ -30,6 +30,7 @@ const Home = () => {
   const navigation = useNavigation();
 
 
+  console.log(data);
   
   if (error) {
     console.log("Error fetching apiarios", error);
