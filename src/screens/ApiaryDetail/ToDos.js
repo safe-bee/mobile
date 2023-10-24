@@ -22,7 +22,7 @@ const ToDos = ({
                           details={[
                             {
                                 title: 'Notas',
-                                moreInfo: tarea.descripcion
+                                moreInfo: tarea.descripcion || 'Sin notas'
                             },
                         ]}
                       />

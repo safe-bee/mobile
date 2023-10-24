@@ -27,6 +27,14 @@ const HiveHistory = () => {
                     {
                         title: 'Flora tratada',
                         moreInfo: 'Aca va la flora tratada'
+                    },
+                    {
+                        title: 'Flora tratada',
+                        moreInfo: 'Aca va la flora tratada'
+                    },
+                    {
+                        title: 'Flora tratada',
+                        moreInfo: 'Aca va la flora tratada'
                     }
                  ]}
                 />

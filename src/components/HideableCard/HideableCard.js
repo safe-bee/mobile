@@ -26,11 +26,18 @@ const HideableCard = ({
     }
   };
 
+  const calculateCardHeight = () => {
+    const minHeight = 70;
+    const additionalHeight = details.length * 60;
+    return openCardIndex === index ? minHeight + additionalHeight : minHeight;
+  };
+
+
   return (
     <Card
         style={{
             width: '80%',
-            height: openCardIndex !== index ? 70 : (70 + 49*5 ),
+            height: calculateCardHeight(),
             marginTop: 12
         }}
     >
@@ -165,6 +172,7 @@ const styles = StyleSheet.create({
       paddingLeft: 5,
     },
     details: {
+      marginTop: 15
     },
     detailsRow: {
       marginTop: 5
