@@ -116,7 +116,7 @@ const HarvestHoney = () => {
                       <ContainedButton 
                         disabled={!isVisitedForm}
                         onSubmit={handleNext}
-                        label="Crear Tarea"
+                        label="Crear Registro"
                         icon={ mutationLoading ? () => <ActivityIndicator color={COLORS.WHITE} /> : () => {} }
                       />
                     </View>

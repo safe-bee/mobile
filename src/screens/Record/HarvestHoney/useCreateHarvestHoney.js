@@ -1,7 +1,7 @@
 import useForm from '../../../hooks/useForm';
 import useGetApariosPorColmenas from '../../../hooks/useGetApariosPorColmenas';
 import { useEffect } from 'react';
-import { CREATE_TAREA } from '../../../graphql/mutations/createTarea';
+import { CREATE_COSECHA } from '../../../graphql/mutations/createRecords';
 import { useMutation } from "@apollo/client";
 import { ROUTES } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
@@ -22,7 +22,7 @@ const tipoUnidades = [
 const useCreateHarvestHoney = () => {
 
 
-const [createTarea, { loading }] = useMutation(CREATE_TAREA);
+const [createCosecha, { loading }] = useMutation(CREATE_COSECHA);
 
 const {
     apiarios,
@@ -62,18 +62,18 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     async (formValues) => {
 
         const variables = {
-            cantidad: formValues.porcentaje.value,
+            cantidadCosecha: parseFloat(formValues.cantidad.value),
             colmenaId: formValues.colmena.value,
-            fecha: formValues.fechaDeRegistro.value,
+            // fecha: formValues.fechaDeRegistro.value,
             tipoUnidad: formValues.tipoUnidad.value
         };
         
        try {
-            const res = await createTarea({ variables });
+            const res = await createCosecha({ variables });
             navigation.navigate(ROUTES.HOME);
         
             if (!res.data.errors) {
-                showSnackbar("La tarea se creo correctamente!", "", "success");
+                showSnackbar("El registro se creo correctamente!", "", "success");
             } else {
                 showSnackbar("Ha habido un error!", "", "error");
             }

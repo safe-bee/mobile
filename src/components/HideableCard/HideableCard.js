@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { ScrollView, View, TouchableOpacity, Text, Image, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, Image, StyleSheet } from "react-native";
 import { Card } from 'react-native-paper';
 import { ROUTES } from '../../constants';
 import COLORS from '../../theme/colors';
@@ -28,7 +27,7 @@ const HideableCard = ({
 
   const calculateCardHeight = () => {
     const minHeight = 70;
-    const additionalHeight = details.length * 60;
+    const additionalHeight = details.length ? details.length * 50 : 45;
     return openCardIndex === index ? minHeight + additionalHeight : minHeight;
   };
 
@@ -83,20 +82,28 @@ const HideableCard = ({
                         </View>
                         <View style={styles.details}>
                             {
-                                details.map(detail => (
-                                    <View style={styles.detailsRow}>
-                                        <View style={styles.detailsHeader}>
-                                            <Text style={styles.detailsHeaderText}>
-                                                {detail.title}
-                                            </Text>
-                                        </View>
-                                        <View style={styles.detailsHeader}>
-                                            <Text style={styles.detailsSubText}>
-                                                {detail.moreInfo}
-                                            </Text>
-                                        </View>
-                                    </View>
-                                ))
+                                details.length 
+                                  ? details.map(detail => (
+                                      <View style={styles.detailsRow}>
+                                          <View style={styles.detailsHeader}>
+                                              <Text style={styles.detailsHeaderText}>
+                                                  {detail.header}
+                                              </Text>
+                                          </View>
+                                          <View style={styles.detailsHeader}>
+                                              <Text style={styles.detailsSubText}>
+                                                  {detail.value}
+                                              </Text>
+                                          </View>
+                                      </View>
+                                  ))
+                                : <View style={styles.noNotes}>
+                                      <View style={styles.detailsHeader}>
+                                          <Text style={styles.detailsSubText}>
+                                              Sin notas adicionales
+                                          </Text>
+                                      </View>
+                                  </View>
                             }
                         </View>
                       </View>
@@ -137,7 +144,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
     },
     headerExpanded: {
-        flex: 0.5,
+        flex: 0.65,
         height: '100%',
         flexDirection: 'row',
     },
@@ -173,6 +180,9 @@ const styles = StyleSheet.create({
     },
     details: {
       marginTop: 15
+    },
+    noNotes : {
+      marginTop: 20, 
     },
     detailsRow: {
       marginTop: 5

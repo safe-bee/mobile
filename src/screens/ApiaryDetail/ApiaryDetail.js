@@ -16,6 +16,7 @@ import ToDos from './ToDos';
 import HiveHistory from './HiveHistory';
 import HiveDetailsMoreOptions from '../../components/Modals/HiveDetailsMoreOptions/index';
 import { GET_COLMENA } from '../../graphql/queries';
+import { GET_REGISTROS } from '../../graphql/queries';
 import executeQuery from '../../graphql/api';
 
 const Container = styled.View`
@@ -23,27 +24,30 @@ const Container = styled.View`
 `;
 
 const ApiaryDetail = () => {
+  const route = useRoute();
+  const { id } = route.params;
+  const { data: colmenaData, loading: colmenaLoading } = useQuery(GET_COLMENA, { variables: { id },  fetchPolicy: "cache-and-network" });
+  const { data: registrosData, loading: registrosLoading } = useQuery(GET_REGISTROS, { variables: { colmenaId: id },  fetchPolicy: "cache-and-network" });
     
+
   const [tabSelected, setTabSelected] = useState(1);
   const [openMoreOptionsModal, setMoreOptionsModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const route = useRoute();
-  const { id } = route.params;
 
 
-  const { data, loading } = useQuery(GET_COLMENA, { variables: { id },  fetchPolicy: "cache-and-network" });
-
-  const colmena = data?.colmena;
+  const colmena = colmenaData?.colmena;
   const tareas = colmena?.tareas;
 
-  console.log("tareas");
-  console.log(tareas);
+  const registros = registrosData?.registros;
+
+  console.log(registrosData);
+
   return (
       <Container>
         <MainContentContainer>
             <Content>
               {
-                loading 
+                colmenaLoading || registrosLoading
                 ? <Loading size={50} />
                 : (
                   <View style={{ direction: 'row', flex: 1 }}>
@@ -115,7 +119,7 @@ const ApiaryDetail = () => {
                       {
                         tabSelected === 1
                         ? <ToDos tareas={tareas} />
-                        : <HiveHistory />
+                        : <HiveHistory registros={registros} />
                       }
                   </View>
                )

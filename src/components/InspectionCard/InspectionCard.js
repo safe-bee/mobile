@@ -6,16 +6,34 @@ import { ROUTES } from '../../constants';
 import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
 import Icon from 'react-native-remix-icon';
-
+import { formatDate } from '../../utils/helpers';
 
 
 const InspectionCard = ({
-    setOpenCard,
-    openCardIndex,
-    index
+    details,
+    date
 }) => {
   const navigation = useNavigation();
- 
+
+  const getInspectionIcon = (inspectionStep) => {
+    let icon;
+
+    if (inspectionStep === 'plagas') {
+        icon = <Icon name="ri-emotion-happy-line" size={22} color={COLORS.WHITE} />;
+    } else if (inspectionStep === 'poblacion') {
+        icon = <Icon name="ri-vip-crown-line" size={21} color={COLORS.WHITE} />;
+    } else if (inspectionStep === 'reina larvas') {
+        icon =  <Icon name="ri-virus-line" size={22} color={COLORS.WHITE} />;
+    } else if (inspectionStep === 'flora') {
+        icon = <Icon name="ri-empathize-line" size={22} color={COLORS.WHITE} />;
+    } else {
+        icon = <Icon name="ri-leaf-line" size={22} color={COLORS.WHITE} />;
+    }
+
+    return icon;
+  }
+
+
   return (
     <Card
         style={{
@@ -32,7 +50,7 @@ const InspectionCard = ({
                 <View style={styles.headerExpanded}>
                     <View style={styles.leftHeader}>
                         <Text style={styles.title}>Inspeccion</Text>
-                        <Text style={styles.date}>12 de Agosto</Text>
+                        <Text style={styles.date}>{formatDate(date)}</Text>
                     </View>
                     
                     <View style={styles.rightHeaderExpanded}>
@@ -44,70 +62,24 @@ const InspectionCard = ({
                 
                 <Card.Content 
                 >
-                    <View style={styles.detailsHeader}>
-                        <View style={{ alignItems: 'center', flex: 0.3 }}>
-                            <View style={styles.icon}>
-                                <Icon name="ri-emotion-happy-line" size={23} color={COLORS.WHITE} />
+                    {
+                        details?.map(detail => {
+                          let icon = getInspectionIcon(detail.header)
+                          return (
+                            <View style={styles.detailsHeader}>
+                                <View style={{ alignItems: 'center', flex: 0.3 }}>
+                                    <View style={detail.value ? styles.icon : { ...styles.icon, ...styles.disabled }}>
+                                        {icon}
+                                    </View>
+                                </View>
+                                <View style={{ marginTop: 8, flex: 0.7 }}>
+                                    <Text style={styles.detailsHeaderText}>
+                                        {detail.header}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>
-                        <View style={{ marginTop: 8, flex: 0.7 }}>
-                            <Text style={styles.detailsHeaderText}>
-                                Hive Population 
-                            </Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.detailsHeader}>
-                        <View style={{ alignItems: 'center', flex: 0.3 }}>
-                            <View style={styles.icon}>
-                                <Icon name="ri-vip-crown-line" size={21} color={COLORS.WHITE} />
-                            </View>
-                        </View>
-                        <View style={{ marginTop: 8, flex: 0.7 }}>
-                            <Text style={styles.detailsHeaderText}>
-                                Hive Population 
-                            </Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.detailsHeader}>
-                        <View style={{ alignItems: 'center', flex: 0.3 }}>
-                            <View style={styles.icon}>
-                                <Icon name="ri-virus-line" size={22} color={COLORS.WHITE} />
-                            </View>
-                        </View>
-                        <View style={{ marginTop: 8, flex: 0.7 }}>
-                            <Text style={styles.detailsHeaderText}>
-                                Hive Population 
-                            </Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.detailsHeader}>
-                        <View style={{ alignItems: 'center', flex: 0.3 }}>
-                            <View style={styles.icon}>
-                                <Icon name="ri-empathize-line" size={22} color={COLORS.WHITE} />
-                            </View>
-                        </View>
-                        <View style={{ marginTop: 8, flex: 0.7 }}>
-                            <Text style={styles.detailsHeaderText}>
-                                Hive Population 
-                            </Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.detailsHeader}>
-                        <View style={{ alignItems: 'center', flex: 0.3 }}>
-                            <View style={styles.icon}>
-                                <Icon name="ri-leaf-line" size={22} color={COLORS.WHITE} />
-                            </View>
-                        </View>
-                        <View style={{ marginTop: 8, flex: 0.7 }}>
-                            <Text style={styles.detailsHeaderText}>
-                                Hive Population 
-                            </Text>
-                        </View>
-                    </View>
+                          )})
+                    }
                 </Card.Content>
 
                 </View>
@@ -179,6 +151,7 @@ const styles = StyleSheet.create({
       fontFamily: FONTS.medium,
       color: COLORS.GREY_3,
       flex: 1,
+      textTransform: 'capitalize'
     },
     detailsHeader: {
       flexDirection: 'row',
@@ -191,6 +164,9 @@ const styles = StyleSheet.create({
       color: COLORS.BLACK_1,
       backgroundColor: 'white',
       flex: 0.5
+    },
+    disabled: {
+      backgroundColor: '#b5725e', 
     },
     icon: {
       width: 35, 

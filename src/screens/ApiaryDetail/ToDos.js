@@ -19,12 +19,7 @@ const ToDos = ({
                           index={index}
                           header={tarea.tipoRegistro} 
                           date={tarea.fecha}
-                          details={[
-                            {
-                                title: 'Notas',
-                                moreInfo: tarea.descripcion || 'Sin notas'
-                            },
-                        ]}
+                          details={[]}
                       />
                     ))
                 }

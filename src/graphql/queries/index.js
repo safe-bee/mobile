@@ -55,3 +55,22 @@ export const GET_COLMENA = gql`
     }
   }
 `;
+
+
+export const GET_REGISTROS =  gql`
+  query HistorialRegistros($colmenaId: Int!) {
+    registros (colmenaId: $colmenaId) {
+      monthYear
+      registros {
+        id
+        fecha
+        colmenaId
+        tipoRegistro
+        detalles {
+          header
+          value
+        }
+      }
+    }
+  }
+`;
