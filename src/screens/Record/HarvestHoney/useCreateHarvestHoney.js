@@ -76,6 +76,10 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             tipoUnidad: formValues.tipoUnidad.value,
             notas: formValues.notas.value
         };
+
+        if (formValues.tareaAsociada.value) {
+            variables.tareaId = formValues.tareaAsociada.value;
+        }
         
        try {
             const res = await createCosecha({ variables });
@@ -95,6 +99,7 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
 
   const { tareasAsociadas } = useGetTareasAsociadas({ tipoRegistro: 'COSECHA', colmenaId: fields?.colmena.value });
 
+
   const colmenasDelApiarioSeleccionado = colmenasXApiario.find(item => item.id === fields?.apiario.value)?.colmenas;
 
   useEffect(() => {
@@ -110,6 +115,8 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
   }, [fields?.colmena.value]);
 
 
+  console.log("fields.tareaAsociada.value");
+  console.log(fields.tareaAsociada.value);
   return {
       fields,
       updateField,

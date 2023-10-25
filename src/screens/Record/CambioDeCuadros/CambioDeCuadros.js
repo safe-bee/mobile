@@ -35,13 +35,12 @@ const CambioDeCuadros = () => {
       onSubmit();
   };
 
-
   return (
       <Container>
         <MainContentContainer>
           <Content>
             <ScrollView style={{ flex: 1 }}>
-                <View style={{ flex: 1, height: 820, paddingHorizontal: 10 }}>
+                <View style={{ flex: 1, height: 800, paddingHorizontal: 10 }}>
                   <View style={{ marginBottom: 20, marginTop: 40 }}>
                     <Text style={{ fontSize: 15, fontFamily: FONTS.medium }}>
                       Registrar Cambio de cuadros
@@ -71,7 +70,7 @@ const CambioDeCuadros = () => {
                       onChange={(value) => updateField({ name: "tareaAsociada", value })}
                       label='Tarea asociada'
                       value={fields?.tareaAsociada.value}
-                      options={colmenas}
+                      options={tareasAsociadas}
                     />
                   </View>
 

@@ -83,6 +83,10 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             fecha: formValues.fechaDeTarea.value,
             tipoPlaga: formValues.tipoPlaga.value
         };
+
+        if (formValues.tareaAsociada.value) {
+            variables.tareaId = formValues.tareaAsociada.value;
+        }
         
        try {
             const res = await createTratamiento({ variables });

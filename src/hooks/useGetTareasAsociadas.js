@@ -5,7 +5,7 @@ import { formatForPendingTasks } from '../utils/helpers';
 
 const useGetTareasAsociadas = ({ tipoRegistro, colmenaId }) => {
 
-    const [loadData, { loading, data: tareasPendientesData }] =  useLazyQuery(GET_TAREAS_PENDIENTES);
+    const [loadData, { loading, data: tareasPendientesData }] =  useLazyQuery(GET_TAREAS_PENDIENTES, { fetchPolicy: "cache-and-network" });
     
     
     useEffect(() => {

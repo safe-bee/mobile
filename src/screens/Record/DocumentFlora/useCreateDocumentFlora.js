@@ -70,6 +70,10 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             notas: formValues.notas.value,
         };
         
+        if (formValues.tareaAsociada.value) {
+            variables.tareaId = formValues.tareaAsociada.value;
+        }
+        
        try {
             const res = await createAlimentacion({ variables });
             navigation.navigate(ROUTES.HOME);

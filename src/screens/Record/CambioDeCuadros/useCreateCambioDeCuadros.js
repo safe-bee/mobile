@@ -64,6 +64,10 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             cantidad: parseInt(formValues.cantidad.value),
             notas: formValues.notas.value,
         };
+
+        if (formValues.tareaAsociada.value) {
+            variables.tareaId = formValues.tareaAsociada.value;
+        }
         
        try {
             const res = await createCambioDeCuadros({ variables });

@@ -21,8 +21,6 @@ const Container = styled.View`
 
 const DeadHive = () => {
 
-  const { showSnackbar } = useSnackbar();
-  
   const {
     fields,
     updateField,
@@ -74,7 +72,7 @@ const DeadHive = () => {
                       onChange={(value) => updateField({ name: "tareaAsociada", value })}
                       label='Tarea asociada'
                       value={fields?.tareaAsociada.value}
-                      options={colmenas}
+                      options={tareasAsociadas}
                     />
                   </View>
 

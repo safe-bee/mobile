@@ -58,6 +58,10 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             colmenaId: formValues.colmena.value,
             fecha: formValues.fechaDeRegistro.value,
         };
+
+        if (formValues.tareaAsociada.value) {
+            variables.tareaId = formValues.tareaAsociada.value;
+        }
         
        try {
             const res = await createMuerte({ variables });

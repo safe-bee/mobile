@@ -72,7 +72,7 @@ const MiteAssesment = () => {
                       onChange={(value) => updateField({ name: "tareaAsociada", value })}
                       label='Tarea asociada'
                       value={fields?.tareaAsociada.value}
-                      options={colmenas}
+                      options={tareasAsociadas}
                     />
                   </View>
 
