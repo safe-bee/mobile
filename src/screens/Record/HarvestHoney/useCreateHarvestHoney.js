@@ -49,7 +49,7 @@ const inputFields = {
      },
      tareaAsociada: {
         value: { label: '', value: '' },
-        validations: [requiredValidation],
+        validations: [],
      },
      tipoUnidad: {
         value: tipoUnidades[0].value,
@@ -69,8 +69,6 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     inputFields,
     async (formValues) => {
 
-        console.log("formValues");
-        console.log(formValues);
         const variables = {
             cantidadCosecha: parseFloat(formValues.cantidad.value),
             colmenaId: formValues.colmena.value,

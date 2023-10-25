@@ -30,7 +30,7 @@ const useGetTareasAsociadas = ({ tipoRegistro, colmenaId }) => {
     };
     
     return {
-        tareasAsociadas: formatTareas(),
+        tareasAsociadas: loading ? [] : formatTareas(),
     }
 }
 

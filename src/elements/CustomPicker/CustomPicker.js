@@ -33,6 +33,8 @@ export default function CustomPicker({ options, onChange, value, label }) {
          items={items}
          setOpen={setOpen}
          setValue={onChange}
+         emptyLabel="No hay opciones disponibles"
+         placeholder='Selecciona una opcion'
          //onChangeValue={onChange}
          setItems={setItems}
          style={{

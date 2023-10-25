@@ -9,7 +9,6 @@ import CustomPicker from '../../../elements/CustomPicker/index'
 import Calendar from '../../../elements/Calendar/index'
 import { ContainedButton } from '../../../elements/Button/Button'
 import { MenuContainer, MainContentContainer, Content } from '../../sharedStyles';
-import { useSnackbar } from '../../../context/SnackbarContext';
 import Menu from '../../../components/Menu/index';
 
 
@@ -20,8 +19,6 @@ const Container = styled.View`
 `;
 
 const CambioDeCuadros = () => {
-
-  const { showSnackbar } = useSnackbar();
   
   const {
     fields,
@@ -30,15 +27,12 @@ const CambioDeCuadros = () => {
     isVisitedForm,
     mutationLoading,
     apiarios,
-    colmenas
+    colmenas,
+    tareasAsociadas
   } = useCreateCambioDeCuadros();
 
   const handleNext = () => {
-    if (fields?.colmena?.value) {
       onSubmit();
-    } else {
-      showSnackbar("Error de Validacion!", "No seleccionaste ninguna colmena, revisa haber creado una previamente.", "error");
-    }
   };
 
 
@@ -47,14 +41,14 @@ const CambioDeCuadros = () => {
         <MainContentContainer>
           <Content>
             <ScrollView style={{ flex: 1 }}>
-                <View style={{ flex: 1, height: 650, paddingHorizontal: 10 }}>
+                <View style={{ flex: 1, height: 820, paddingHorizontal: 10 }}>
                   <View style={{ marginBottom: 20, marginTop: 40 }}>
                     <Text style={{ fontSize: 15, fontFamily: FONTS.medium }}>
                       Registrar Cambio de cuadros
                     </Text>
                   </View>
 
-                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 8, zIndex: 9999999  }}>
+                  <View style={{ flex: 1, flexDirection: 'column', zIndex: 9999999  }}>
                     <CustomPicker 
                       onChange={(value) => updateField({ name: "apiario", value })}
                       label='Apiario'
@@ -63,7 +57,7 @@ const CambioDeCuadros = () => {
                       />
                   </View>
 
-                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 8, zIndex: 9999998  }}>
+                  <View style={{ flex: 1, flexDirection: 'column', zIndex: 9999998  }}>
                     <CustomPicker 
                       onChange={(value) => updateField({ name: "colmena", value })}
                       label='Colmena'
@@ -72,16 +66,16 @@ const CambioDeCuadros = () => {
                     />
                   </View>
 
-                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 8, zIndex: 9999997  }}>
+                  <View style={{ flex: 1, flexDirection: 'column', zIndex: 9999997  }}>
                     <CustomPicker 
-                      onChange={(value) => updateField({ name: "colmena", value })}
+                      onChange={(value) => updateField({ name: "tareaAsociada", value })}
                       label='Tarea asociada'
-                      value={fields?.colmena.value}
+                      value={fields?.tareaAsociada.value}
                       options={colmenas}
                     />
                   </View>
 
-                   <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginVertical: 8 }}>
+                   <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
                       <Calendar 
                         onConfirm={(text) => updateField({ name: "fechaDeRegistro", value: text })}
                         label='Fecha del registro'
@@ -89,7 +83,7 @@ const CambioDeCuadros = () => {
                         />
                     </View>
 
-                    <View style={{ flex: 1, marginVertical: 8 }}>
+                    <View style={{ flex: 1 }}>
                       <TextInput
                         autoCapitalize="none"
                         autoCorrect={false}
@@ -97,8 +91,22 @@ const CambioDeCuadros = () => {
                         onBlur={() => {}}
                         outlined={true}
                         onChangeText={(text) => updateField({ name: "cantidad", value: text })}
-                        value={fields?.porcentaje?.value}
+                        value={fields?.cantidad?.value}
+                        error={fields?.cantidad?.error}
                         keyboardType="numeric"
+                      />
+                    </View>
+
+                    <View style={{ flex: 1 }}>
+                      <TextInput
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        label='Notas'
+                        onBlur={() => {}}
+                        outlined={true}
+                        onChangeText={(text) => updateField({ name: "notas", value: text })}
+                        value={fields?.notas?.value}
+                        textArea
                       />
                     </View>
 

@@ -1,7 +1,8 @@
 import useForm from '../../../hooks/useForm';
 import useGetApariosPorColmenas from '../../../hooks/useGetApariosPorColmenas';
+import useGetTareasAsociadas from '../../../hooks/useGetTareasAsociadas';
 import { useEffect } from 'react';
-import { CREATE_TAREA } from '../../../graphql/mutations/createTarea';
+import { CREATE_VARROA } from '../../../graphql/mutations/createRecords';
 import { useMutation } from "@apollo/client";
 import { ROUTES } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
@@ -23,7 +24,7 @@ const tipoMetodos = [
 const useCreateMiteAssesment = () => {
 
 
-const [createTarea, { loading }] = useMutation(CREATE_TAREA);
+const [createVarroa, { loading }] = useMutation(CREATE_VARROA);
 
 const {
     apiarios,
@@ -48,14 +49,22 @@ const inputFields = {
         value: colmenasXApiario[0].colmenas[0].value,
         validations: [requiredValidation],
      },
+     tareaAsociada: {
+        value: { label: '', value: '' },
+        validations: [],
+     },
      tipoMetodo: {
         value: tipoMetodos[0].value,
         validations: [requiredValidation],
     },
     porcentaje: {
         value: '',
-        validations: [],
+        validations: [requiredValidation],
     },
+    notas: {
+        value: '',
+        validations: [],
+    }
 };
 
 const { fields, updateField, onSubmit, isVisitedForm } = useForm(
@@ -63,14 +72,15 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     async (formValues) => {
 
         const variables = {
-            porcentaje: formValues.porcentaje.value,
             colmenaId: formValues.colmena.value,
+            porcentaje: parseFloat(formValues.porcentaje.value),
             fecha: formValues.fechaDeRegistro.value,
-            tipoMetodo: formValues.tipoMetodo.value
+            tipoMetodo: formValues.tipoMetodo.value,
+            notas: formValues.notas.value,
         };
         
        try {
-            const res = await createTarea({ variables });
+            const res = await createVarroa({ variables });
             navigation.navigate(ROUTES.HOME);
         
             if (!res.data.errors) {
@@ -85,16 +95,23 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     }
   );
 
+  const { tareasAsociadas } = useGetTareasAsociadas({ tipoRegistro: 'VARROA', colmenaId: fields?.colmena.value });
+
   const colmenasDelApiarioSeleccionado = colmenasXApiario.find(item => item.id === fields?.apiario.value)?.colmenas;
 
 
   useEffect(() => {
     if (fields?.apiario.value) {
-        updateField({ name: "colmena", value: colmenasDelApiarioSeleccionado[0] })
+        updateField({ name: "colmena", value: colmenasDelApiarioSeleccionado[0].value })
     }
   }, [fields?.apiario.value]);
 
 
+  useEffect(() => {
+    if (fields?.colmena.value && tareasAsociadas?.length) {
+        updateField({ name: "tareaAsociada", value: tareasAsociadas[0] })
+    }
+  }, [fields?.colmena.value]);
 
   return {
       fields,
@@ -104,7 +121,8 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
       mutationLoading: loading,
       tipoMetodos,
       apiarios,
-      colmenas: colmenasDelApiarioSeleccionado
+      colmenas: colmenasDelApiarioSeleccionado,
+      tareasAsociadas
   }
 }
 

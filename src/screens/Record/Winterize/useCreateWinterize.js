@@ -1,7 +1,8 @@
 import useForm from '../../../hooks/useForm';
 import useGetApariosPorColmenas from '../../../hooks/useGetApariosPorColmenas';
+import useGetTareasAsociadas from '../../../hooks/useGetTareasAsociadas';
 import { useEffect } from 'react';
-import { CREATE_TAREA } from '../../../graphql/mutations/createTarea';
+import { CREATE_HIBERNACION } from '../../../graphql/mutations/createRecords';
 import { useMutation } from "@apollo/client";
 import { ROUTES } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
@@ -14,7 +15,7 @@ const requiredValidation = {
 
 const useCreateWinterize = () => {
 
-const [createTarea, { loading }] = useMutation(CREATE_TAREA);
+const [createHibernacion, { loading }] = useMutation(CREATE_HIBERNACION);
 
 const {
     apiarios,
@@ -39,6 +40,14 @@ const inputFields = {
         value: colmenasXApiario[0].colmenas[0].value,
         validations: [requiredValidation],
      },
+     notas: {
+        value: '',
+        validations: [],
+    },
+    tareaAsociada: {
+        value: { label: '', value: '' },
+        validations: [],
+     },
 };
 
 const { fields, updateField, onSubmit, isVisitedForm } = useForm(
@@ -48,10 +57,11 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
         const variables = {
             colmenaId: formValues.colmena.value,
             fecha: formValues.fechaDeRegistro.value,
+            notas: formValues.notas.value,
         };
         
        try {
-            const res = await createTarea({ variables });
+            const res = await createHibernacion({ variables });
             navigation.navigate(ROUTES.HOME);
         
             if (!res.data.errors) {
@@ -66,14 +76,22 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     }
   );
 
+  const { tareasAsociadas } = useGetTareasAsociadas({ tipoRegistro: 'HIBERNACION', colmenaId: fields?.colmena.value });
+
   const colmenasDelApiarioSeleccionado = colmenasXApiario.find(item => item.id === fields?.apiario.value)?.colmenas;
 
 
   useEffect(() => {
     if (fields?.apiario.value) {
-        updateField({ name: "colmena", value: colmenasDelApiarioSeleccionado[0] })
+        updateField({ name: "colmena", value: colmenasDelApiarioSeleccionado[0].value })
     }
   }, [fields?.apiario.value]);
+
+  useEffect(() => {
+    if (fields?.colmena.value && tareasAsociadas?.length) {
+        updateField({ name: "tareaAsociada", value: tareasAsociadas[0] })
+    }
+  }, [fields?.colmena.value]);
 
 
 
@@ -84,7 +102,8 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
       isVisitedForm,
       mutationLoading: loading,
       apiarios,
-      colmenas: colmenasDelApiarioSeleccionado
+      colmenas: colmenasDelApiarioSeleccionado,
+      tareasAsociadas
   }
 }
 

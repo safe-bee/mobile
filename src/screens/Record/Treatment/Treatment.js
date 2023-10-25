@@ -30,15 +30,12 @@ const Treatment = () => {
     mutationLoading,
     tipoPlagas,
     apiarios,
-    colmenas
+    colmenas,
+    tareasAsociadas
   } = useCreateTreatment();
 
   const handleNext = () => {
-    if (fields?.colmena?.value) {
       onSubmit();
-    } else {
-      showSnackbar("Error de Validacion!", "No seleccionaste ninguna colmena, revisa haber creado una previamente.", "error");
-    }
   };
 
 
@@ -47,7 +44,7 @@ const Treatment = () => {
         <MainContentContainer>
           <Content>
             <ScrollView style={{ flex: 1 }}>
-                <View style={{ flex: 1, height: 850, paddingHorizontal: 10 }}>
+                <View style={{ flex: 1, height: 950, paddingHorizontal: 10 }}>
                   <View style={{ marginBottom: 20, marginTop: 40 }}>
                     <Text style={{ fontSize: 15, fontFamily: FONTS.medium }}>
                       Registrar tratamiento
@@ -74,9 +71,9 @@ const Treatment = () => {
 
                   <View style={{ flex: 1, flexDirection: 'column', marginVertical: 8, zIndex: 9999997  }}>
                     <CustomPicker 
-                      onChange={(value) => updateField({ name: "colmena", value })}
+                      onChange={(value) => updateField({ name: "tareaAsociada", value })}
                       label='Tarea asociada'
-                      value={fields?.colmena.value}
+                      value={fields?.tareaAsociada.value}
                       options={colmenas}
                     />
                   </View>
@@ -107,7 +104,7 @@ const Treatment = () => {
                         onBlur={() => {}}
                         outlined={true}
                         onChangeText={(text) => updateField({ name: "producto", value: text })}
-                        value={fields?.notas?.value}
+                        value={fields?.producto?.value}
                       />
                     </View>
 
@@ -119,7 +116,20 @@ const Treatment = () => {
                         onBlur={() => {}}
                         outlined={true}
                         onChangeText={(text) => updateField({ name: "dosis", value: text })}
+                        value={fields?.dosis?.value}
+                      />
+                    </View>
+
+                    <View style={{ flex: 1 }}>
+                      <TextInput
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        label='Notas'
+                        onBlur={() => {}}
+                        outlined={true}
+                        onChangeText={(text) => updateField({ name: "notas", value: text })}
                         value={fields?.notas?.value}
+                        textArea
                       />
                     </View>
 

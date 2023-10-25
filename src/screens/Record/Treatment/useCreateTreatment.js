@@ -1,7 +1,8 @@
 import useForm from '../../../hooks/useForm';
 import useGetApariosPorColmenas from '../../../hooks/useGetApariosPorColmenas';
+import useGetTareasAsociadas from '../../../hooks/useGetTareasAsociadas';
 import { useEffect } from 'react';
-import { CREATE_TAREA } from '../../../graphql/mutations/createTarea';
+import { CREATE_TRATAMIENTO } from '../../../graphql/mutations/createRecords';
 import { useMutation } from "@apollo/client";
 import { ROUTES } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
@@ -23,7 +24,7 @@ const tipoPlagas = [
 const useCreateTreatment = () => {
 
 
-const [createTarea, { loading }] = useMutation(CREATE_TAREA);
+const [createTratamiento, { loading }] = useMutation(CREATE_TRATAMIENTO);
 
 const {
     apiarios,
@@ -48,6 +49,10 @@ const inputFields = {
         value: colmenasXApiario[0].colmenas[0].value,
         validations: [requiredValidation],
      },
+     tareaAsociada: {
+        value: { label: '', value: '' },
+        validations: [],
+     },
      tipoPlaga: {
         value: tipoPlagas[0].value,
         validations: [requiredValidation],
@@ -57,6 +62,10 @@ const inputFields = {
         validations: [],
     },
     producto: {
+        value: '',
+        validations: [],
+    },
+    notas: {
         value: '',
         validations: [],
     },
@@ -70,16 +79,17 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             dosis: formValues.dosis.value,
             producto: formValues.producto.value,
             colmenaId: formValues.colmena.value,
+            notas: formValues.notas.value,
             fecha: formValues.fechaDeTarea.value,
             tipoPlaga: formValues.tipoPlaga.value
         };
         
        try {
-            const res = await createTarea({ variables });
+            const res = await createTratamiento({ variables });
             navigation.navigate(ROUTES.HOME);
         
             if (!res.data.errors) {
-                showSnackbar("La tarea se creo correctamente!", "", "success");
+                showSnackbar("El registro se creo correctamente!", "", "success");
             } else {
                 showSnackbar("Ha habido un error!", "", "error");
             }
@@ -90,14 +100,23 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     }
   );
 
+  const { tareasAsociadas } = useGetTareasAsociadas({ tipoRegistro: 'TRATAMIENTO', colmenaId: fields?.colmena.value });
+
   const colmenasDelApiarioSeleccionado = colmenasXApiario.find(item => item.id === fields?.apiario.value)?.colmenas;
 
 
   useEffect(() => {
     if (fields?.apiario.value) {
-        updateField({ name: "colmena", value: colmenasDelApiarioSeleccionado[0] })
+        updateField({ name: "colmena", value: colmenasDelApiarioSeleccionado[0].value })
     }
   }, [fields?.apiario.value]);
+
+
+  useEffect(() => {
+    if (fields?.colmena.value && tareasAsociadas?.length) {
+        updateField({ name: "tareaAsociada", value: tareasAsociadas[0] })
+    }
+  }, [fields?.colmena.value]);
 
 
 
@@ -109,7 +128,8 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
       mutationLoading: loading,
       tipoPlagas,
       apiarios,
-      colmenas: colmenasDelApiarioSeleccionado
+      colmenas: colmenasDelApiarioSeleccionado,
+      tareasAsociadas
   }
 }
 

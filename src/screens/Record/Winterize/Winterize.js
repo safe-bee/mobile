@@ -30,15 +30,12 @@ const Winterize = () => {
     isVisitedForm,
     mutationLoading,
     apiarios,
-    colmenas
+    colmenas,
+    tareasAsociadas
   } = useCreateWinterize();
 
   const handleNext = () => {
-    if (fields?.colmena?.value) {
       onSubmit();
-    } else {
-      showSnackbar("Error de Validacion!", "No seleccionaste ninguna colmena, revisa haber creado una previamente.", "error");
-    }
   };
 
 
@@ -47,14 +44,14 @@ const Winterize = () => {
         <MainContentContainer>
           <Content>
             <ScrollView style={{ flex: 1 }}>
-                <View style={{ flex: 1, height: 550, paddingHorizontal: 10 }}>
+                <View style={{ flex: 1, height: 670, paddingHorizontal: 10 }}>
                   <View style={{ marginBottom: 20, marginTop: 40 }}>
                     <Text style={{ fontSize: 15, fontFamily: FONTS.medium }}>
                       Registrar Hibernacion
                     </Text>
                   </View>
 
-                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 8, zIndex: 9999999  }}>
+                  <View style={{ flex: 1, flexDirection: 'column', zIndex: 9999999  }}>
                     <CustomPicker 
                       onChange={(value) => updateField({ name: "apiario", value })}
                       label='Apiario'
@@ -63,7 +60,7 @@ const Winterize = () => {
                       />
                   </View>
 
-                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 8, zIndex: 9999998  }}>
+                  <View style={{ flex: 1, flexDirection: 'column', zIndex: 9999998  }}>
                     <CustomPicker 
                       onChange={(value) => updateField({ name: "colmena", value })}
                       label='Colmena'
@@ -72,21 +69,34 @@ const Winterize = () => {
                     />
                   </View>
 
-                  <View style={{ flex: 1, flexDirection: 'column', marginVertical: 8, zIndex: 9999997  }}>
+                  <View style={{ flex: 1, flexDirection: 'column', zIndex: 9999997  }}>
                     <CustomPicker 
-                      onChange={(value) => updateField({ name: "colmena", value })}
+                      onChange={(value) => updateField({ name: "tareaAsociada", value })}
                       label='Tarea asociada'
-                      value={fields?.colmena.value}
+                      value={fields?.tareaAsociada.value}
                       options={colmenas}
                     />
                   </View>
 
-                   <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', marginVertical: 8 }}>
+                   <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
                       <Calendar 
                         onConfirm={(text) => updateField({ name: "fechaDeRegistro", value: text })}
                         label='Fecha del registro'
                         dateValue={fields?.fechaDeRegistro?.value}
                         />
+                    </View>
+
+                    <View style={{ flex: 1 }}>
+                      <TextInput
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        label='Notas'
+                        onBlur={() => {}}
+                        outlined={true}
+                        onChangeText={(text) => updateField({ name: "notas", value: text })}
+                        value={fields?.notas?.value}
+                        textArea
+                      />
                     </View>
 
 
