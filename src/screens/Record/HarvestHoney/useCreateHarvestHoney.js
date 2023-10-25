@@ -1,8 +1,9 @@
+import { useMutation, useQuery } from "@apollo/client";
 import useForm from '../../../hooks/useForm';
 import useGetApariosPorColmenas from '../../../hooks/useGetApariosPorColmenas';
+import useGetTareasAsociadas from '../../../hooks/useGetTareasAsociadas';
 import { useEffect } from 'react';
 import { CREATE_COSECHA } from '../../../graphql/mutations/createRecords';
-import { useMutation } from "@apollo/client";
 import { ROUTES } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
 import { useSnackbar } from '../../../context/SnackbarContext';
@@ -20,7 +21,10 @@ const tipoUnidades = [
 
 
 const useCreateHarvestHoney = () => {
+ 
+const { showSnackbar } = useSnackbar();
 
+const navigation = useNavigation();
 
 const [createCosecha, { loading }] = useMutation(CREATE_COSECHA);
 
@@ -29,10 +33,6 @@ const {
     colmenasXApiario
 } = useGetApariosPorColmenas();
 
-
-const { showSnackbar } = useSnackbar();
-
-const navigation = useNavigation();
 
 const inputFields = {
     fechaDeRegistro: {
@@ -47,11 +47,19 @@ const inputFields = {
         value: colmenasXApiario[0].colmenas[0].value,
         validations: [requiredValidation],
      },
+     tareaAsociada: {
+        value: { label: '', value: '' },
+        validations: [requiredValidation],
+     },
      tipoUnidad: {
         value: tipoUnidades[0].value,
         validations: [requiredValidation],
     },
     cantidad: {
+        value: '',
+        validations: [requiredValidation],
+    },
+    notas: {
         value: '',
         validations: [],
     },
@@ -61,11 +69,14 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     inputFields,
     async (formValues) => {
 
+        console.log("formValues");
+        console.log(formValues);
         const variables = {
             cantidadCosecha: parseFloat(formValues.cantidad.value),
             colmenaId: formValues.colmena.value,
-            // fecha: formValues.fechaDeRegistro.value,
-            tipoUnidad: formValues.tipoUnidad.value
+            fecha: formValues.fechaDeRegistro.value,
+            tipoUnidad: formValues.tipoUnidad.value,
+            notas: formValues.notas.value
         };
         
        try {
@@ -84,15 +95,21 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     }
   );
 
-  const colmenasDelApiarioSeleccionado = colmenasXApiario.find(item => item.id === fields?.apiario.value)?.colmenas;
+  const { tareasAsociadas } = useGetTareasAsociadas({ tipoRegistro: 'COSECHA', colmenaId: fields?.colmena.value });
 
+  const colmenasDelApiarioSeleccionado = colmenasXApiario.find(item => item.id === fields?.apiario.value)?.colmenas;
 
   useEffect(() => {
     if (fields?.apiario.value) {
-        updateField({ name: "colmena", value: colmenasDelApiarioSeleccionado[0] })
+        updateField({ name: "colmena", value: colmenasDelApiarioSeleccionado[0].value })
     }
   }, [fields?.apiario.value]);
 
+  useEffect(() => {
+    if (fields?.colmena.value && tareasAsociadas?.length) {
+        updateField({ name: "tareaAsociada", value: tareasAsociadas[0] })
+    }
+  }, [fields?.colmena.value]);
 
 
   return {
@@ -103,7 +120,8 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
       mutationLoading: loading,
       tipoUnidades,
       apiarios,
-      colmenas: colmenasDelApiarioSeleccionado
+      colmenas: colmenasDelApiarioSeleccionado,
+      tareasAsociadas
   }
 }
 

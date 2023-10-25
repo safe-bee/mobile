@@ -10,10 +10,9 @@ const useGetApiariosPorColmenas = () => {
 
     const colmenasXApiario = data?.apiarios.map(apiario => ({ id: apiario.id, colmenas: apiario.colmenas.map(colmena => ({ label: colmena.nombre, value: colmena.id })) }));
 
-
     return {
         apiarios,
-        colmenasXApiario
+        colmenasXApiario,
     }
 }
 

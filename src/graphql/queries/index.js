@@ -74,3 +74,19 @@ export const GET_REGISTROS =  gql`
     }
   }
 `;
+
+
+
+export const GET_TAREAS_PENDIENTES =  gql`
+  query TareasPendientesPorColmenaYTipo(
+    $colmenaId: Int!, 
+    $tipoRegistro: TipoRegistro!
+   ) {
+    tareasPendientesPorColmenaYTipo(colmenaId: $colmenaId, tipoRegistro: $tipoRegistro) {
+      colmenaId,
+      fecha,
+      id
+    }
+  }
+`;
+

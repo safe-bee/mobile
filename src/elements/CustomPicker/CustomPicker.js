@@ -11,12 +11,11 @@ export default function CustomPicker({ options, onChange, value, label }) {
     const [open, setOpen] = useState(false);
     const [items, setItems] = useState(options);
   
-
       useEffect(() => {
         if (options) {
           setItems(options)
         }
-      }, [options]);
+      }, [options?.length]);
 
     
     return (

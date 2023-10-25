@@ -42,3 +42,18 @@ export const formatDate = (inputDate) => {
 
   return `${formattedDay}/${formattedMonth}/${year}`;
 }
+
+
+export const formatForPendingTasks = (inputDate) => {
+  const fecha = new Date(inputDate);
+
+  const mes = fecha.getMonth() + 1;
+  const año = fecha.getFullYear();
+
+  const mesFormateado = mes < 10 ? `0${mes}` : mes; 
+  const añoFormateado = año.toString().slice(2);
+
+  const resultado = `${mesFormateado}-${añoFormateado}`;
+
+  return resultado;
+}
