@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, Image, StyleSheet } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import { Card } from 'react-native-paper';
-import { ROUTES } from '../../constants';
 import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
+import { ContainedButton } from '../../elements/Button/Button'
 import Icon from 'react-native-remix-icon';
 import { formatDate } from '../../utils/helpers';
 
@@ -14,8 +15,11 @@ const HideableCard = ({
     header,
     date,
     details,
+    seccionTarea = false,
+    descripcion = ''
 }) => {
   
+  const navigation = useNavigation();
 
   const handlePressDetails = () => {
     if (index === openCardIndex) {
@@ -27,7 +31,7 @@ const HideableCard = ({
 
   const calculateCardHeight = () => {
     const minHeight = 70;
-    const additionalHeight = details.length ? details.length * 50 : 45;
+    const additionalHeight = details.length ? details.length * 50 : seccionTarea ? 100 : 45
     return openCardIndex === index ? minHeight + additionalHeight : minHeight;
   };
 
@@ -79,34 +83,49 @@ const HideableCard = ({
                                     <Icon name="ri-arrow-up-s-line" size={30} color={COLORS.GREY_3} />
                                 </TouchableOpacity>
                             </View>
+                          </View>
+
+
+                          <View style={styles.details}>
+                              {
+                                  details.length 
+                                    ? details.map(detail => (
+                                        <View style={styles.detailsRow}>
+                                            <View style={styles.detailsHeader}>
+                                                <Text style={styles.detailsHeaderText}>
+                                                    {detail.header}
+                                                </Text>
+                                            </View>
+                                            <View style={styles.detailsHeader}>
+                                                <Text style={styles.detailsSubText}>
+                                                    {detail.value}
+                                                </Text>
+                                            </View>
+                                        </View>
+                                    ))
+                                  : <View style={seccionTarea ? styles.noNotesTarea : styles.noNotesRegistros}>
+                                        <View style={styles.detailsHeader}>
+                                            <Text style={styles.detailsSubText}>
+                                                {seccionTarea && descripcion || 'Sin notas adicionales'}
+                                            </Text>
+                                        </View>
+                                    </View>
+                              }
+                          </View>
+
+                          {
+                            seccionTarea
+                            ? (
+                                <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
+                                  <ContainedButton 
+                                    onSubmit={()=> navigation.navigate(header)}
+                                    label={header === 'INSPECCION' ? 'Realizar Inspeccion' : 'Crear Tarea'}
+                                  />
+                              </View>
+                            ) : ''
+                          }
+
                         </View>
-                        <View style={styles.details}>
-                            {
-                                details.length 
-                                  ? details.map(detail => (
-                                      <View style={styles.detailsRow}>
-                                          <View style={styles.detailsHeader}>
-                                              <Text style={styles.detailsHeaderText}>
-                                                  {detail.header}
-                                              </Text>
-                                          </View>
-                                          <View style={styles.detailsHeader}>
-                                              <Text style={styles.detailsSubText}>
-                                                  {detail.value}
-                                              </Text>
-                                          </View>
-                                      </View>
-                                  ))
-                                : <View style={styles.noNotes}>
-                                      <View style={styles.detailsHeader}>
-                                          <Text style={styles.detailsSubText}>
-                                              Sin notas adicionales
-                                          </Text>
-                                      </View>
-                                  </View>
-                            }
-                        </View>
-                      </View>
                 ) : 
                 (
                     <View style={styles.container}>
@@ -179,10 +198,13 @@ const styles = StyleSheet.create({
       paddingLeft: 5,
     },
     details: {
-      marginTop: 15
+      marginTop: 15,
     },
-    noNotes : {
-      marginTop: 20, 
+    noNotesTarea : {
+      marginBottom: 20,
+    },
+    noNotesRegistros : {
+      marginTop: 20,
     },
     detailsRow: {
       marginTop: 5

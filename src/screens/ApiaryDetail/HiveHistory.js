@@ -5,7 +5,6 @@ import HideableCard from '../../components/HideableCard/index';
 import { ScrollView } from 'react-native-gesture-handler';
 import FONTS from '../../theme/fonts';
 import COLORS from '../../theme/colors';
-import { GET_COLMENA } from '../../graphql/queries';
 
 const HiveHistory = ({
     registros
@@ -40,7 +39,9 @@ const HiveHistory = ({
         <ScrollView style={{ flex: 0.3 }}>
             <View style={{ height: '100%', alignItems: 'center', paddingTop: 10 }}>
                 {
-                 registros.map(registro => (
+                 
+                 registros.length 
+                  ? registros.map(registro => (
                     <>
                         <View style={{ marginVertical: 15 }} key={registro.monthYear}>
                             <Text style={{ textTransform: 'capitalize', color: COLORS.GREEN_2, fontSize: 17, fontWeight: 'bold', fontFamily: FONTS.medium }}>
@@ -66,6 +67,12 @@ const HiveHistory = ({
                             )}
                     </>
                  ))
+                 : 
+                  <View style={{ marginTop: 10 }}>
+                      <Text style={{ fontSize: 15, fontFamily: FONTS.light }}>
+                          No hay registros para mostrar
+                      </Text>
+                  </View>
                 }
             </View>
         </ScrollView>

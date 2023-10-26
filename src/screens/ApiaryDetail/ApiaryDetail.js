@@ -40,8 +40,6 @@ const ApiaryDetail = () => {
 
   const registros = registrosData?.registros;
 
-  console.log(registrosData);
-
   return (
       <Container>
         <MainContentContainer>
