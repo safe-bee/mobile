@@ -116,8 +116,8 @@ const ApiaryDetail = () => {
                         
                       {
                         tabSelected === 1
-                        ? <ToDos tareas={tareas} />
-                        : <HiveHistory registros={registros} />
+                        ? <ToDos tareas={tareas} colmenaId={id} />
+                        : <HiveHistory registros={registros} colmenaId={id} />
                       }
                   </View>
                )

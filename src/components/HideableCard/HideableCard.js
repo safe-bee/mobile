@@ -119,7 +119,7 @@ const HideableCard = ({
                                 <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
                                   <ContainedButton 
                                     onSubmit={()=> navigation.navigate(header)}
-                                    label={header === 'INSPECCION' ? 'Realizar Inspeccion' : 'Crear Tarea'}
+                                    label={header === 'INSPECCION' ? 'Realizar Inspeccion' : 'Realizar Tarea'}
                                   />
                               </View>
                             ) : ''
