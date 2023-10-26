@@ -10,29 +10,30 @@ import { formatDate } from '../../utils/helpers';
 
 const HideableCard = ({
     setOpenCard,
-    openCardIndex,
-    index,
+    openCardId,
+    activeCardId,
     header,
     date,
     details,
     seccionTarea = false,
-    descripcion = ''
+    descripcion = '',
+    setMoreOptionsModal,
 }) => {
   
   const navigation = useNavigation();
 
   const handlePressDetails = () => {
-    if (index === openCardIndex) {
+    if (openCardId === activeCardId) {
         setOpenCard(null);
     } else {
-        setOpenCard(index);
+        setOpenCard(activeCardId);
     }
   };
 
   const calculateCardHeight = () => {
     const minHeight = 70;
     const additionalHeight = details.length ? details.length * 50 : seccionTarea ? 100 : 45
-    return openCardIndex === index ? minHeight + additionalHeight : minHeight;
+    return openCardId === activeCardId ? minHeight + additionalHeight : minHeight;
   };
 
 
@@ -48,7 +49,7 @@ const HideableCard = ({
             style={{ height: '100%' }}
         >
             {
-                openCardIndex === index ?
+                openCardId === activeCardId ?
                 (
                     <View style={styles.container}>
                         
@@ -75,7 +76,7 @@ const HideableCard = ({
                                         elevation: 10, // Ef
                                     }}
                                   >
-                                    <Icon size={22} name="ri-more-fill" color={COLORS.BLACK_1} />
+                                    <Icon size={22} name="ri-more-fill" color={COLORS.BLACK_1} onPress={setMoreOptionsModal}/>
                                   </View>
                                 </TouchableOpacity>
 

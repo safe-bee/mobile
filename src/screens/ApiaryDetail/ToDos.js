@@ -3,15 +3,16 @@ import { View, Text } from "react-native";
 import HideableCard from '../../components/HideableCard/index';
 import { ScrollView } from 'react-native-gesture-handler';
 import DeleteTarea from '../../components/Modals/DeleteTarea/index';
+import MoreOptionsDetailsColmena from '../../components/Modals/MoreOptionsDetailsColmena/index';
 import FONTS from '../../theme/fonts';
 
 const ToDos = ({
     tareas,
     colmenaId
 }) => {
-    const [openCardIndex, setOpenCard] = useState(null);
-    const [openDeleteTareaModal, setOpenDeleteTareaModal] = useState(false);
-    const [tareaSeleccionada, setTareaSeleccionada] = useState(null);
+    const [openCardId, setOpenCardId] = useState(null);
+    const [openDeleteTarea, setOpenDeleteTarea] = useState(false);
+    const [openMoreOptionsModal, setMoreOptionsModal] = useState(false);
 
     return (
         <ScrollView style={{ flex: 0.3 }}>
@@ -19,16 +20,17 @@ const ToDos = ({
                 {
                     
                     tareas.length 
-                     ? tareas.map((tarea, index) => (
+                     ? tareas.map((tarea) => (
                         <HideableCard 
-                          setOpenCard={setOpenCard} 
-                          openCardIndex={openCardIndex}
+                          setOpenCard={setOpenCardId} 
+                          openCardId={openCardId}
+                          activeCardId={tarea.id}
                           descripcion={tarea.descripcion}
-                          index={index}
                           header={tarea.tipoRegistro} 
                           date={tarea.fecha}
                           details={[]}
                           seccionTarea={true}
+                          setMoreOptionsModal={setMoreOptionsModal}
                       />
                     ))
                     : 
@@ -39,16 +41,28 @@ const ToDos = ({
                     </View>
                 }
             </View>
-            {
-                openDeleteTareaModal
+            
+           {
+                openDeleteTarea
                 ? <DeleteTarea
-                    visible={openDeleteTareaModal}
-                    onDismiss={() => setOpenDeleteTareaModal(false)}
+                    visible={openDeleteTarea}
+                    onDismiss={() => setOpenDeleteTarea(false)}
                     colmenaId={colmenaId}
-                    tareaId={tareaSeleccionada.id}
+                    tareaId={openCardId}
                 />
                 : null
            }
+
+           {
+                openMoreOptionsModal
+                ? <MoreOptionsDetailsColmena
+                    visible={openMoreOptionsModal}
+                    onDismiss={() => setMoreOptionsModal(false)}
+                    handleDeletePress={() => setOpenDeleteTarea(true)} 
+                />
+                : null
+            }
+
         </ScrollView>
     )
 }
