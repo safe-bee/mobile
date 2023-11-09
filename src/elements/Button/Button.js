@@ -10,7 +10,9 @@ const ContainedButton = ({
   icon = () => {},
   formButton = true,
   buttonColor = COLORS.YELLOW,
-  labelColor = COLORS.BLACK_2
+  labelColor = COLORS.BLACK_2,
+  fontWeight = 'bold',
+  extraStyles = {}
 }) => {
     return (
       <Button
@@ -20,8 +22,8 @@ const ContainedButton = ({
         icon={icon}
         uppercase={false}
         contentStyle={contentStyle}
-        style={{ borderRadius: 20, backgroundColor: buttonColor, width: formButton ? '80%' : '100%' }}
-        labelStyle={{ color: labelColor, fontWeight: 'bold' }}
+        style={{ ...extraStyles, borderRadius: 20, backgroundColor: buttonColor, width: formButton ? '80%' : '100%' }}
+        labelStyle={{ color: labelColor, fontWeight }}
       >
         {label}
       </Button>

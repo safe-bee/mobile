@@ -25,7 +25,6 @@ const executeQuery = async (query, variables) => {
 
 
 /*
-
   useEffect(() => {
     const testQuery = async () => {
       const data = await executeQuery(GET_COLMENA, { id });
@@ -35,7 +34,6 @@ const executeQuery = async (query, variables) => {
 
     testQuery();
   }, []);
-
 
 */
 

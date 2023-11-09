@@ -5,14 +5,15 @@ import HideableCard from '../../components/HideableCard/index';
 import { ScrollView } from 'react-native-gesture-handler';
 import FONTS from '../../theme/fonts';
 import COLORS from '../../theme/colors';
-import DeleteTarea from '../../components/Modals/DeleteTarea/index';
+import DeleteRegistro from '../../components/Modals/DeleteRegistro/index';
 import MoreOptionsDetailsColmena from '../../components/Modals/MoreOptionsDetailsColmena/index';
 
 const HiveHistory = ({
-    registros
+    registros,
+    colmenaId
 }) => {
   const [openCardId, setOpenCardId] = useState(null);
-  const [openDeleteTareaModal, setOpenDeleteTareaModal] = useState(false);
+  const [openDeleteRegistroModal, setOpenDeleteRegistroModal] = useState(false);
   const [openMoreOptionsModal, setMoreOptionsModal] = useState(false);
 
 
@@ -56,17 +57,17 @@ const HiveHistory = ({
                         {registro.registros.map((registroDetalle) => 
                             registroDetalle.tipoRegistro === 'INSPECCION'
                             ?   <InspectionCard 
-                                  setOpenCard={setOpenCard}
                                   details={details}
                                   date={registroDetalle?.fecha}
                                  />
                             :    <HideableCard 
                                     setOpenCard={setOpenCardId} 
                                     openCardId={openCardId}
-                                    activeCardId={tarea.id}
+                                    activeCardId={registroDetalle.id}
                                     header={registroDetalle?.tipoRegistro} 
                                     date={registroDetalle?.fecha}
                                     details={registroDetalle?.detalles}
+                                    setMoreOptionsModal={setMoreOptionsModal}
                                 />
                             )}
                     </>
@@ -81,12 +82,12 @@ const HiveHistory = ({
             </View>
 
               {
-                  openDeleteTareaModal
-                  ? <DeleteTarea
-                      visible={openDeleteTareaModal}
-                      onDismiss={() => setOpenDeleteTareaModal(false)}
+                  openDeleteRegistroModal
+                  ? <DeleteRegistro
+                      visible={openDeleteRegistroModal}
+                      onDismiss={() => setOpenDeleteRegistroModal(false)}
                       colmenaId={colmenaId}
-                      tareaId={openCardId}
+                      registroId={openCardId}
                   />
                   : null
               }
@@ -96,7 +97,8 @@ const HiveHistory = ({
                     ? <MoreOptionsDetailsColmena
                         visible={openMoreOptionsModal}
                         onDismiss={() => setMoreOptionsModal(false)}
-                        handleDeletePress={() => setOpenDeleteTareaModal(true)} 
+                        handleDeletePress={() => setOpenDeleteRegistroModal(true)} 
+                        buttonLabel="Borrar Registro"
                     />
                     : null
               }

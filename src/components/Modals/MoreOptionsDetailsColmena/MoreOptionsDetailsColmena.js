@@ -9,6 +9,7 @@ const HiveDetailsMoreOptions = ({
     visible,
     onDismiss,
     handleDeletePress,
+    buttonLabel
 }) => {
     const containerStyle = { backgroundColor: 'white', margin: 20, elevation: 10, borderRadius: 10, };
   
@@ -30,12 +31,12 @@ const HiveDetailsMoreOptions = ({
                 </View>
 
 
-                <View style={{ paddingHorizontal: 15, flex: 0.5, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+                <View style={{ paddingHorizontal: 15, flex: 0.8, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                       <ContainedButton 
                          disabled={false}
                          onSubmit={onDeletePress}
-                         label="Borrar colmena"
+                         label={buttonLabel}
                          buttonColor={COLORS.RED_60}
                          labelColor={COLORS.WHITE}
                          icon={() => <Icon size={23} name="ri-delete-bin-line" color={COLORS.WHITE} /> }

@@ -66,6 +66,7 @@ export const GET_REGISTROS =  gql`
         fecha
         colmenaId
         tipoRegistro
+        notas
         detalles {
           header
           value

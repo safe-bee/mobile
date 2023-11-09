@@ -77,7 +77,7 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             notas: formValues.notas.value
         };
 
-         if (formValues.tareaAsociada.value.value) {
+         if (formValues.tareaAsociada.value) {
             variables.tareaId = formValues.tareaAsociada.value;
         }
         

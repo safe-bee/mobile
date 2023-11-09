@@ -58,7 +58,8 @@ const ToDos = ({
                 ? <MoreOptionsDetailsColmena
                     visible={openMoreOptionsModal}
                     onDismiss={() => setMoreOptionsModal(false)}
-                    handleDeletePress={() => setOpenDeleteTarea(true)} 
+                    handleDeletePress={() => setOpenDeleteTarea(true)}
+                    buttonLabel="Borrar Tarea"
                 />
                 : null
             }
