@@ -4,9 +4,6 @@ import { ScrollView, View, TouchableOpacity, Text, Image, StyleSheet } from "rea
 import { Card } from 'react-native-paper';
 import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
-import Menu from '../../components/Menu/index';
-import FabMenu from '../../components/Menu/FabMenu';
-import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
 import Icon from 'react-native-remix-icon';
 
 export const ContentContainer = styled.View`
@@ -15,9 +12,11 @@ export const ContentContainer = styled.View`
 
 export const Container = styled.View`
   flex: 1;
+  height: 100%;
+  width: 100%;
 `;
 
-const InspectionDetails = ({
+const InspectionCardDetails = ({
   estadoCajon,
   estadoPoblacion,
   estadoReina,
@@ -28,8 +27,7 @@ const InspectionDetails = ({
 }) => {
   return (
     <Container>
-      <MainContentContainer>
-        <View style={{ flex: 1}}>
+        <View style={{ flex: 1 }}>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                  <Text style={{ color: COLORS.GREEN_2, fontSize: 24, fontWeight: 'bold', fontFamily: FONTS.medium}}>
                     Resumen de inspeccion
@@ -41,12 +39,12 @@ const InspectionDetails = ({
                 </Text>
             </View>
             <View style={{ alignItems: 'center', marginTop: 20 }}>
-                <Card style={{ width: '65%'}}>
+                <Card style={{ width: '80%' }}>
                     <Card.Content>
                         <View style={styles.detailsHeader}>
                             <View style={{ alignItems: 'center', flex: 0.3 }}>
                                 <View style={estadoCajon ? styles.icon : { ...styles.icon, ...styles.disabled }}>
-                                    <Icon name="ri-emotion-happy-line" size={23} color={COLORS.WHITE} />
+                                    <Icon name="ri-emotion-happy-line" size={22} color={COLORS.WHITE} />
                                 </View>
                             </View>
                             <View style={{ marginTop: 8, flex: 0.7 }}>
@@ -59,10 +57,10 @@ const InspectionDetails = ({
                         <View style={styles.detailsHeader}>
                             <View style={{ alignItems: 'center', flex: 0.3 }}>
                                 <View style={estadoPoblacion ? styles.icon : { ...styles.icon, ...styles.disabled }}>
-                                    <Icon name="ri-vip-crown-line" size={21} color={COLORS.WHITE} />
+                                    <Icon name="ri-vip-crown-line" size={22} color={COLORS.WHITE} />
                                 </View>
                             </View>
-                            <View style={{ marginTop: 8, flex: 0.7 }}>
+                            <View style={{ marginTop: 8, flex: 0.7  }}>
                                 <Text style={styles.detailsHeaderText}>
                                     Estado poblacion 
                                 </Text>
@@ -155,15 +153,6 @@ const InspectionDetails = ({
             </View>
         </View>
 
-      </MainContentContainer>
-      
-      <View>
-        <FabMenu />
-      </View>
-      
-      <MenuContainer>
-        <Menu />
-      </MenuContainer>
     </Container>
   );
 }
@@ -232,6 +221,7 @@ const styles = StyleSheet.create({
     },
     detailsHeader: {
       flexDirection: 'row',
+      flex: 1,
       marginTop: 7,
       justifyContent: 'center'
     },
@@ -256,4 +246,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default InspectionDetails;
+export default InspectionCardDetails;

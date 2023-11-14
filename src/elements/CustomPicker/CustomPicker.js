@@ -7,7 +7,7 @@ import FONTS from '../../theme/fonts';
 import { SIZES, makeSize } from '../../theme/sizes';
 import { Label, LabelContainer } from '../TextInput/TextInput.styles';
 
-export default function CustomPicker({ options, onChange, value, label }) {
+export default function CustomPicker({ options, onChange, value, label, multiple = false }) {
     const [open, setOpen] = useState(false);
     const [items, setItems] = useState(options);
   

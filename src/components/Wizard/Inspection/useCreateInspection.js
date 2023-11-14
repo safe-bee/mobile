@@ -26,11 +26,63 @@ const navigation = useNavigation();
 const inputFields = {
     estadoCajon: {
         value: true,
-        validations: [requiredValidation],
+        validations: [],
+    },
+    sellado: {
+        value: '',
+        validations: [],
+    },
+    invasores: {
+        value: '',
+        validations: [],
+    },
+    detallePoblacionFaltaEspacio: {
+        value: '',
+        validations: [],
+    },
+    detallePoblacionEstado: {
+        value: '',
+        validations: [],
+    },
+    detallePoblacionNumCuadros: {
+        value: '',
+        validations: [],
+    },
+    detalleReinaLarvasQueSeVe: {
+        value: '',
+        validations: [],
+    },
+    detalleReinaLarvasPatronDeCria: {
+        value: '',
+        validations: [],
+    },
+    detalleFloraEstado: {
+        value: '',
+        validations: [],
+    },
+    detalleFloraDispRecursos: {
+        value: '',
+        validations: [],
+    },
+    detalleAlimentoEstado: {
+        value: '',
+        validations: [],
+    },
+    detalleAlimentoDispRecursos: {
+        value: '',
+        validations: [],
+    },
+    detallePlagasTemperamentoAbejas: {
+        value: '',
+        validations: [],
+    },
+    detallePlagasPlagas: {
+        value: '',
+        validations: [],
     },
     estadoPoblacion: {
         value: true,
-        validations: [requiredValidation],
+        validations: [],
     },
     estadoReina: {
         value: true,

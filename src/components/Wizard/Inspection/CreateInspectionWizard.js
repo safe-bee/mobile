@@ -7,6 +7,7 @@ import QueenAndBrood from './QueenAndBrood';
 import Flora from './Flora';
 import Food from './Food';
 import Cajon from './Cajon';
+import InspectionSummary from './InspectionSummary';
 import Wizard from '../index'
 
 const Container = styled.View`
@@ -42,6 +43,10 @@ const createPages = () => ({
     BeeStressors: {
       start: false,
       component: BeeStressors,
+    },
+    InspectionSummary: {
+      start: false,
+      component: InspectionSummary,
     },
 });
 
