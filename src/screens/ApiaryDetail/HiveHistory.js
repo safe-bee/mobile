@@ -16,7 +16,6 @@ const HiveHistory = ({
   const [openDeleteRegistroModal, setOpenDeleteRegistroModal] = useState(false);
   const [openMoreOptionsModal, setMoreOptionsModal] = useState(false);
 
-
    const details = [
         {
           "header": "poblacion",
@@ -40,6 +39,7 @@ const HiveHistory = ({
         }
     ];
 
+  
     return (
         <ScrollView style={{ flex: 0.3 }}>
             <View style={{ height: '100%', alignItems: 'center', paddingTop: 10 }}>
@@ -54,11 +54,14 @@ const HiveHistory = ({
                             </Text>
                         </View>
                         
-                        {registro.registros.map((registroDetalle) => 
+                        {
+                        
+                        registro.registros.map((registroDetalle) => 
                             registroDetalle.tipoRegistro === 'INSPECCION'
                             ?   <InspectionCard 
                                   details={details}
                                   date={registroDetalle?.fecha}
+                                  inspeccionId={registroDetalle?.id}
                                  />
                             :    <HideableCard 
                                     setOpenCard={setOpenCardId} 

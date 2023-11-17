@@ -91,3 +91,36 @@ export const GET_TAREAS_PENDIENTES =  gql`
   }
 `;
 
+
+export const GET_INSPECCION =  gql`
+  query Inspeccion($inspeccionId: Int!) {
+    inspeccion(id: $inspeccionId) {
+      registroId
+      clima
+      temperatura
+      estadoCajon
+      detalleCajonSellado
+      detalleCajonInvasores
+      estadoPoblacion
+      detallePoblacionEstado
+      detallePoblacionNumCuadros
+      detallePoblacionFaltaEspacio
+      estadoReinaLarvas
+      detalleReinaLarvasQueSeVe
+      detalleReinaLarvasPatronDeCria
+      estadoFlora
+      detalleFloraEstado
+      detalleFloraDispRecursos
+      estadoAlimento
+      detalleAlimentoEstado
+      detalleAlimentoDispRecursos
+      estadoPlagas
+      detallePlagasPlagas
+      detallePlagasTemperamentoAbejas
+      fotoInspeccion
+    }
+  }
+`;
+
+
+

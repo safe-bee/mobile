@@ -11,9 +11,13 @@ import { formatDate } from '../../utils/helpers';
 
 const InspectionCard = ({
     details,
-    date
+    date,
+    inspeccionId
 }) => {
   const navigation = useNavigation();
+
+  console.log("registroDetalle");
+  console.log(inspeccionId);
 
   const getInspectionIcon = (inspectionStep) => {
     let icon;
@@ -32,7 +36,6 @@ const InspectionCard = ({
 
     return icon;
   }
-
 
   return (
     <Card
@@ -54,7 +57,7 @@ const InspectionCard = ({
                     </View>
                     
                     <View style={styles.rightHeaderExpanded}>
-                        <TouchableOpacity style={styles.arrowUp} onPress={() => navigation.navigate(ROUTES.INSPECTION_DETAILS)}>
+                        <TouchableOpacity style={styles.arrowUp} onPress={() => navigation.navigate(ROUTES.INSPECTION_DETAILS, { inspeccionId })}>
                             <Icon name="ri-arrow-right-s-line" size={30} color={COLORS.GREY_3} />
                         </TouchableOpacity>
                     </View>

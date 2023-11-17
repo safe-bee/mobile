@@ -1,13 +1,19 @@
 import React from 'react';
+import { useQuery } from "@apollo/client";
+import { useRoute } from '@react-navigation/native';
+import { GET_INSPECCION } from '../../graphql/queries/index';
 import styled from 'styled-components/native';
-import { ScrollView, View, TouchableOpacity, Text, Image, StyleSheet } from "react-native";
+import { ScrollView, View, StyleSheet } from "react-native";
 import { Card } from 'react-native-paper';
 import COLORS from '../../theme/colors';
 import FONTS from '../../theme/fonts';
 import Menu from '../../components/Menu/index';
+import InspectionCardDetails from '../../components/InspectionCardDetails/index'
 import FabMenu from '../../components/Menu/FabMenu';
 import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
 import Icon from 'react-native-remix-icon';
+import Loading from '../../components/Loading/index';
+
 
 export const ContentContainer = styled.View`
   flex: 0.9;
@@ -17,154 +23,76 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-const InspectionDetails = ({
-  estadoCajon,
-  estadoPoblacion,
-  estadoReina,
-  estadoFloraCircundante,
-  estadoAlimento,
-  estadoPlagas,
-  fechaInspeccion,
-}) => {
-  return (
+const InspectionDetails = () => {
+  const route = useRoute();
+  const { inspeccionId } = route.params;
+
+  const { data, loading } = useQuery(GET_INSPECCION, { variables: { inspeccionId },  fetchPolicy: "cache-and-network" });
+
+  const getDetallesArray = () => {
+    const dataArray = [];
+    const fieldNames = [
+        { key: "sellado", label: "Sellado"},
+        { key: "invasores", label: "Invasores"},
+        { key: "detallePoblacionFaltaEspacio", label: "Falta espacio" },
+        { key: "detallePoblacionNumCuadros", label: "Numero de cuadros" },
+        { key: "detallePoblacionEstado", label: "Poblacion estado" },
+        { key: "detalleReinaLarvasQueSeVe", label: "Reina larvas que se ven" },
+        { key: "detalleReinaLarvasPatronDeCria", label: "Reina larvas patron de cria" },
+        { key: "detalleFloraEstado", label: "Estado flora"},
+        { key: "detalleFloraDispRecursos", label: "Flora disponibilidad recursos" },
+        { key: "detalleAlimentoEstado", label: "Alimento estado"},
+        { key: "detalleAlimentoDispRecursos", label: "Alimento disponibilidad recursos"},
+        { key: "detallePlagasTemperamentoAbejas", label: "Temperamento abejas"},
+        { key: "detallePlagasPlagas", label: "Plagas"},
+    ];
+
+    fieldNames.forEach(fieldName => {
+        const value = data?.inspeccion?.[fieldName.key];
+        if (value) {
+            const item = { value, label: fieldName.label };
+            dataArray.push(item);
+        }
+    });
+
+    return dataArray;
+ }
+
+ const detalles = getDetallesArray();
+
+ return (
     <Container>
       <MainContentContainer>
-        <View style={{ flex: 1}}>
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                 <Text style={{ color: COLORS.GREEN_2, fontSize: 24, fontWeight: 'bold', fontFamily: FONTS.medium}}>
-                    Resumen de inspeccion
-                </Text>
-            </View> 
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
-                 <Text style={{ color: COLORS.BLACK_1, fontSize: 14, fontWeight: 'bold', fontFamily: FONTS.medium}}>
-                    Noviembre 9 de 2023
-                </Text>
-            </View>
-            <View style={{ alignItems: 'center', marginTop: 20 }}>
-                <Card style={{ width: '65%'}}>
-                    <Card.Content>
-                        <View style={styles.detailsHeader}>
-                            <View style={{ alignItems: 'center', flex: 0.3 }}>
-                                <View style={estadoCajon ? styles.icon : { ...styles.icon, ...styles.disabled }}>
-                                    <Icon name="ri-emotion-happy-line" size={23} color={COLORS.WHITE} />
-                                </View>
-                            </View>
-                            <View style={{ marginTop: 8, flex: 0.7 }}>
-                                <Text style={styles.detailsHeaderText}>
-                                    Estado del cajon 
-                                </Text>
-                            </View>
-                        </View>
+          {
+              loading
+              ? <Loading size={50} />
+              : (
+                  <Content>
+                    <ScrollView keyboardShouldPersistTaps="handled" style={{ flex: 1, flexDirection: 'column' }}>            
+                        <View style={{ flex: 1 }}>
+                            <InspectionCardDetails
+                                estadoAlimento={data?.inspeccion?.estadoAlimento}
+                                estadoCajon={data?.inspeccion?.estadoCajon}
+                                estadoPoblacion={data?.inspeccion?.estadoPoblacion}
+                                estadoReina={data?.inspeccion?.estadoReina}
+                                estadoPlagas={data?.inspeccion?.estadoPlagas}
+                                estadoFloraCircundante={true}
+                                detalles={detalles}
+                                fechaInspeccion={new Date()}
+                            />
+                      </View>
+                    </ScrollView>
+                  </Content>
+              )
+          }
+        </MainContentContainer>
 
-                        <View style={styles.detailsHeader}>
-                            <View style={{ alignItems: 'center', flex: 0.3 }}>
-                                <View style={estadoPoblacion ? styles.icon : { ...styles.icon, ...styles.disabled }}>
-                                    <Icon name="ri-vip-crown-line" size={21} color={COLORS.WHITE} />
-                                </View>
-                            </View>
-                            <View style={{ marginTop: 8, flex: 0.7 }}>
-                                <Text style={styles.detailsHeaderText}>
-                                    Estado poblacion 
-                                </Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.detailsHeader}>
-                            <View style={{ alignItems: 'center', flex: 0.3 }}>
-                              <View style={estadoReina ? styles.icon : { ...styles.icon, ...styles.disabled }}>
-                                    <Icon name="ri-virus-line" size={22} color={COLORS.WHITE} />
-                                </View>
-                            </View>
-                            <View style={{ marginTop: 8, flex: 0.7 }}>
-                                <Text style={styles.detailsHeaderText}>
-                                    Estado de reina y larvas 
-                                </Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.detailsHeader}>
-                            <View style={{ alignItems: 'center', flex: 0.3 }}>
-                                <View style={estadoFloraCircundante ? styles.icon : { ...styles.icon, ...styles.disabled }}>
-                                    <Icon name="ri-empathize-line" size={22} color={COLORS.WHITE} />
-                                </View>
-                            </View>
-                            <View style={{ marginTop: 8, flex: 0.7 }}>
-                                <Text style={styles.detailsHeaderText}>
-                                  Estado flora circundante
-                                </Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.detailsHeader}>
-                            <View style={{ alignItems: 'center', flex: 0.3 }}>
-                                <View style={estadoAlimento ? styles.icon : { ...styles.icon, ...styles.disabled }}>
-                                    <Icon name="ri-leaf-line" size={22} color={COLORS.WHITE} />
-                                </View>
-                            </View>
-                            <View style={{ marginTop: 8, flex: 0.7 }}>
-                                <Text style={styles.detailsHeaderText}>
-                                    Estado del alimento 
-                                </Text>
-                            </View>
-                        </View>
-                        
-                        <View style={styles.detailsHeader}>
-                            <View style={{ alignItems: 'center', flex: 0.3 }}>
-                                <View style={estadoPlagas ? styles.icon : { ...styles.icon, ...styles.disabled }}>
-                                    <Icon name="ri-leaf-line" size={22} color={COLORS.WHITE} />
-                                </View>
-                            </View>
-                            <View style={{ marginTop: 8, flex: 0.7 }}>
-                                <Text style={styles.detailsHeaderText}>
-                                    Estado de plagas 
-                                </Text>
-                            </View>
-                        </View>
-                    </Card.Content>    
-                </Card>
-            </View>
-            
-            <View style={{ marginTop: 35, marginLeft: 30 }}>
-                 <Text style={{ color: COLORS.BLACK_1, fontSize: 17, fontWeight: 'bold', fontFamily: FONTS.medium}}>
-                    Detalles
-                </Text>
-                <View style={{ marginTop: 10 }}>
-                  <View>
-                    <Text style={{ color: COLORS.GREEN_2, fontSize: 12, fontFamily: FONTS.regular}}>
-                        Sintomas
-                    </Text>
-                 </View>
-                  <View style={{ marginTop: 5 }}>
-                    <Text style={{ color: COLORS.BLACK_1, fontSize: 12, fontFamily: FONTS.regular}}>
-                        Ninguno
-                    </Text>
-                  </View>
-                </View>
-                <View style={{ marginTop: 10 }}>
-                  <View>
-                    <Text style={{ color: COLORS.GREEN_2, fontSize: 12, fontFamily: FONTS.regular}}>
-                        Sintomas
-                    </Text>
-                 </View>
-                  <View style={{ marginTop: 5 }}>
-                    <Text style={{ color: COLORS.BLACK_1, fontSize: 12, fontFamily: FONTS.regular}}>
-                        Ninguno
-                    </Text>
-                  </View>
-                </View>
-            </View>
-        </View>
-
-      </MainContentContainer>
-      
-      <View>
-        <FabMenu />
-      </View>
-      
       <MenuContainer>
         <Menu />
       </MenuContainer>
-    </Container>
+
+  </Container>
+
   );
 }
 
