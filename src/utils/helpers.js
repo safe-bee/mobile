@@ -43,6 +43,11 @@ export const formatDate = (inputDate) => {
   return `${formattedDay}/${formattedMonth}/${year}`;
 }
 
+export const fullDate = (date) => {
+  const fecha = new Date(date);
+  const opcionesDeFormato = { day: 'numeric', month: 'long', year: 'numeric' };
+  return fecha.toLocaleDateString('es-ES', opcionesDeFormato);
+}
 
 export const formatForPendingTasks = (inputDate) => {
   const fecha = new Date(inputDate);
@@ -58,4 +63,14 @@ export const formatForPendingTasks = (inputDate) => {
   const resultado = `${diaFormateado}-${mesFormateado}-${añoFormateado}`;
 
   return resultado;
+}
+
+export const formatToReadableData = (value) => {
+  if (typeof value === 'number') {
+    return value.toString();
+  } else if (typeof value === 'string') {
+    return value.replace(/_/g, ' ');
+  } else {
+    return value;
+  }
 }

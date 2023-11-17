@@ -7,6 +7,7 @@ import QueenAndBrood from './QueenAndBrood';
 import Flora from './Flora';
 import Food from './Food';
 import Cajon from './Cajon';
+import InspectionSetup from './InspectionSetup';
 import InspectionSummary from './InspectionSummary';
 import Wizard from '../index'
 
@@ -20,8 +21,12 @@ const Container = styled.View`
 
 
 const createPages = () => ({
-    Cajon: {
+    InspectionSetup: {
       start: true,
+      component: InspectionSetup,
+    },  
+    Cajon: {
+      start: false,
       component: Cajon,
     },  
     HivePopulation: {
@@ -58,6 +63,8 @@ const CreateInspectionWizard = () => {
       fields,
       updateField,
       onSubmit,
+      colmenas,
+      apiarios,
       isVisitedForm,
       mutationLoading
     } = useCreateInspection({
@@ -72,8 +79,10 @@ const CreateInspectionWizard = () => {
             wizardState={{
               fields,
               onSubmit,
-              // isVisitedForm,
-              // mutationLoading
+              colmenas,
+              apiarios,
+              isVisitedForm,
+              mutationLoading
             }}
             wizardStateSetters={{
               updateField

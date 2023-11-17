@@ -56,6 +56,10 @@ const HivePopulation = ({
                     <Dots 
                         pages={[
                             {
+                                onPress: () => setWizardPage('InspectionSetup'),
+                                actualPage: false
+                            },
+                            {
                                 onPress: () => setWizardPage('Cajon'),
                                 actualPage: false,
                             },

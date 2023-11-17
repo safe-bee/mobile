@@ -67,7 +67,16 @@ const createPhoneFormat = (errorMessage) => (val, setError) => {
   return true;
 };
 
+const checkTemperatureFormat = (errorMessage)  => (val, setError) => {
+  const temperatura = parseFloat(val);
 
+  if (isNaN(temperatura) || temperatura < -40 || temperatura > 50) {
+    setError(errorMessage);
+    return false;
+  }
+  setError('');
+  return true;
+}
 
 const useValidatedInput = (
   initialValue,
@@ -97,8 +106,11 @@ const useValidatedInput = (
       case 'phoneFormat':
         return createPhoneFormat(type.errorMessage);
 
+      case 'temperature':
+        return checkTemperatureFormat(type.errorMessage);
+
       case 'hasNumber':
-        return checkNumber(type.errorMessage);
+          return checkNumber(type.errorMessage);
 
       case 'hasUpperAndLowerCase':
         return checkCase(type.errorMessage);

@@ -55,6 +55,10 @@ const Food = ({
                     <Dots 
                         pages={[
                             {
+                                onPress: () => setWizardPage('InspectionSetup'),
+                                actualPage: false
+                            },
+                            {
                                 onPress: () => setWizardPage('Cajon'),
                                 actualPage: false
                             },

@@ -1,29 +1,52 @@
+import { useEffect } from 'react';
 import useForm from '../../../hooks/useForm';
 import { CREATE_COLMENAS } from '../../../graphql/mutations/createColmenas';
 import { useMutation } from "@apollo/client";
-import { GET_APIARIOS } from '../../../graphql/queries/index';
+import { CREATE_INSPECCION } from '../../../graphql/mutations/createInspeccion';
 import { ROUTES } from '../../../constants';
 import { useNavigation } from '@react-navigation/native';
 import { useSnackbar } from '../../../context/SnackbarContext';
+import useGetApiariosPorColmenas from '../../../hooks/useGetApariosPorColmenas'
 
 const requiredValidation = {
     type: "required",
     errorMessage: "El campo es requerido."
 };
 
+const temperatureValidation = {
+    type: "temperature",
+    errorMessage: "Tempertura fuera del rango de -40° y 50° grados."
+};
 
-export const useCreateInspection = ({ apiarioId }) => {
-/*
-const [createColmenas, { loading }] = useMutation(CREATE_COLMENAS, {
-  refetchQueries: [{ query: GET_APIARIOS }],
-});
-*/
+
+
+export const useCreateInspection = () => {
+
+const [createInspeccion, { loading }] = useMutation(CREATE_INSPECCION);
+
 
 const { showSnackbar } = useSnackbar();
 
 const navigation = useNavigation();
 
+const {
+    apiarios,
+    colmenasXApiario
+  } = useGetApiariosPorColmenas();
+
 const inputFields = {
+    clima: {
+        value: '',
+        validations: [],
+    },
+    temperatura: {
+        value: '',
+        validations: [],
+    },
+    dateInspection: {
+        value: new Date(),
+        validations: [requiredValidation],
+    },
     estadoCajon: {
         value: true,
         validations: [],
@@ -80,6 +103,14 @@ const inputFields = {
         value: '',
         validations: [],
     },
+    apiario: {
+        value: apiarios[0].value,
+        validations: [requiredValidation],
+     },
+     colmena: {
+         value: colmenasXApiario[0].colmenas[0].value,
+         validations: [requiredValidation],
+    },
     estadoPoblacion: {
         value: true,
         validations: [],
@@ -102,47 +133,74 @@ const inputFields = {
     },
 };
 
+
+
 const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     inputFields,
     async (formValues) => {
-
-        /*
-        const variables = {
-            nombre: formValues.hiveName.value,
-            apiarioId,
-            tipo: formValues.hiveType.value,
-            datosTotalCuadros: formValues.datosNumeroCuadros.value || null,
-            datosColor: formValues.color.value || null,
-            datosFechaEstablecimiento: formValues.fechaEstablecimiento.value || null,
-            reinaTipo: formValues.tipoReina.value || null,
-            reinaColor: formValues.colorReina.value || null,
-            reinaFechaAceptacion: formValues.reinaFechaAceptacion.value || null,
-            reinaNotas: formValues.reinaNotas.value || null
-        };
         
+        const variables = {
+            colmenaId: formValues.colmena.value.value,
+            fecha: formValues.dateInspection.value,
+            estadoCajon: formValues.estadoCajon.value,
+            estadoReinaLarvas: formValues.estadoReina.value,
+            estadoPoblacion: formValues.estadoPoblacion.value,
+            estadoFlora: formValues.estadoFloraCircundante.value,
+            estadoPlagas: formValues.estadoPlagas.value,
+            estadoAlimento: formValues.estadoAlimento.value,
+            temperatura: formValues.temperatura && formValues.temperatura.value !== "" ? parseFloat(formValues.temperatura.value) : undefined,
+            clima: formValues.clima && formValues.clima.value !== "" ? formValues.clima.value : undefined,
+            detalleCajonSellado: formValues.sellado && formValues.sellado.value !== "" ? formValues.sellado.value : undefined,
+            detalleCajonInvasores: formValues.invasores && formValues.invasores.value !== "" ? formValues.invasores.value : undefined,
+            detallePoblacionEstado: formValues.detallePoblacionEstado && formValues.detallePoblacionEstado.value !== "" ? formValues.detallePoblacionEstado.value : undefined,
+            detallePoblacionNumCuadros: formValues.detallePoblacionNumCuadros && formValues.detallePoblacionNumCuadros.value !== "" ? formValues.detallePoblacionNumCuadros.value : undefined,
+            detallePoblacionFaltaEspacio: formValues.detallePoblacionFaltaEspacio && formValues.detallePoblacionFaltaEspacio.value !== "" ? formValues.detallePoblacionFaltaEspacio.value : undefined,
+            detalleReinaLarvasQueSeVe: formValues.detalleReinaLarvasQueSeVe && formValues.detalleReinaLarvasQueSeVe.value !== "" ? formValues.detalleReinaLarvasQueSeVe.value : undefined,
+            detalleReinaLarvasPatronDeCria: formValues.detalleReinaLarvasPatronDeCria && formValues.detalleReinaLarvasPatronDeCria.value !== "" ? formValues.detalleReinaLarvasPatronDeCria.value : undefined,
+            detalleFloraEstado: formValues.detalleFloraEstado && formValues.detalleFloraEstado.value !== "" ? formValues.detalleFloraEstado.value : undefined,
+            detalleFloraDispRecursos: formValues.detalleFloraDispRecursos && formValues.detalleFloraDispRecursos.value !== "" ? formValues.detalleFloraDispRecursos.value : undefined,
+            detalleAlimentoEstado: formValues.detalleAlimentoEstado && formValues.detalleAlimentoEstado.value !== "" ? formValues.detalleAlimentoEstado.value : undefined,
+            detalleAlimentoDispRecursos: formValues.detalleAlimentoDispRecursos && formValues.detalleAlimentoDispRecursos.value !== "" ? formValues.detalleAlimentoDispRecursos.value : undefined,
+            detallePlagasPlagas: formValues.detallePlagasPlagas && formValues.detallePlagasPlagas.value !== "" ? formValues.detallePlagasPlagas.value : undefined,
+            detallePlagasTemperamentoAbejas: formValues.detallePlagasTemperamentoAbejas && formValues.detallePlagasTemperamentoAbejas.value !== "" ? formValues.detallePlagasTemperamentoAbejas.value : undefined
+        };
+
         try {
-            const res = await createColmenas({ variables });
+            const res = await createInspeccion({ variables });
             navigation.navigate(ROUTES.HOME);
             
             if (!res.data.errors) {
-                showSnackbar("El apiario se creo correctamente!", "", "success");
+                showSnackbar("La inspeccion se creo correctamente!", "", "success");
             } else {
                 showSnackbar("Ha habido un error!", "", "error");
             }
         } catch (e) {
             console.log(e);
         }
-        */
+        
         
     }
   );
+
+  const colmenasDelApiarioSeleccionado = colmenasXApiario.find(item => item.id === fields?.apiario.value)?.colmenas;
+
+
+  useEffect(() => {
+    if (fields?.apiario.value) {
+        updateField({ name: "colmena", value: colmenasDelApiarioSeleccionado[0] })
+    }
+  }, [fields?.apiario.value]);
+
+
 
   return {
       fields,
       updateField,
       onSubmit,
       isVisitedForm,
-      //mutationLoading: loading
+      apiarios,
+      colmenas: colmenasDelApiarioSeleccionado,
+      mutationLoading: loading
   }
 }
 

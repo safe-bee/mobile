@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import { ScrollView, View, TouchableOpacity, Text, Image, StyleSheet } from "react-native";
 import { Card } from 'react-native-paper';
 import COLORS from '../../theme/colors';
+import { formatToReadableData, fullDate } from '../../utils/helpers';
 import FONTS from '../../theme/fonts';
 import Icon from 'react-native-remix-icon';
 
@@ -16,6 +17,7 @@ export const Container = styled.View`
   width: 100%;
 `;
 
+
 const InspectionCardDetails = ({
   estadoCajon,
   estadoPoblacion,
@@ -24,18 +26,19 @@ const InspectionCardDetails = ({
   estadoAlimento,
   estadoPlagas,
   fechaInspeccion,
+  detalles,
 }) => {
   return (
     <Container>
         <View style={{ flex: 1 }}>
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
                  <Text style={{ color: COLORS.GREEN_2, fontSize: 24, fontWeight: 'bold', fontFamily: FONTS.medium}}>
                     Resumen de inspeccion
                 </Text>
             </View> 
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
                  <Text style={{ color: COLORS.BLACK_1, fontSize: 14, fontWeight: 'bold', fontFamily: FONTS.medium}}>
-                    Noviembre 9 de 2023
+                    {fullDate(fechaInspeccion)}
                 </Text>
             </View>
             <View style={{ alignItems: 'center', marginTop: 20 }}>
@@ -123,34 +126,38 @@ const InspectionCardDetails = ({
             </View>
             
             <View style={{ marginTop: 35, marginLeft: 30 }}>
-                 <Text style={{ color: COLORS.BLACK_1, fontSize: 17, fontWeight: 'bold', fontFamily: FONTS.medium}}>
-                    Detalles
-                </Text>
-                <View style={{ marginTop: 10 }}>
-                  <View>
-                    <Text style={{ color: COLORS.GREEN_2, fontSize: 12, fontFamily: FONTS.regular}}>
-                        Sintomas
+                {
+                  detalles.length
+                  ?
+                  <>
+                    <Text style={{ color: COLORS.BLACK_1, fontSize: 17, fontWeight: 'bold', fontFamily: FONTS.medium}}>
+                        Detalles
                     </Text>
-                 </View>
-                  <View style={{ marginTop: 5 }}>
-                    <Text style={{ color: COLORS.BLACK_1, fontSize: 12, fontFamily: FONTS.regular}}>
-                        Ninguno
-                    </Text>
-                  </View>
-                </View>
-                <View style={{ marginTop: 10 }}>
-                  <View>
-                    <Text style={{ color: COLORS.GREEN_2, fontSize: 12, fontFamily: FONTS.regular}}>
-                        Sintomas
-                    </Text>
-                 </View>
-                  <View style={{ marginTop: 5 }}>
-                    <Text style={{ color: COLORS.BLACK_1, fontSize: 12, fontFamily: FONTS.regular}}>
-                        Ninguno
-                    </Text>
-                  </View>
-                </View>
+                      {
+                        detalles.map( detalle => {
+                          return (
+                          <View style={{ marginTop: 10 }}>
+                            <View>
+                                <Text style={{ color: COLORS.GREEN_2, fontSize: 12, textTransform: 'capitalize', fontFamily: FONTS.regular}}>
+                                    {detalle.label}
+                                </Text>
+                            </View>
+                              <View style={{ marginTop: 5 }}>
+                                <Text style={{ color: COLORS.BLACK_1, fontSize: 12, textTransform: 'capitalize', fontFamily: FONTS.regular}}>
+                                  {formatToReadableData(detalle.value)}
+                                </Text>
+                              </View>
+                          </View>
+                        )})
+                      }
+                  </>
+                  : ''
+                }
+                
+                
+                
             </View>
+
         </View>
 
     </Container>

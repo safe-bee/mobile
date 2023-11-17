@@ -56,6 +56,10 @@ const QueenAndBrood = ({
                     <Dots 
                         pages={[
                             {
+                                onPress: () => setWizardPage('InspectionSetup'),
+                                actualPage: false
+                            },
+                            {
                                 onPress: () => setWizardPage('Cajon'),
                                 actualPage: false
                             },
@@ -103,7 +107,7 @@ const QueenAndBrood = ({
                                     onChange={(value) => wizardStateSetters?.updateField({ name: "detalleReinaLarvasQueSeVe", value })}
                                     label='¿Que se ve?'
                                     value={wizardState?.fields?.detalleReinaLarvasQueSeVe?.value}
-                                    options={selladoOptions}
+                                    options={invasoresOptions}
                                 />
                             </View>
                             <View style={{ flex: 0.2, flexDirection: 'column', marginVertical: 10, zIndex: 9999998 }}>
@@ -111,7 +115,7 @@ const QueenAndBrood = ({
                                     onChange={(value) => wizardStateSetters?.updateField({ name: "detalleReinaLarvasPatronDeCria", value })}
                                     label='Patron de cria'
                                     value={wizardState?.fields?.detalleReinaLarvasPatronDeCria?.value}
-                                    options={invasoresOptions}
+                                    options={selladoOptions}
                                 />
                             </View>
                             <View style={{ flex: 0.2, marginTop: 20, alignItems: 'center'}}>

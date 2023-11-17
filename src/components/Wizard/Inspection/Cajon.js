@@ -55,6 +55,10 @@ const Cajon = ({
                     <Dots 
                         pages={[
                             {
+                                onPress: () => setWizardPage('InspectionSetup'),
+                                actualPage: false
+                            },
+                            {
                                 onPress: onActualStatePress,
                                 actualPage: true
                             },
@@ -107,7 +111,7 @@ const Cajon = ({
                             </View>
                             <View style={{ flex: 0.2, flexDirection: 'column', marginVertical: 10, zIndex: 9999998 }}>
                                 <CustomPicker 
-                                    onChange={(value) => wizardStateSetters?.updateField({ name: "sellado", value })}
+                                    onChange={(value) => wizardStateSetters?.updateField({ name: "invasores", value })}
                                     label='Invasores'
                                     value={wizardState?.fields?.invasores?.value}
                                     options={invasoresOptions}

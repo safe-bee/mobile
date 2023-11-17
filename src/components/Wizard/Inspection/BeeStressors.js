@@ -56,6 +56,10 @@ const BeeStressors = ({
                     <Dots 
                         pages={[
                             {
+                                onPress: () => setWizardPage('InspectionSetup'),
+                                actualPage: false
+                            },
+                            {
                                 onPress: () => setWizardPage('Cajon'),
                                 actualPage: false
                             },
@@ -103,7 +107,7 @@ const BeeStressors = ({
                                     onChange={(value) => wizardStateSetters?.updateField({ name: "detallePlagasPlagas", value })}
                                     label='Plagas'
                                     value={wizardState?.fields?.detallePlagasPlagas?.value}
-                                    options={plagasOptions}
+                                    options={temperamentoOptions}
                                 />
                             </View>
                             <View style={{ flex: 0.2, flexDirection: 'column', marginVertical: 10, zIndex: 9999998 }}>
@@ -111,7 +115,7 @@ const BeeStressors = ({
                                     onChange={(value) => wizardStateSetters?.updateField({ name: "detallePlagasTemperamentoAbejas", value })}
                                     label='Temperamento abejas'
                                     value={wizardState?.fields?.detallePlagasTemperamentoAbejas?.value}
-                                    options={temperamentoOptions}
+                                    options={plagasOptions}
                                 />
                             </View>
                             <View style={{ flex: 0.2, marginTop: 20, alignItems: 'center'}}>
