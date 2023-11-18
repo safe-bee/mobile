@@ -39,7 +39,7 @@ const ApiarioCard = ({ apiario, setSelectedApiario, setMoreOptionsPress }) => {
             {
                 apiario.colmenas.length ?
                     apiario.colmenas.map( colmena => (
-                    <TouchableOpacity onPress={() => navigation.navigate(ROUTES.APIARY_DETAIL, { id: colmena.id })} style={{ alignItems: 'center', borderRadius: 5, backgroundColor: 'rgba(173, 216, 230, 0.5)', flex: 0.3, borderRadius: 8, marginTop: 10, flexDirection: 'row' }}>
+                    <TouchableOpacity key={colmena.id} onPress={() => navigation.navigate(ROUTES.APIARY_DETAIL, { id: colmena.id })} style={{ alignItems: 'center', borderRadius: 5, backgroundColor: 'rgba(173, 216, 230, 0.5)', flex: 0.3, borderRadius: 8, marginTop: 10, flexDirection: 'row' }}>
                         <View style={{ flex: 0.2, alignItems: 'center' }}>
                             <Image
                               source={require('../../../assets/hive4.png')} 

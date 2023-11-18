@@ -11,6 +11,9 @@ export default {
     },
     ios: {
       bundleIdentifier: 'com.beesafe.mobile',
+      infoPlist: {
+        CFBundleAllowMixedLocalizations: true,
+      },
     },
     android: {
       package: 'com.beesafe.mobile',
@@ -18,7 +21,13 @@ export default {
         foregroundImage: './assets/favicon.png',
         backgroundColor: "#ffffff",
       },
+      permissions: [
+        'CAMERA',
+        'READ_EXTERNAL_STORAGE',
+        'WRITE_EXTERNAL_STORAGE',
+      ],
     },
+    runtimeVersion:  "exposdk:48.0.0",
     extra:{
       eas: {
         projectId: 'bdc871e7-68eb-436d-890c-83e3bc26ac2f'

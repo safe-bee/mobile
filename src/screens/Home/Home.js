@@ -29,9 +29,6 @@ const Home = () => {
   const apiarios = data?.apiarios;
   const navigation = useNavigation();
 
-
-  console.log(data);
-  
   if (error) {
     console.log("Error fetching apiarios", error);
   }
@@ -47,7 +44,7 @@ const Home = () => {
                 <View style={{ flex: 1, paddingHorizontal: 5 }}>
                   <ScrollView style={{ flex: 0.7 }}>
                       {apiarios.map(apiario => (
-                        <View style={{ flex: 1, marginTop: 15 }}>
+                        <View key={apiario.id} style={{ flex: 1, marginTop: 15 }}>
                           <ApiarioCard apiario={apiario} setMoreOptionsPress={setMoreOptionsModal} setSelectedApiario={setSelectedApiario} />
                         </View>
                       ))}
