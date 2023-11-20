@@ -92,6 +92,7 @@ const Home = () => {
                 visible={openMoreOptionsModal}
                 onDismiss={() => setMoreOptionsModal(false)}
                 handleDeletePress={() => setOpenDeleteModal(true)} 
+                apiarioId={selectedApiario.id}
               />
             : null
           }

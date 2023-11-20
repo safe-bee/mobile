@@ -24,7 +24,12 @@ export const GET_APIARIO = gql`
   query Apiario($apiarioId: Int!) {
     apiario(id: $apiarioId) {
       nombre,
-      id
+      id,
+      fecha_creacion
+      latitud
+      longitud
+      direccion
+      tipo_ambiente
     }
   }
 `;

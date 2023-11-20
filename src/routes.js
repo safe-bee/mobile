@@ -10,6 +10,7 @@ import HiveDetails from './screens/HiveDetails/index'
 import Tarea from './screens/Tarea/index'
 import Inspection from './screens/Inspection/index'
 import CreateApiary from './components/Wizard/CreateApiary/CreateApiaryWizard';
+import EditApiary from './components/Wizard/CreateApiary/EditApiary';
 import CreateHive from './components/Wizard/CreateHive/CreateHiveWizard';
 import { MenuProvider } from './context/MenuContext';
 import { RealizarTareaProvider } from './context/RealizarTareaContext';
@@ -111,6 +112,13 @@ export default function Routes() {
                     component={CreateApiary}
                     options={{
                     title: "Crear apiario",
+                  }}
+                />
+                <Stack.Screen
+                    name={ROUTES.EDIT_APIARY}
+                    component={EditApiary}
+                    options={{
+                    title: "Editar apiario",
                   }}
                 />
                 <Stack.Screen

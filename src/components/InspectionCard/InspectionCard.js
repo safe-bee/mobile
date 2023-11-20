@@ -16,9 +16,6 @@ const InspectionCard = ({
 }) => {
   const navigation = useNavigation();
 
-  console.log("registroDetalle");
-  console.log(inspeccionId);
-
   const getInspectionIcon = (inspectionStep) => {
     let icon;
 

@@ -5,6 +5,7 @@ export const ROUTES = Object.freeze({
   TAREA: 'tarea',
   INSPECTION: 'INSPECCION',
   CREATE_APIARY: 'crear apiario',
+  EDIT_APIARY: 'editar apiario',
   CREATE_HIVE: 'crear colmena',
   APIARY_DETAIL: 'detalles de apiario',
   HIVE_DETAILS: 'detalles colmena',

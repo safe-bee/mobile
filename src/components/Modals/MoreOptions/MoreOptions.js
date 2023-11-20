@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTES } from '../../../constants';
 import { View, Image, TouchableOpacity } from "react-native";
 import COLORS from '../../../theme/colors';
 import FONTS from '../../../theme/fonts';
@@ -11,8 +13,10 @@ const MoreOptions = ({
     visible,
     onDismiss,
     handleDeletePress,
+    apiarioId
 }) => {
     
+    const navigation = useNavigation();
     const containerStyle = { backgroundColor: 'white', margin: 20, elevation: 10, borderRadius: 10, };
   
     const onDeletePress = () => {
@@ -20,6 +24,10 @@ const MoreOptions = ({
         onDismiss();
     };
 
+    const onEditPress = () => {
+      navigation.navigate(ROUTES.EDIT_APIARY, { apiarioId });
+      onDismiss();
+  };
 
     return (
       <Portal>
@@ -50,7 +58,7 @@ const MoreOptions = ({
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                       <ContainedButton 
                          disabled={false}
-                         onSubmit={onDeletePress}
+                         onSubmit={onEditPress}
                          label="Editar apiario"
                          buttonColor={COLORS.BLUE_2}
                          labelColor={COLORS.WHITE}

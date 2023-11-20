@@ -31,8 +31,9 @@ const requiredValidation = {
 };
 
 
-export const useCreateApiary = () => {
+export const useCreateApiary = (initFields) => {
 
+    console.log(initFields);
  const [createApiarios, { loading }] = useMutation(CREATE_APIARIOS, {
     refetchQueries: [{ query: GET_APIARIOS }],
  })
@@ -43,23 +44,23 @@ const navigation = useNavigation();
 
 const inputFields = {
     apiaryName: {
-        value: '',
+        value: initFields?.apiariyName ||'',
         validations: [requiredValidation],
     },
     dateTask: {
-        value: new Date(),
+        value: initFields?.dateTask || new Date(),
         validations: [],
     },
     environment: {
-        value: '',
+        value: initFields?.environment || '',
         validations: [requiredValidation],
     },
     address: {
-        value: 'Buenos Aires, Argentina',
+        value: initFields?.address || 'Buenos Aires, Argentina',
         validations: [],
     },
     region: {
-        value: BUENOS_AIRES_COORD,
+        value: initFields?.region || BUENOS_AIRES_COORD,
         validations: [],
     }
 };
