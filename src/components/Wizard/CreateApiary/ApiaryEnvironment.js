@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { StyleSheet, ScrollView, View, TouchableOpacity, Text } from "react-native";
+import React from 'react';
+import { ScrollView, View, TouchableOpacity, Text } from "react-native";
 import { Card } from 'react-native-paper';
 import styled from 'styled-components/native';
 import COLORS from '../../../theme/colors';
 import FONTS from '../../../theme/fonts';
-import { ContainedButton } from '../../../elements/Button/Button'
 import { useSnackbar } from '../../../context/SnackbarContext';
 import Menu from '../../../components/Menu/index'
 import { MenuContainer, MainContentContainer, Content } from '../../../screens/sharedStyles';
 import Dots from '../../../components/Dots/index'
+import { Label } from '../../../elements/TextInput/TextInput.styles';
 
 const Container = styled.View`
   flex: 1;
@@ -35,15 +35,11 @@ const ApiaryEnvironment = ({
     const surbanSelected = wizardState?.fields?.environment?.value === 'suburbano';
     const ruralSelected = wizardState?.fields?.environment?.value === 'rural';
 
-    
-    const handleNext = () => {
-      if (wizardState?.fields?.environment?.value ) {
-        setWizardPage('ApiaryLocation');
-      } else {
-        showSnackbar("Error de Validacion!", "Corriga los siguientes errores: 'ambiente' no seleccionado");
-      }
-    };
 
+    const onEnvironmentPress = (environment) => {
+      wizardStateSetters?.updateField({ name: "environment", value: environment });
+      setWizardPage('ApiaryLocation');
+    }
     
     return (
         <Container>
@@ -76,37 +72,50 @@ const ApiaryEnvironment = ({
                     Selecciona el ambiente que mejor se adapte a tu apiario.
                   </Text>
                 </View>
-                <View style={{ flex: 1, height: 600, justifyContent: 'center', alignContent: 'center' }}>
+                <View style={{ flex: 1, height: 500, justifyContent: 'center', alignContent: 'center' }}>
+                    <View style={{ marginLeft: 30, justifyContent: 'center' }}>
+                      <Label
+                        fontFamily={FONTS.regular}
+                      >
+                       Rural
+                      </Label>
+                    </View>
                     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                      <TouchableOpacity onPress={() => wizardStateSetters?.updateField({ name: "environment", value: 'rural' })}>
-                        <Card style={{ alignItems:'center', marginTop: 20, width: cardWidth , alignContent: 'center', elevation: 10 }}>
+                      <TouchableOpacity onPress={() => onEnvironmentPress('rural')}>
+                        <Card style={{ alignItems:'center', marginTop: 10, width: cardWidth , alignContent: 'center', elevation: 10 }}>
                           <Card.Cover style={ruralSelected ? selectedCardStyle : cardStyle} source={require('../../../../assets/rural.jpeg')} />
                         </Card>
                       </TouchableOpacity>
                     </View>
-
+                    
+                    <View style={{ marginLeft: 30, marginTop: 20, justifyContent: 'center' }}>
+                      <Label
+                        fontFamily={FONTS.regular}
+                      >
+                       Suburbano
+                      </Label>
+                    </View>
                     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                      <TouchableOpacity onPress={() => wizardStateSetters?.updateField({ name: "environment", value: 'suburbano' })}>
-                        <Card style={{ marginTop: 20, width: cardWidth, elevation: 10 }}>
-                          <Card.Cover style={surbanSelected ? selectedCardStyle : cardStyle} source={require('../../../../assets/suburban.jpeg')} />
-                        </Card>
+                        <TouchableOpacity onPress={() => onEnvironmentPress('suburbano')}>
+                          <Card style={{ marginTop: 10, width: cardWidth, elevation: 10 }}>
+                            <Card.Cover style={surbanSelected ? selectedCardStyle : cardStyle} source={require('../../../../assets/suburban.jpeg')} />
+                          </Card>
                        </TouchableOpacity>
                     </View>
-
-                    <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <TouchableOpacity onPress={() => wizardStateSetters?.updateField({ name: "environment", value: 'urbano' })}>
-                        <Card style={{ marginTop: 20, width: cardWidth, elevation: 10 }}>
-                          <Card.Cover style={urbanSelected ? selectedCardStyle : cardStyle} source={require('../../../../assets/urban.jpeg')} />
-                        </Card>
-                      </TouchableOpacity>
-                    </View>
                     
-                    <View style={{ flex: 1, marginTop: 20, flexDirection: 'column', alignItems: 'center' }}>
-                      <ContainedButton 
-                        disabled={false}
-                        onSubmit={handleNext}
-                        label="Next"
-                      />
+                    <View style={{ marginLeft: 30, marginTop: 20,  justifyContent: 'center' }}>
+                        <Label
+                          fontFamily={FONTS.regular}
+                        >
+                        Urbano
+                        </Label>
+                    </View>
+                    <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                      <TouchableOpacity onPress={() => onEnvironmentPress('urbano')}>
+                          <Card style={{ marginTop: 10, width: cardWidth, elevation: 10 }}>
+                            <Card.Cover style={urbanSelected ? selectedCardStyle : cardStyle} source={require('../../../../assets/urban.jpeg')} />
+                          </Card>
+                        </TouchableOpacity>
                     </View>
                 </View>
               </ScrollView>

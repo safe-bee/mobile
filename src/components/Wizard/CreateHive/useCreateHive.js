@@ -83,7 +83,7 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             navigation.navigate(ROUTES.HOME);
             
             if (!res.data.errors) {
-                showSnackbar("El apiario se creo correctamente!", "", "success");
+                showSnackbar("La colmena se creo correctamente!", "", "success");
             } else {
                 showSnackbar("Ha habido un error!", "", "error");
             }

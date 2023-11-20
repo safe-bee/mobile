@@ -82,7 +82,7 @@ const ApiarySetup = ({
                     <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
                       <Calendar 
                         onConfirm={(text) => wizardStateSetters?.updateField({ name: "dateTask", value: text })}
-                        label='Date of task'
+                        label='Fecha de la tarea'
                         dateValue={wizardState?.fields?.dateTask?.value}
                         />
                     </View>
@@ -91,7 +91,7 @@ const ApiarySetup = ({
                       <ContainedButton 
                         disabled={false}
                         onSubmit={handleNext}
-                        label="Next"
+                        label="Siguiente"
                       />
                     </View>
                 </View>

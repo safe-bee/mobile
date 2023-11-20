@@ -122,7 +122,7 @@ const HiveSetup = ({
                       <ContainedButton 
                         disabled={false}
                         onSubmit={handleNext}
-                        label="Next"
+                        label="Siguiente"
                       />
                     </View>
                 </View>

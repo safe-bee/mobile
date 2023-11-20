@@ -73,7 +73,7 @@ const HiveAdvanced = ({
                         autoCapitalize="none"
                         autoCorrect={false}
                         label='Total # de cuadros'
-                        placeholder='Total # of frames'
+                        placeholder='Total # de cuadros'
                         onBlur={() => {}}
                         icon="ri-pencil-fill"
                         outlined={true}
