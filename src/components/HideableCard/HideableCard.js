@@ -13,6 +13,7 @@ const HideableCard = ({
     openCardId,
     activeCardId,
     header,
+    onActionPress,
     date,
     details,
     seccionTarea = false,
@@ -20,8 +21,6 @@ const HideableCard = ({
     setMoreOptionsModal,
 }) => {
   
-  const navigation = useNavigation();
-
   const handlePressDetails = () => {
     if (openCardId === activeCardId) {
         setOpenCard(null);
@@ -119,7 +118,7 @@ const HideableCard = ({
                             ? (
                                 <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
                                   <ContainedButton 
-                                    onSubmit={()=> navigation.navigate(header)}
+                                    onSubmit={onActionPress}
                                     label={header === 'INSPECCION' ? 'Realizar Inspeccion' : 'Realizar Tarea'}
                                   />
                               </View>

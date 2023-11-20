@@ -12,6 +12,7 @@ import Inspection from './screens/Inspection/index'
 import CreateApiary from './components/Wizard/CreateApiary/CreateApiaryWizard';
 import CreateHive from './components/Wizard/CreateHive/CreateHiveWizard';
 import { MenuProvider } from './context/MenuContext';
+import { RealizarTareaProvider } from './context/RealizarTareaContext';
 import { SnackbarProvider } from './context/SnackbarContext'; 
 import ApiaryDetail from './screens/ApiaryDetail/index';
 import InspectionDetails from './screens/InspectionDetails/index';
@@ -55,7 +56,7 @@ export default function Routes() {
     >
       <SnackbarProvider>
           <MenuProvider>
-            
+           <RealizarTareaProvider>
             <Stack.Navigator
                 headerMode="screen"
                 screenOptions={{
@@ -190,7 +191,7 @@ export default function Routes() {
                   }}
                 />
           </Stack.Navigator>
-          
+          </RealizarTareaProvider>
         </MenuProvider>
       </SnackbarProvider>
     </NavigationContainer>

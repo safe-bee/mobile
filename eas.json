@@ -1,12 +1,13 @@
 {
   "cli": {
-    "version": ">= 3.10.2"
+    "version": ">= 3.10.2",
+    "promptToConfigurePushNotifications": false
   },
   "build": {
-    "qa": { 
+    "qa": {
       "distribution": "internal",
       "channel": "qa",
-       "android": {
+      "android": {
         "buildType": "apk"
       }
     },

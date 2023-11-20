@@ -60,11 +60,9 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
         };
 
         if (formValues.tareaAsociada.value.value) {
-            variables.tareaId = formValues.tareaAsociada.value;
+            variables.tareaId = formValues.tareaAsociada.value.value;
         }
         
-        console.log("variables");
-        console.log(variables);
        try {
             const res = await createMuerte({ variables });
             navigation.navigate(ROUTES.HOME);

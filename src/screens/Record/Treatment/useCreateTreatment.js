@@ -84,8 +84,8 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             tipoPlaga: formValues.tipoPlaga.value
         };
 
-         if (formValues.tareaAsociada.value) {
-            variables.tareaId = formValues.tareaAsociada.value;
+         if (formValues.tareaAsociada.value.value) {
+            variables.tareaId = formValues.tareaAsociada.value.value;
         }
         
        try {

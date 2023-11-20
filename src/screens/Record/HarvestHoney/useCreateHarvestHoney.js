@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
+import { useRealizarTareaContext } from '../../../context/RealizarTareaContext';
 import useForm from '../../../hooks/useForm';
 import useGetApariosPorColmenas from '../../../hooks/useGetApariosPorColmenas';
 import useGetTareasAsociadas from '../../../hooks/useGetTareasAsociadas';
@@ -23,6 +24,19 @@ const tipoUnidades = [
 const useCreateHarvestHoney = () => {
  
 const { showSnackbar } = useSnackbar();
+
+const {
+    selectedApiario, 
+    selectedColmena, 
+    selectedTarea, 
+} = useRealizarTareaContext();
+
+console.log("selectedApiario");
+console.log(selectedApiario);
+console.log("selectedTarea");
+console.log(selectedTarea);
+console.log(selectedColmena);
+
 
 const navigation = useNavigation();
 
@@ -77,8 +91,8 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             notas: formValues.notas.value
         };
 
-         if (formValues.tareaAsociada.value) {
-            variables.tareaId = formValues.tareaAsociada.value;
+         if (formValues.tareaAsociada.value.value) {
+            variables.tareaId = formValues.tareaAsociada.value.value;
         }
         
        try {
@@ -115,8 +129,6 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
   }, [fields?.colmena.value]);
 
 
-  console.log("fields.tareaAsociada.value");
-  console.log(fields.tareaAsociada.value);
   return {
       fields,
       updateField,

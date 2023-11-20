@@ -80,7 +80,7 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
         };
 
          if (formValues.tareaAsociada.value.value) {
-            variables.tareaId = formValues.tareaAsociada.value;
+            variables.tareaId = formValues.tareaAsociada.value.value;
         }
         
        try {

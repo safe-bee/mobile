@@ -1,7 +1,6 @@
 import React from 'react';
 import { ScrollView, View, Text, ActivityIndicator } from "react-native";
 import styled from 'styled-components/native';
-import { useQuery } from "@apollo/client";
 import FONTS from '../../theme/fonts';
 import COLORS from '../../theme/colors';
 import TextInput from '../../elements/TextInput/index';
@@ -22,7 +21,7 @@ const Container = styled.View`
 const Tarea = () => {
 
   const { showSnackbar } = useSnackbar();
-  
+
   const {
     fields,
     updateField,
