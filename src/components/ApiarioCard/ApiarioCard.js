@@ -39,7 +39,7 @@ const ApiarioCard = ({ apiario, setSelectedApiario, setMoreOptionsPress }) => {
             {
                 apiario.colmenas.length ?
                     apiario.colmenas.map( colmena => (
-                    <TouchableOpacity key={colmena.id} onPress={() => navigation.navigate(ROUTES.APIARY_DETAIL, { id: colmena.id })} style={{ alignItems: 'center', borderRadius: 5, backgroundColor: 'rgba(173, 216, 230, 0.5)', flex: 0.3, borderRadius: 8, marginTop: 10, flexDirection: 'row' }}>
+                    <TouchableOpacity key={colmena.id} onPress={() => navigation.navigate(ROUTES.APIARY_DETAIL, { id: colmena.id })} style={{ alignItems: 'center', borderRadius: 5, backgroundColor: 'rgba(255, 255, 255, 0.8)', flex: 0.3, borderRadius: 8, marginTop: 10, flexDirection: 'row' }}>
                         <View style={{ flex: 0.2, alignItems: 'center' }}>
                             <Image
                               source={require('../../../assets/hive4.png')} 
@@ -47,7 +47,7 @@ const ApiarioCard = ({ apiario, setSelectedApiario, setMoreOptionsPress }) => {
                             />
                         </View>
                         <View style={{ flex: 0.8, flexDirection: 'row' }}>
-                            <Text style={{ fontSize: 15,fontFamily: FONTS.regular, color: COLORS.BLACK_2 }}>
+                            <Text style={{ textShadowColor: 'black', fontSize: 15, fontFamily: FONTS.regular, color: COLORS.BLACK_2 }}>
                                 {colmena.nombre}
                             </Text>
                             <TouchableOpacity style={{ marginLeft: 10 }}>
