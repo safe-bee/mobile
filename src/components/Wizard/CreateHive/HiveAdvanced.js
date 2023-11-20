@@ -77,6 +77,7 @@ const HiveAdvanced = ({
                         onBlur={() => {}}
                         icon="ri-pencil-fill"
                         outlined={true}
+                        keyboardType='numeric'
                         onChangeText={(text) => wizardStateSetters?.updateField({ name: "datosNumeroCuadros", value: text })}
                         value={wizardState?.fields?.datosNumeroCuadros?.value}
                         error={wizardState?.fields?.datosNumeroCuadros?.error}

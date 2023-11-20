@@ -12,7 +12,6 @@ import FabMenu from '../../components/Menu/FabMenu';
 import { GET_COLMENA } from '../../graphql/queries';
 import { formatDate } from '../../utils/helpers';
 import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
-import Icon from 'react-native-remix-icon';
 
 export const ContentContainer = styled.View`
   flex: 0.9;
@@ -28,8 +27,6 @@ const HiveDetails = () => {
   const { colmenaId } = route.params;
   const { data, loading } = useQuery(GET_COLMENA, { variables: { id: colmenaId },  fetchPolicy: "cache-and-network" });
 
-  console.log("data");
-  console.log(data);
   const colmena = data?.colmena;
 
   return (
