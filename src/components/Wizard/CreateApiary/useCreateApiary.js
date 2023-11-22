@@ -33,7 +33,6 @@ const requiredValidation = {
 
 export const useCreateApiary = (initFields) => {
 
-    console.log(initFields);
  const [createApiarios, { loading }] = useMutation(CREATE_APIARIOS, {
     refetchQueries: [{ query: GET_APIARIOS }],
  })

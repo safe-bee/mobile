@@ -27,7 +27,7 @@ export default {
         'WRITE_EXTERNAL_STORAGE',
       ],
     },
-    runtimeVersion:  "exposdk:48.0.0",
+    runtimeVersion:  "exposdk:49.0.0",
     extra:{
       eas: {
         projectId: 'bdc871e7-68eb-436d-890c-83e3bc26ac2f'

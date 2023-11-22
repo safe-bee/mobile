@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import { useQuery } from "@apollo/client";
 import COLORS from '../../theme/colors';
 import { GET_APIARIOS } from '../../graphql/queries/index';
+import usePushNotifications from '../../hooks/usePushNotifications';
 import { ROUTES } from '../../constants';
 import Menu from '../../components/Menu/index';
 import DeleteApario from '../../components/Modals/DeleteApiario/index';
@@ -28,6 +29,8 @@ const Home = () => {
 
   const apiarios = data?.apiarios;
   const navigation = useNavigation();
+  const { expoPushToken } = usePushNotifications();
+
 
   if (error) {
     console.log("Error fetching apiarios", error);

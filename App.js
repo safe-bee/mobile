@@ -3,6 +3,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { ApolloProvider } from "@apollo/client";
 import { Text, TextInput } from 'react-native';
 import apolloClient from "./src/configs/createApolloClient";
+import { UserProvider, useUserContext } from './src/context/UserContext';
 import { SplashScreenContainer } from './src/components/SpashScreen/SplashScreen.styles';
 import Routes from './src/routes'
 import { PaperProvider } from 'react-native-paper';
@@ -67,7 +68,9 @@ export default function App() {
     <SplashScreenContainer onLayout={onLayoutRootView}>
       <ApolloProvider client={apolloClient}>
         <PaperProvider>
-          <Routes />
+          <UserProvider>
+            <Routes />
+          </UserProvider>
         </PaperProvider>
       </ApolloProvider>
     </SplashScreenContainer>

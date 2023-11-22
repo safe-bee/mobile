@@ -10,11 +10,13 @@ export default function Header({ navigation, route, options }) {
     const screenWidth = Dimensions.get('window').width;
     return (
       <Container>
-        <BackgroundImage
-            source={require('../../../assets/header1.jpg')}
-            resizeMode="cover"
-            style={{ width: screenWidth }}
-        />
+
+          <BackgroundImage
+              source={require('../../../assets/header1.jpg')}
+              resizeMode="cover"
+              style={{ width: screenWidth }}
+          />
+
           {routeName !== ROUTES.HOME  && routeName !== ROUTES.PROFILE
             ?   <TouchableOpacity onPress={() => navigation.goBack()}>
                   <BackButton>
