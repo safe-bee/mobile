@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Image, View, TouchableOpacity, Text, StyleSheet, ScrollView } from "react-native";
+import { Image, View, Text, ScrollView } from "react-native";
 import { Card } from 'react-native-paper';
 import { useQuery } from "@apollo/client";
 import { useRoute } from '@react-navigation/native';
@@ -11,7 +11,7 @@ import Menu from '../../components/Menu/index';
 import FabMenu from '../../components/Menu/FabMenu';
 import { GET_COLMENA } from '../../graphql/queries';
 import { formatDate } from '../../utils/helpers';
-import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
+import { MenuContainer, MainContentContainer } from '../sharedStyles';
 
 export const ContentContainer = styled.View`
   flex: 0.9;

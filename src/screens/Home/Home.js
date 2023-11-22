@@ -3,7 +3,6 @@ import { View, ScrollView } from "react-native";
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { useQuery } from "@apollo/client";
-import COLORS from '../../theme/colors';
 import { GET_APIARIOS } from '../../graphql/queries/index';
 import usePushNotifications from '../../hooks/usePushNotifications';
 import { ROUTES } from '../../constants';
