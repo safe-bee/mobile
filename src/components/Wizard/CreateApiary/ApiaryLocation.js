@@ -4,7 +4,7 @@ import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { useSnackbar } from '../../../context/SnackbarContext';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import styled from 'styled-components/native';
-import BEE_ICON from '../../../../assets/icon.png';
+import BEE_ICON from '../../../../assets/icon4.png';
 import COLORS from '../../../theme/colors';
 import FONTS from '../../../theme/fonts';
 import { ContainedButton } from '../../../elements/Button/Button'
@@ -230,6 +230,7 @@ const ApiaryLocation = ({
   setWizardPage,
 }) => {
 
+
   const ref = useRef();
   const mapViewRef = useRef(null);
   const [markerCoords, setMarkerCoords] = useState(BUENOS_AIRES_COORD);
@@ -244,6 +245,9 @@ const ApiaryLocation = ({
     region,  
   } = wizardState?.fields; 
   
+  console.log("wizardState?.fields?.region");
+  console.log(wizardState?.fields?.region);
+
   useEffect(() => {
     if (region?.latitude !== AV_CORRIENTES_COORD.latitude &&
         region?.longitude !== AV_CORRIENTES_COORD.longitude &&

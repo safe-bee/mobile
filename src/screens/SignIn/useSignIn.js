@@ -4,6 +4,8 @@ import { SIGN_IN_MUTATION } from "../../graphql/mutations/signIn";
 import useForm from "../../hooks/useForm";
 import { useUserContext } from "../../context/UserContext"
 import AuthService from '../../services/auth.service';
+import PushNotificationService from '../../services/pushNotification.service';
+import useSubscribeToPushNotifications from '../../hooks/useSuscribeToPushNotifications';
 
 const ERROR_TYPES = {
   USER_NOT_FOUND: "user_not_found",
@@ -14,6 +16,7 @@ const ERROR_TYPES = {
 const useSignIn = ({
   handleError,
 }) => {
+  const { handleSubscribeToPushNotifications }  = useSubscribeToPushNotifications();
   const [signInMutation, { loading }] = useMutation(SIGN_IN_MUTATION);
 
   const { setCurrentUser } = useUserContext();
@@ -44,6 +47,15 @@ const useSignIn = ({
     const stringifiedData = await JSON.stringify(user);
     await AuthService.setAuth(stringifiedData);
   }
+  
+  const handleSuscribeToPushNotifications = async () => {
+    const pushToken = await PushNotificationService.getPushNotificationToken();
+    if (pushToken) {
+      await handleSubscribeToPushNotifications({
+        pushToken,
+      });
+    }
+  }
 
   const handleSignIn = async (values) => {
     
@@ -55,9 +67,9 @@ const useSignIn = ({
     try {
         const res = await signInMutation({ variables });
         if (res?.data?.signIn?.usuario) {
-            updateCurrentUser(res?.data?.signIn?.usuario)
+            updateCurrentUser(res?.data?.signIn?.usuario);
+            //handleSuscribeToPushNotifications()
         }
-        // navigation.navigate(ROUTES.HOME);
 
     } catch (e) {
         if (e.message.includes("Credenciales incorrectas")) {
@@ -83,7 +95,6 @@ const useSignIn = ({
     updateField,
     isVisitedForm,
     mutationLoading: loading,
-    handleSignIn, 
   };
 };
 

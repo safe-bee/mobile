@@ -41,7 +41,7 @@ const EditApiaryWizard = () => {
     const route = useRoute();
     const { apiarioId } = route.params;
 
-    const { data, error, loading, refetch } = useQuery(
+    const { data } = useQuery(
         GET_APIARIO, 
         { variables: { apiarioId },  
         fetchPolicy: "cache-and-network"
@@ -52,8 +52,9 @@ const EditApiaryWizard = () => {
         dateTask: data?.apiario?.fecha_creacion,
         environment: data?.apiario?.tipo_ambiente,
         address: data?.apiario?.direccion,
-        region: { latitud: data?.apiario.latitud, longitud: data?.apiario.longitud }
+        region: { latitude: data?.apiario.latitud, longitude: data?.apiario.longitud }
     }
+
     const {
       fields,
       updateField,

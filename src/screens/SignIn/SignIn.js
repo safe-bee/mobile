@@ -47,7 +47,6 @@ const SignIn = () => {
     onSubmit,
     updateField,
     mutationLoading,
-    handleSignIn,
    } = useSignIn({ handleError });
 
    

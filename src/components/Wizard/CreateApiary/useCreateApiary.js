@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import useForm from '../../../hooks/useForm';
+import usePrevious from '../../../hooks/usePrevious';
 import { CREATE_APIARIOS } from '../../../graphql/mutations/createApiarios';
 import { GET_APIARIOS } from '../../../graphql/queries/index';
 import executeQuery from '../../../graphql/api';
@@ -41,28 +43,37 @@ const { showSnackbar } = useSnackbar();
 
 const navigation = useNavigation();
 
+const apiaryName = initFields?.apiaryName;
+const dateTask = initFields?.dateTask;
+const environment = initFields?.environment;
+const address = initFields?.environment;
+const region = initFields?.region;
+
+
+
 const inputFields = {
     apiaryName: {
-        value: initFields?.apiariyName ||'',
+        value: apiaryName ||'',
         validations: [requiredValidation],
     },
     dateTask: {
-        value: initFields?.dateTask || new Date(),
+        value: dateTask ? new Date(dateTask) : new Date(),
         validations: [],
     },
     environment: {
-        value: initFields?.environment || '',
+        value: environment ? environment.toLowerCase() : '',
         validations: [requiredValidation],
     },
     address: {
-        value: initFields?.address || 'Buenos Aires, Argentina',
+        value: address || 'Buenos Aires, Argentina',
         validations: [],
     },
     region: {
-        value: initFields?.region || BUENOS_AIRES_COORD,
+        value: region || BUENOS_AIRES_COORD,
         validations: [],
     }
 };
+
 
 const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     inputFields,
@@ -91,6 +102,40 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
         }
     }
   );
+
+
+    // the useEffect and usePrevious code area have to do with useForm creating the form while the query is still loading.
+  // if not used like this, the profile form will render blank unless the user query is already cached.
+  const prevApiaryName = usePrevious(apiaryName);
+  const prevDateTask = usePrevious(dateTask);
+  const prevEnvironment = usePrevious(environment);
+  const prevAddress = usePrevious(address);
+  const prevRegion = usePrevious(region);
+
+  useEffect(() => {
+    console.log("entre");
+    console.log(initFields);
+    if (apiaryName && apiaryName !== prevApiaryName) {
+      fields.apiaryName.setValue(apiaryName);
+    }
+
+    if (dateTask && dateTask !== prevDateTask) {
+      fields.dateTask.setValue(initFields?.dateTask);
+    }
+
+    if (environment && environment !== prevEnvironment) {
+      fields.environment.setValue(environment);
+    }
+
+    if (address && address !== prevAddress) {
+      fields.address.setValue(address);
+    }
+
+    if (region && region !== prevRegion) {
+      fields.region.setValue(region);
+    }
+  }, [apiaryName, dateTask, environment, address, region]);
+
 
   return {
       fields,

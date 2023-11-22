@@ -35,7 +35,6 @@ const ApiaryEnvironment = ({
     const surbanSelected = wizardState?.fields?.environment?.value === 'suburbano';
     const ruralSelected = wizardState?.fields?.environment?.value === 'rural';
 
-
     const onEnvironmentPress = (environment) => {
       wizardStateSetters?.updateField({ name: "environment", value: environment });
       setWizardPage('ApiaryLocation');
