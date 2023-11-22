@@ -104,6 +104,7 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
   );
 
 
+
     // the useEffect and usePrevious code area have to do with useForm creating the form while the query is still loading.
   // if not used like this, the profile form will render blank unless the user query is already cached.
   const prevApiaryName = usePrevious(apiaryName);
@@ -120,20 +121,25 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     }
 
     if (dateTask && dateTask !== prevDateTask) {
-      fields.dateTask.setValue(initFields?.dateTask);
+      fields.dateTask.setValue(new Date(initFields?.dateTask));
     }
 
     if (environment && environment !== prevEnvironment) {
-      fields.environment.setValue(environment);
+      fields.environment.setValue(environment.toLowerCase());
     }
 
     if (address && address !== prevAddress) {
       fields.address.setValue(address);
     }
-
-    if (region && region !== prevRegion) {
+    /*
+    if (
+        region &&
+        prevRegion &&
+        region.latitude === prevRegion.latitude &&
+        region.longitude === prevRegion.longitude
+    ) {
       fields.region.setValue(region);
-    }
+    }*/
   }, [apiaryName, dateTask, environment, address, region]);
 
 
