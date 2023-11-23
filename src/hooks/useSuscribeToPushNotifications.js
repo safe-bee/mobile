@@ -6,20 +6,18 @@ export default function useSubscribeToPushNotifications() {
   const [subscribeToPushNotifications] = useMutation(SUBSCRIBE_TO_PUSH_NOTIFICATIONS);
 
   async function handleSubscribeToPushNotifications({
-    username,
-    pushToken,
+    usuarioId,
+    token,
   }) {
     const { data } = await subscribeToPushNotifications({
       variables: {
-        input: {
-          username,
-          pushToken,
-        },
+        usuarioId,
+        token,
       },
     }).catch((error) => {
       console.log(error);
     });
   }
 
-  return {handleSubscribeToPushNotifications};
+  return { handleSubscribeToPushNotifications };
 }

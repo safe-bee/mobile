@@ -56,11 +56,11 @@ const ApiarioCard = ({ apiario, setSelectedApiario, setMoreOptionsPress }) => {
                         </View>
                     </TouchableOpacity>
                 )) 
-                : <View style={{ flex: 1, justifyContent: 'center' }}>
+                : <View style={{ borderRadius: 8, flex: 1, padding: 5, justifyContent: 'center', backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
                     <Text style={{ paddingLeft: 10, fontSize: 15 ,fontFamily: FONTS.medium, color: COLORS.BLACK_1 }}>
                         Parece que no tenes configurada ninguna colmena ahora. Ahora que tu apiario fue creado, podes empezar creando tus colmenas!
                     </Text>
-                </View>
+                  </View>
              }
             </ScrollView>
             

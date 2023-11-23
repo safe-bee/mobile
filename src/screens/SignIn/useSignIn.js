@@ -48,11 +48,12 @@ const useSignIn = ({
     await AuthService.setAuth(stringifiedData);
   }
   
-  const handleSuscribeToPushNotifications = async () => {
-    const pushToken = await PushNotificationService.getPushNotificationToken();
-    if (pushToken) {
+  const handleSuscribeToPushNotifications = async (usuarioId) => {
+    const token = await PushNotificationService.getPushNotificationToken();
+    if (token) {
       await handleSubscribeToPushNotifications({
-        pushToken,
+        token,
+        usuarioId
       });
     }
   }
@@ -68,7 +69,8 @@ const useSignIn = ({
         const res = await signInMutation({ variables });
         if (res?.data?.signIn?.usuario) {
             updateCurrentUser(res?.data?.signIn?.usuario);
-            //handleSuscribeToPushNotifications()
+            console.log(res?.data?.signIn?.usuario);
+            handleSuscribeToPushNotifications(res?.data?.signIn?.usuario?.usuarioId);
         }
 
     } catch (e) {
