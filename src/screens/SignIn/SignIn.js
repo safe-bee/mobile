@@ -56,10 +56,6 @@ const SignIn = () => {
 
    return (
     <SafeAreaContainer>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={styles.scrollView}
-        >
           <KeyboardDismissContainer onPress={Keyboard.dismiss}>
             <Container>
               <LogoContainer>
@@ -115,7 +111,6 @@ const SignIn = () => {
 
             </Container>
           </KeyboardDismissContainer>
-        </KeyboardAvoidingView>
       </SafeAreaContainer>
     )
 }
@@ -129,6 +124,7 @@ const styles = StyleSheet.create({
       flex: 1,
       paddingHorizontal: SIZES.LG,
       paddingTop: '10%',
+      minHeight: '100%'
     },
 });
   

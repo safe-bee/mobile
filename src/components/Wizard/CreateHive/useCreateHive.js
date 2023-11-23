@@ -12,10 +12,10 @@ const requiredValidation = {
 };
 
 
-export const useCreateHive = ({ apiarioId }) => {
+export const useCreateHive = ({ apiarioId, usuarioId }) => {
 
 const [createColmenas, { loading }] = useMutation(CREATE_COLMENAS, {
-  refetchQueries: [{ query: GET_APIARIOS }],
+    refetchQueries: [{ query: GET_APIARIOS,  variables: { usuarioId } }],
 });
 
 const { showSnackbar } = useSnackbar();

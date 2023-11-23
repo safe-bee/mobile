@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { useQuery } from "@apollo/client";
+import { useUserContext } from '../../../context/UserContext';
 import { useCreateHive } from './useCreateHive';
 import Wizard from '../index'
 import HiveSetup from './HiveSetup';
@@ -43,6 +44,7 @@ const createPages = () => ({
 const CreateHiveWizard = ({ route }) => {
     const [overrideWizardPage, setOverrideWizardPage] = useState('');
 
+    const { currentUser } = useUserContext();
     const { apiarioId } = route.params;
     
     const { data, error, loading, refetch } = useQuery(GET_APIARIO, { variables: { apiarioId },  fetchPolicy: "cache-and-network" });
@@ -57,7 +59,8 @@ const CreateHiveWizard = ({ route }) => {
     } = useCreateHive({
       setError: () => {},
       setSuccess: () => {},
-      apiarioId: data?.apiario?.id
+      apiarioId: data?.apiario?.id,
+      usuarioId: currentUser?.usuarioId
     });
 
     return (

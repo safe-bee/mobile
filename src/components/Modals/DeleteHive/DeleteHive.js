@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Portal, Text, Button } from 'react-native-paper';
 import { View, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { useUserContext } from '../../../context/UserContext';
 import COLORS from '../../../theme/colors';
 import FONTS from '../../../theme/fonts';
 import { ContainedButton, TextButton } from '../../../elements/Button';
@@ -18,13 +19,14 @@ const DeleteHive = ({
     colmenaId
 }) => {
     
+    const { currentUser } = useUserContext();  
     const containerStyle = { backgroundColor: 'white', margin: 20, elevation: 10, borderRadius: 10, };
     const navigation = useNavigation();
   
     const { showSnackbar } = useSnackbar();
 
     const [deleteColmena, { loading }] = useMutation(DELETE_COLMENA, {
-        refetchQueries: [{ query: GET_APIARIOS }],
+      refetchQueries: [{ query: GET_APIARIOS,  variables: { usuarioId: currentUser?.usuarioId } }],
     });
 
 
