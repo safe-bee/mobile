@@ -3,7 +3,7 @@ export default {
     name: "BeeSafe",
     slug: "beesafe",
     version: "1.0.0",
-    icon: "./assets/icon.png",
+    icon: "./assets/icon4.png",
     splash: {
       image: "./assets/splash.png",
       resizeMode: "contain",

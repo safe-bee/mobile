@@ -1,10 +1,11 @@
 
 import { useQuery } from "@apollo/client";
+import { useUserContext } from '../context/UserContext';
 import { GET_APIARIOS } from '../graphql/queries/index';
 
 const useGetApiariosPorColmenas = () => {
-
-    const { data, loading } = useQuery(GET_APIARIOS, { fetchPolicy: "cache-and-network" });
+    const { currentUser } = useUserContext();
+    const { data } = useQuery(GET_APIARIOS, { variables: { usuarioId: currentUser?.usuarioId }, fetchPolicy: "cache-and-network" });
 
     const apiarios = data?.apiarios.map(apiario => ({ value: apiario.id, label: apiario.nombre }));
 
