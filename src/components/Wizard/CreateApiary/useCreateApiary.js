@@ -65,11 +65,11 @@ const inputFields = {
         validations: [requiredValidation],
     },
     address: {
-        value: 'Palermo, Buenos Aires, Argentina', //address || 'Palermo, Buenos Aires, Argentina',
+        value: address || '',//'Palermo, Buenos Aires, Argentina', //address || 'Palermo, Buenos Aires, Argentina',
         validations: [],
     },
     region: {
-        value: BUENOS_AIRES_COORD,// region || BUENOS_AIRES_COORD,
+        value: region || BUENOS_AIRES_COORD, // BUENOS_AIRES_COORD,// 
         validations: [],
     }
 };
@@ -130,7 +130,6 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
       fields.environment.setValue(environment.toLowerCase());
     }
 
-    /*
     if (address && address !== prevAddress) {
       fields.address.setValue(address);
     }
@@ -142,7 +141,7 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
         region.longitude !== prevRegion.longitude
     ) {
       fields.region.setValue(region);
-    }*/
+    }
   }, [apiaryName, dateTask, environment, address, region]);
 
 

@@ -9,7 +9,6 @@ import styled from 'styled-components/native';
 import BEE_ICON from '../../../../assets/icon4.png';
 import COLORS from '../../../theme/colors';
 import FONTS from '../../../theme/fonts';
-import Loading from '../../../components/Loading/index';
 import { ContainedButton } from '../../../elements/Button/Button'
 import TextInput from '../../../elements/TextInput/index';
 import Menu from '../../../components/Menu/index'
@@ -276,8 +275,6 @@ const ApiaryLocation = ({
         longitude: coordenada.coord2,
       }))
     });
-
-    console.log(suggestedZones);
 
     return suggestedZones.map((zone, index) => (
       <Polygon
