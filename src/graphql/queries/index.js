@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 
 
 export const GET_APIARIOS = gql`
-  query Apiarios {
-    apiarios {
+  query Apiarios($usuarioId: Int!) {
+    apiarios(usuarioId: $usuarioId) {
       id,
       nombre,
       direccion,
@@ -129,3 +129,14 @@ export const GET_INSPECCION =  gql`
 
 
 
+export const GET_ZONAS_SUGERIDAS = gql`
+query ZonasSugeridas {
+  zonasSugeridas {
+    coordenadas {
+      coord2
+      coord1
+    }
+    nombre
+  }
+}
+`;

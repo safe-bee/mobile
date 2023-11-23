@@ -3,6 +3,7 @@ import { View } from "react-native";
 import styled from 'styled-components/native';
 import { useQuery } from "@apollo/client";
 import { GET_APIARIO  } from '../../../graphql/queries/index';
+import { useUserContext } from '../../../context/UserContext';
 import { useRoute } from '@react-navigation/native';
 import { useCreateApiary } from './useCreateApiary';
 import ApiarySetup from './ApiarySetup';
@@ -36,7 +37,8 @@ const createPages = () => ({
 
 
 const EditApiaryWizard = () => {
-    const [overrideWizardPage, setOverrideWizardPage] = useState('');
+  const { currentUser } = useUserContext();    
+  const [overrideWizardPage, setOverrideWizardPage] = useState('');
 
     const route = useRoute();
     const { apiarioId } = route.params;
@@ -61,7 +63,10 @@ const EditApiaryWizard = () => {
       onSubmit,
       isVisitedForm,
       mutationLoading
-    } = useCreateApiary(editApiario);
+    } = useCreateApiary({
+      initFields: editApiario,
+      usuarioId: currentUser?.usuarioId,
+    });
 
     
     return (

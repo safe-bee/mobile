@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useQuery } from "@apollo/client";
 import { View, ScrollView, Dimensions, ActivityIndicator } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import { GET_ZONAS_SUGERIDAS } from '../../../graphql/queries/index';
 import { useSnackbar } from '../../../context/SnackbarContext';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import styled from 'styled-components/native';
@@ -233,6 +235,7 @@ const ApiaryLocation = ({
 
   const ref = useRef();
   const mapViewRef = useRef(null);
+  const { data, loading } = useQuery(GET_ZONAS_SUGERIDAS, { fetchPolicy: "cache-and-network" });
   const [markerCoords, setMarkerCoords] = useState(BUENOS_AIRES_COORD);
   const [mapInitialized, setMapInitialized] = useState(false);
 
@@ -245,9 +248,6 @@ const ApiaryLocation = ({
     region,  
   } = wizardState?.fields; 
   
-  console.log("wizardState?.fields?.region");
-  console.log(wizardState?.fields?.region);
-
   useEffect(() => {
     if (region?.latitude !== AV_CORRIENTES_COORD.latitude &&
         region?.longitude !== AV_CORRIENTES_COORD.longitude &&
@@ -355,6 +355,10 @@ const ApiaryLocation = ({
   }
 
 
+  console.log("address.value");
+  console.log(address.value);
+  console.log("address.value");
+  console.log(region.value);
   return (
     <Container>
       <MainContentContainer>

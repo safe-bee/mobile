@@ -7,6 +7,7 @@ export const SIGN_IN_MUTATION = gql`
                 correoElectronico
                 nombreUsuario
                 usuarioId
+                token
             }
         }
     } 

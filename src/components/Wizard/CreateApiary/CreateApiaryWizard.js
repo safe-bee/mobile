@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View } from "react-native";
 import styled from 'styled-components/native';
+import { useUserContext } from '../../../context/UserContext';
 import { useCreateApiary } from './useCreateApiary';
 import ApiarySetup from './ApiarySetup';
 import ApiaryLocation from './ApiaryLocation';
@@ -33,7 +34,8 @@ const createPages = () => ({
 
 
 const CreateApiaryWizard = () => {
-    const [overrideWizardPage, setOverrideWizardPage] = useState('');
+  const { currentUser } = useUserContext();  
+  const [overrideWizardPage, setOverrideWizardPage] = useState('');
 
     const {
       fields,
@@ -42,8 +44,7 @@ const CreateApiaryWizard = () => {
       isVisitedForm,
       mutationLoading
     } = useCreateApiary({
-      setError: () => {},
-      setSuccess: () => {},
+      usuarioId: currentUser?.usuarioId,
     });
 
     

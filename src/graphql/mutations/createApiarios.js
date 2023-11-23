@@ -9,6 +9,7 @@ export const CREATE_APIARIOS = gql`
     $direccion: String!
     $tipo_ambiente: TipoAmbiente!
     $fecha_creacion: DateTime!
+    $usuarioId: Int!
   ) {
     createApiario(
       nombre: $nombre
@@ -17,6 +18,7 @@ export const CREATE_APIARIOS = gql`
       direccion: $direccion
       tipo_ambiente: $tipo_ambiente
       fecha_creacion: $fecha_creacion
+      usuarioId: $usuarioId
     ) {
       id
       nombre

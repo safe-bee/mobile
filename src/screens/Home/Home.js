@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView } from "react-native";
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { useQuery } from "@apollo/client";
 import { GET_APIARIOS } from '../../graphql/queries/index';
@@ -8,6 +8,7 @@ import usePushNotifications from '../../hooks/usePushNotifications';
 import { ROUTES } from '../../constants';
 import Menu from '../../components/Menu/index';
 import DeleteApario from '../../components/Modals/DeleteApiario/index';
+import { useUserContext } from '../../context/UserContext';
 import MoreOptions from '../../components/Modals/MoreOptions/index';
 import FabMenu from '../../components/Menu/FabMenu';
 import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
@@ -21,7 +22,9 @@ const Container = styled.View`
 `;
 
 const Home = () => {
-  const { data, error, loading } = useQuery(GET_APIARIOS, { fetchPolicy: "cache-and-network" });
+
+  const { currentUser } = useUserContext();
+  const { data, error, loading } = useQuery(GET_APIARIOS, { variables: { usuarioId: currentUser?.usuarioId }, fetchPolicy: "cache-and-network" });
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openMoreOptionsModal, setMoreOptionsModal] = useState(false);
   const [selectedApiario, setSelectedApiario] = useState(null);

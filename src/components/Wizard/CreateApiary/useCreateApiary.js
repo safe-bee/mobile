@@ -33,10 +33,10 @@ const requiredValidation = {
 };
 
 
-export const useCreateApiary = (initFields) => {
+export const useCreateApiary = ({ initFields, usuarioId } ) => {
 
  const [createApiarios, { loading }] = useMutation(CREATE_APIARIOS, {
-    refetchQueries: [{ query: GET_APIARIOS }],
+    refetchQueries: [{ query: GET_APIARIOS,  variables: { usuarioId } }],
  })
 
 const { showSnackbar } = useSnackbar();
@@ -65,11 +65,11 @@ const inputFields = {
         validations: [requiredValidation],
     },
     address: {
-        value: address || 'Buenos Aires, Argentina',
+        value: 'Palermo, Buenos Aires, Argentina', //address || 'Palermo, Buenos Aires, Argentina',
         validations: [],
     },
     region: {
-        value: region || BUENOS_AIRES_COORD,
+        value: BUENOS_AIRES_COORD,// region || BUENOS_AIRES_COORD,
         validations: [],
     }
 };
@@ -86,7 +86,11 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             direccion: formValues.address.value,
             latitud: formValues.region.value.latitude,
             longitud: formValues.region.value.longitude,
+            usuarioId
         };
+
+        console.log("variables");
+        console.log(variables);
 
         try {
             const res = await createApiarios({ variables });
@@ -114,8 +118,6 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
   const prevRegion = usePrevious(region);
 
   useEffect(() => {
-    console.log("entre");
-    console.log(initFields);
     if (apiaryName && apiaryName !== prevApiaryName) {
       fields.apiaryName.setValue(apiaryName);
     }
@@ -128,15 +130,16 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
       fields.environment.setValue(environment.toLowerCase());
     }
 
+    /*
     if (address && address !== prevAddress) {
       fields.address.setValue(address);
     }
-    /*
+    
     if (
         region &&
         prevRegion &&
-        region.latitude === prevRegion.latitude &&
-        region.longitude === prevRegion.longitude
+        region.latitude !== prevRegion.latitude &&
+        region.longitude !== prevRegion.longitude
     ) {
       fields.region.setValue(region);
     }*/
