@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from "@apollo/client";
 import { View, ScrollView, Dimensions, ActivityIndicator } from "react-native";
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker, Polygon } from 'react-native-maps';
 import { GET_ZONAS_SUGERIDAS } from '../../../graphql/queries/index';
 import { useSnackbar } from '../../../context/SnackbarContext';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -9,6 +9,7 @@ import styled from 'styled-components/native';
 import BEE_ICON from '../../../../assets/icon4.png';
 import COLORS from '../../../theme/colors';
 import FONTS from '../../../theme/fonts';
+import Loading from '../../../components/Loading/index';
 import { ContainedButton } from '../../../elements/Button/Button'
 import TextInput from '../../../elements/TextInput/index';
 import Menu from '../../../components/Menu/index'
@@ -243,6 +244,9 @@ const ApiaryLocation = ({
 
   const { height } = Dimensions.get('window');
 
+  const zonaSugeridas = data?.zonasSugeridas;
+  console.log(zonaSugeridas);
+
   const {
     address,
     region,  
@@ -265,6 +269,26 @@ const ApiaryLocation = ({
     }
   }, [address?.value]);
 
+  const renderSuggestedZones = () => {
+    const suggestedZones = data?.zonasSugeridas.map((zona) => {
+      return zona.coordenadas.map(coordenada => ({
+        latitude: coordenada.coord1,
+        longitude: coordenada.coord2,
+      }))
+    });
+
+    console.log(suggestedZones);
+
+    return suggestedZones.map((zone, index) => (
+      <Polygon
+        key={index}
+        coordinates={zone}
+        fillColor="rgba(100, 100, 255, 0.5)" 
+        strokeColor="rgba(0, 0, 255, 1)" 
+        strokeWidth={2} 
+      />
+    ));
+  };
 
   const onAddressSelect = (details) => {
     
@@ -355,10 +379,8 @@ const ApiaryLocation = ({
   }
 
 
-  console.log("address.value");
-  console.log(address.value);
-  console.log("address.value");
-  console.log(region.value);
+
+
   return (
     <Container>
       <MainContentContainer>
@@ -382,7 +404,7 @@ const ApiaryLocation = ({
                       ]}
                     />
                 </View>
-
+ 
                 <View style={{ flex: 1 }}>
                   <View style={{ flex: 1, height: height / 4 }}>
                     <MapView
@@ -395,6 +417,7 @@ const ApiaryLocation = ({
                       region={BUENOS_AIRES_COORD}
                       customMapStyle= {mapCustomStyle}
                     >
+                      {!loading ? renderSuggestedZones() : null}
                       <Marker
                         draggable
                         image={BEE_ICON}
@@ -486,6 +509,7 @@ const ApiaryLocation = ({
                     />
                   </View>
                 </View>
+                
 
             </ScrollView>
         </Content>
