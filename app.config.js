@@ -9,17 +9,28 @@ export default {
       resizeMode: "contain",
       backgroundColor: "#ffffff",
     },
+    updates: {
+      url: "https://u.expo.dev/bdc871e7-68eb-436d-890c-83e3bc26ac2f"
+    },
     ios: {
       bundleIdentifier: 'com.beesafe.mobile',
       infoPlist: {
         CFBundleAllowMixedLocalizations: true,
       },
+      config: {
+        googleMapsApiKey: "AIzaSyAdMYZIrkFpeODvZTeM1xHeAKzTE0XBdbg"
+      }
     },
     android: {
       package: 'com.beesafe.mobile',
       adaptiveIcon: {
         foregroundImage: './assets/favicon.png',
         backgroundColor: "#ffffff",
+      },
+      config: {
+        googleMaps: {
+            apiKey: "AIzaSyAdMYZIrkFpeODvZTeM1xHeAKzTE0XBdbg"
+          }
       },
       permissions: [
         'CAMERA',

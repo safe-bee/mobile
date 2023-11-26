@@ -9,6 +9,7 @@ import {
   Image,
   View
 } from 'react-native';
+import usePushNotifications from '../../hooks/usePushNotifications';
 import COLORS from '../../theme/colors';
 import { SIZES } from '../../theme/sizes';
 import TextInput from '../../elements/TextInput/index';
@@ -34,7 +35,7 @@ const ratio = loginLogoContainerWidth / LOGIN_LOGO_WIDTH;
 const loginLogoContainerHeight = LOGIN_LOGO_HEIGHT * ratio;
 
 const SignIn = () => {
-
+  const { expoPushToken } = usePushNotifications();
 
   const { showSnackbar } = useSnackbar();
 

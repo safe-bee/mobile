@@ -31,9 +31,7 @@ const Home = () => {
 
   const apiarios = data?.apiarios;
   const navigation = useNavigation();
-  const { expoPushToken } = usePushNotifications();
-
-
+  
   if (error) {
     console.log("Error fetching apiarios", error);
   }

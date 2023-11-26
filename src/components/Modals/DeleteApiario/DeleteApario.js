@@ -17,7 +17,7 @@ const DeleteApario = ({
     selectedApiario,
 }) => {
     
-  const { currentUser } = useUserContext();
+    const { currentUser } = useUserContext();
     const containerStyle = { backgroundColor: 'white', margin: 20, elevation: 10, borderRadius: 10, };
   
     const { showSnackbar } = useSnackbar();

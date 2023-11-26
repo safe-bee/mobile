@@ -27,7 +27,7 @@ const Container = styled.View`
 `;
 
 
-const API_KEY = 'AIzaSyBLvdgQVmSXzKVWWbIg8eCwoXZF7hGS3rU';
+const API_KEY = 'AIzaSyAdMYZIrkFpeODvZTeM1xHeAKzTE0XBdbg';
 
 const mapCustomStyle = [
   {
@@ -244,7 +244,6 @@ const ApiaryLocation = ({
   const { height } = Dimensions.get('window');
 
   const zonaSugeridas = data?.zonasSugeridas;
-  console.log(zonaSugeridas);
 
   const {
     address,
@@ -258,6 +257,9 @@ const ApiaryLocation = ({
         region?.latitude !== BUENOS_AIRES_COORD.longitude
       ) {
         mapViewRef.current.animateToRegion(region?.value);
+
+        console.log("region");
+        console.log(region);
     }
   }, []);
 
@@ -288,7 +290,8 @@ const ApiaryLocation = ({
   };
 
   const onAddressSelect = (details) => {
-    
+    console.log("details");
+    console.log(details);
     if (details) {
       const latitude = details.geometry.location.lat;
       const longitude = details.geometry.location.lng;
@@ -382,7 +385,7 @@ const ApiaryLocation = ({
     <Container>
       <MainContentContainer>
         <Content>
-            <ScrollView style={{ flex: 1 }}>
+            <ScrollView keyboardShouldPersistTaps={'handled'} style={{ flex: 1 }}>
                 <View style={{ marginBottom: 20 }}>
                     <Dots 
                       pages={[
@@ -406,6 +409,7 @@ const ApiaryLocation = ({
                   <View style={{ flex: 1, height: height / 4 }}>
                     <MapView
                       ref={mapViewRef}
+                      zoomEnabled
                       style={{ width: '100%', height: '100%' }}
                       provider={PROVIDER_GOOGLE}
                       onRegionChangeComplete={(region) => onRegionChange(region)}
@@ -443,6 +447,7 @@ const ApiaryLocation = ({
                         ref={ref}
                         placeholder='Buscar una direccion'
                         onPress={(data, details = null) => {
+                          
                           onAddressSelect(details);
                         }}
                         query={{

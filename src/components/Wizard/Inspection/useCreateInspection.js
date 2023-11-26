@@ -141,7 +141,7 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
         
         const variables = {
             colmenaId: formValues.colmena.value.value,
-            fecha: formValues.dateInspection.value,
+            fecha: formValues.dateInspection.value.toString(),
             estadoCajon: formValues.estadoCajon.value,
             estadoReinaLarvas: formValues.estadoReina.value,
             estadoPoblacion: formValues.estadoPoblacion.value,
@@ -166,6 +166,8 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
         };
 
         try {
+            console.log("variables");
+            console.log(variables);
             const res = await createInspeccion({ variables });
             navigation.navigate(ROUTES.HOME);
             

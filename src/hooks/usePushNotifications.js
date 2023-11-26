@@ -28,7 +28,7 @@ const usePushNotifications = () => {
         }
         
         token = (await ExpoNotifications.getExpoPushTokenAsync({
-            projectId: "bdc871e7-68eb-436d-890c-83e3bc26ac2f"
+            projectId: "dd25e13a-091e-410d-9edb-5ed0b2a94131"
         })).data;
         await PushNotificationService.setPushNotificationToken(token);
 

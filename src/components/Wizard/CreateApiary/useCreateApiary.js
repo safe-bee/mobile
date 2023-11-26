@@ -46,7 +46,7 @@ const navigation = useNavigation();
 const apiaryName = initFields?.apiaryName;
 const dateTask = initFields?.dateTask;
 const environment = initFields?.environment;
-const address = initFields?.environment;
+const address = initFields?.address;
 const region = initFields?.region;
 
 
@@ -65,7 +65,7 @@ const inputFields = {
         validations: [requiredValidation],
     },
     address: {
-        value: address || '',//'Palermo, Buenos Aires, Argentina', //address || 'Palermo, Buenos Aires, Argentina',
+        value: address || 'Buenos Aires',
         validations: [],
     },
     region: {
@@ -88,9 +88,6 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
             longitud: formValues.region.value.longitude,
             usuarioId
         };
-
-        console.log("variables");
-        console.log(variables);
 
         try {
             const res = await createApiarios({ variables });
@@ -117,6 +114,9 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
   const prevAddress = usePrevious(address);
   const prevRegion = usePrevious(region);
 
+
+  console.log("address");
+  console.log(address);
   useEffect(() => {
     if (apiaryName && apiaryName !== prevApiaryName) {
       fields.apiaryName.setValue(apiaryName);
