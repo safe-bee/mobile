@@ -38,7 +38,7 @@ const Record = () => {
       href: ROUTES.DOCUMENT_FLORA,
     },
     {
-      label: "Tratamiento Varroa",
+      label: "Conteo Varroa",
       imagePath: require("../../../assets/varroa-removebg-preview.png"),
       href: ROUTES.MITE_ASSESMENT,
     },

@@ -20,7 +20,7 @@ const tipoAlertas = [
     { value: 'CAMBIO_DE_CUADROS', label: 'Cambio de cuadros' },
     { value: 'HIBERNACION', label: 'Hibernacion' },
     { value: 'VARROA', label: 'Varroa' },
-    { value: 'TRATAMIENTO_VARROA', label: 'Tratamiento Varroa' },
+    { value: 'TRATAMIENTO_VARROA', label: 'Conteo Varroa' },
     { value: 'MUERTE', label: 'Muerte' },
     { value: 'INSPECCION', label: 'Inspeccion' },
 ];

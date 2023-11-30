@@ -62,7 +62,7 @@ const InspectionSummary = ({
     console.log("temperatura");
     console.log(wizardState?.fields?.temperatura);
     console.log(temperatura);
-    if (wizardState?.fields?.temperatura.value || temperatura > 50 || temperatura < -40 ) {
+    if (!wizardState?.fields?.temperatura.value || temperatura > 50 || temperatura < -40 ) {
         showSnackbar("Debe ingresar una temperatura valida", "", "error");
     } else {
         wizardState?.onSubmit();

@@ -141,7 +141,7 @@ const Cajon = ({
                             <View style={{ flex: 1, height: 300, alignItems: 'center' }}>
                                 <InspectionStepCard 
                                     header="Estado del cajon"
-                                    subtitle="¿Como evaluarias la populacion de tu colmena?"
+                                    subtitle="¿Como evaluarias el deterioro del cajon?"
                                     onThumbUp={onThumbsUpPress}
                                     onThumbDown={onThumbsDownPress}
                                 />
