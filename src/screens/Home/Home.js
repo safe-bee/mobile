@@ -15,7 +15,10 @@ import { MenuContainer, MainContentContainer, Content } from '../sharedStyles';
 import { ContainedButton } from '../../elements/Button';
 import ApiarioCard from '../../components/ApiarioCard/';
 import Loading from '../../components/Loading/index';
+import { LogBox } from 'react-native';
 
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();
 
 const Container = styled.View`
   flex: 1;

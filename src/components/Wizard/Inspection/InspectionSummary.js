@@ -58,8 +58,12 @@ const InspectionSummary = ({
  const detalles = getDetallesArray();
 
  const handleSubmit = () => {
-    if (!wizardState?.fields?.colmena.value) {
-        showSnackbar("Debe seleccionar una colmena", "", "error");
+    const temperatura = parseFloat(wizardState?.fields?.temperatura.value);
+    console.log("temperatura");
+    console.log(wizardState?.fields?.temperatura);
+    console.log(temperatura);
+    if (wizardState?.fields?.temperatura.value || temperatura > 50 || temperatura < -40 ) {
+        showSnackbar("Debe ingresar una temperatura valida", "", "error");
     } else {
         wizardState?.onSubmit();
     }

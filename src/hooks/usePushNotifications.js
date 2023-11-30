@@ -53,8 +53,10 @@ const usePushNotifications = () => {
         if (expoPushToken) {
           notificationListener.current =
             ExpoNotifications.addNotificationReceivedListener((notification) => {
+              console.log("notification");
+              console.log(notification);
               setNotification(notification);
-            });
+          });
     
           responseListener.current =
             ExpoNotifications.addNotificationResponseReceivedListener(

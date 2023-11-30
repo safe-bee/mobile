@@ -41,7 +41,7 @@ const inputFields = {
     },
     temperatura: {
         value: '',
-        validations: [],
+        validations: [temperatureValidation],
     },
     dateInspection: {
         value: new Date(),
@@ -140,7 +140,7 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
     async (formValues) => {
         
         const variables = {
-            colmenaId: formValues.colmena.value.value,
+            colmenaId: typeof(formValues.colmena.value) === 'object' ? formValues.colmena.value.value : formValues.colmena.value,
             fecha: formValues.dateInspection.value.toISOString(),
             estadoCajon: formValues.estadoCajon.value,
             estadoReinaLarvas: formValues.estadoReina.value,
@@ -167,9 +167,9 @@ const { fields, updateField, onSubmit, isVisitedForm } = useForm(
 
         const cleanedVariables = Object.fromEntries(Object.entries(variables).filter(([_, v]) => v !== undefined));
 
+        console.log(cleanedVariables);
         try {
-            console.log("variables");
-            console.log(cleanedVariables);
+
             const res = await createInspeccion({ variables: cleanedVariables });
             navigation.navigate(ROUTES.HOME);
             

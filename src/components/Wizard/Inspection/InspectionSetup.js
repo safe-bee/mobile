@@ -29,6 +29,8 @@ const InspectionSetup = ({
   
   const climaOptions = [{ value: 'SOLEADO', label: 'Soleado' }, { value: 'NUBLADO', label: 'Nublado' }, { value: 'TORMENTA', label: 'Tormenta' }, { value: 'LLUVIA', label: 'Lluvia' }]
 
+  console.log("wizardState?.fields?.colmena.value");
+  console.log(wizardState?.fields?.colmena.value);
   return (
       <Container>
         <MainContentContainer>
@@ -99,7 +101,9 @@ const InspectionSetup = ({
 
                     <View style={{ flex: 1, flexDirection: 'column', marginBottom: 2, zIndex: 99999999  }}>
                         <CustomPicker 
-                          onChange={(value) => wizardStateSetters?.updateField({ name: "colmena", value })}
+                          onChange={(value) => {
+                            wizardStateSetters?.updateField({ name: "colmena", value })}
+                          }
                           label='Colmena'
                           value={wizardState?.fields?.colmena.value}
                           options={wizardState?.colmenas}
